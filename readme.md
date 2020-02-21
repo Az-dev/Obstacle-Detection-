@@ -2,7 +2,7 @@
 # <p align="center">Car Project</p>
 
 * The Car project is a C application based-on Atmega32 microcontroller . The project introduces a car dirven by four wheels based on four dc motors 
-* that can detect ostacles ahead and avoid it.   
+that can detect ostacles ahead and avoid it.   
 ____
 ###### __This application implements the following Features and modules -on technical behalf__-:#####
 ### Micro Controller Abstraction Layer (MCAL) implements the following modules ###
