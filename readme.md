@@ -5,6 +5,7 @@
 that can detect ostacles ahead and avoid it.   
 ____
 ###### __This application implements the following Features and modules -on technical behalf__-:#####
+
 ### Micro Controller Abstraction Layer (MCAL) implements the following modules ###
 1. DIO   : An API for General Purpose I/O prepherials.
 2. PWM   : An API for HWPWM module.    
