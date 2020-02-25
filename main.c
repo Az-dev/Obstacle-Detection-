@@ -10,7 +10,8 @@
 /*- Main FUNCTION DEFINITION ---------------------------------------------------------------------------------------------------*/
 int main(void)
 {
-   /* TimerTest(); ---> test passed*/
+   //TimerTest(); /* ---> test passed*/
+   TmuTest();
    /* DioTest();  ----> test passed */
    /* HwPwmTest(); ---> bypassed    */
    /* MotorTest(); ---> test passed and approved HwPWM */ 
@@ -18,9 +19,9 @@ int main(void)
    //UsTest();
    //IcuWithUsTest(); /*--> Fully passed :xD */
    /*------------------- START CAR APPLICATION  ------------------------*/
-   Car_SM_Init();
-   Car_SM_Update();
-   /*------------------- END CAR APPLICATION   ------------------------*/
+   //Car_SM_Init();
+   //Car_SM_Update();
+   /*------------------- END CAR APPLICATION   ------------------------*/ 
     
 }
 

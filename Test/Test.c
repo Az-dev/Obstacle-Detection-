@@ -8,7 +8,30 @@
 #include "Test.h"
 #include "../ECUAL/LCD/char_lcd.h"
 #include "../ECUAL/SwDelay/SwDelay.h"
+#include "../MCAL/Timer/Timer.h"
+#include "../MCAL/Timer/Timer_Cfg.h"
+#include "../SL/TMU/TMU.h"
+#include "../SL/TMU/TMU_PB_Cfg.h"
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
+
+/*
+*  Description : Tests TMU unit.
+*
+*  @param void
+*
+*  @return void
+*/
+void TmuTest(void)
+{
+   
+   /* Testing TMU Init */
+   /*
+   TMU_Init(&gstrTMUConfig); // ---> success with different configurations , tested timer_setVal and asserted the TCNT value for different timers
+   Timer_Start(TIMER_0,0);   
+   while(1);
+   /*
+}
+
 /*
 *  Description : tests Timer module.
 *
@@ -18,17 +41,25 @@
 */
 void TimerTest(void)
 {
+   /*
+   Timer_Init(&gstrTimer0TmuConfig); ---> Test passed with different structs of configurations
+   Timer_Init(&gstrTimerConfig);    
+   Timer_Start(TIMER_0,0);         ---> Test passed with different structs of configurations
+   Timer_Start(TIMER_2,0);         ---> Test passed with different structs of configurations
+   while(1);
+   */
+   
    /*Initialize timer 2*/
-   Timer_Init(&gstrTimerConfig);
+   //Timer_Init(&gstrTimerConfig);
    /* Start timer 2*/
-   Timer_Start(TIMER_2,0);
-   while (1)
-   {
-      softwareDelayMs(5000); 
-      break;   /* Breaking the loop for the purpose of testing Timer_Stop() */
-   }
+   //Timer_Start(TIMER_2,0);
+   //while (1)
+   //{
+   //   softwareDelayMs(5000); 
+   //   break;   /* Breaking the loop for the purpose of testing Timer_Stop() */
+   //}
    /* Stop timer 2*/ 
-   Timer_Stop(TIMER_2);   
+   //Timer_Stop(TIMER_2);   
 }
 
 

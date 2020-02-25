@@ -17,7 +17,6 @@
 #include "../ECUAL/Motor/Motor.h"
 #include "../ECUAL/SwICU/SwICU.h"
 #include "../ECUAL/Us/Us.h"
-#include "../MCAL/Timer/Timer.h"
 /*- FUNCTION PROTOTYPES ---------------------------------------------------------------------------------------------------*/
 
 /*
@@ -82,6 +81,15 @@ void UsTest(void);
 *  @param void
 */
 void IcuWithUsTest(void);
+
+/*
+*  Description : Tests Tmu unit.
+*
+*  @param void
+*
+*  @return void
+*/
+void TmuTest(void);
 
 
 
