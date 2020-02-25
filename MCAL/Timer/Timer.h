@@ -18,6 +18,7 @@
 //#define CPU_F           16000000
 #define MILLI_SECONDS   1000
 #define MICRO_SECONDS   1000000
+#define T1_OV_VAL       65536
 #define T2_OV_VAL       256
 #define T0_OV_VAL       256 		
 #define T0_OCR_MAX      255      
@@ -25,6 +26,13 @@
 #define KILO_HZ         1000
 #define MEGA_HZ         1000000
 #define PERCENT         100
+/*-- calculating inverse tick time for different prescalers --*/
+#define INVERSE_TICK_TIME_PRESCALE_1024  ((CPU_F)/(1024))
+//#define INVERSE_TICK_TIME_PRESCALE_256   ((CPU_F)/(256))
+//#define INVERSE_TICK_TIME_PRESCALE_64    ((CPU_F)/(64))
+//#define INVERSE_TICK_TIME_PRESCALE_8     ((CPU_F)/(8))
+//#define INVERSE_TICK_TIME_PRESCALE_NO    ((CPU_F)/(1))
+
 
 /*---- TIMER CHANNEL ----*/
 #define  TIMER_0  0
@@ -114,8 +122,6 @@ typedef struct strTimerConfig_t{
    uint16_t u16_interruptMask;
 }strTimerConfig_t;
 
-/*- GLOBAL EXTERN VARIABLES ------------------------------------------------------------------------------------------------------------------------*/
-extern strTimerConfig_t gstrTimerConfig;
 /*- FUNCTIONS PROTOTYPES -----------------------------------------------------------------------------------------------------------------------------*/
 /**
  * Description: Initiates timer module. 

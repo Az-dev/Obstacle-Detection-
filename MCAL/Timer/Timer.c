@@ -7,10 +7,9 @@
 volatile static uint8_t gu8_t0Prescaler   = 0;
 volatile static uint16_t gu16_t1Prescaler = 0;
 volatile static uint8_t gu8_t2Prescaler   = 0;
-/*volatile uint8_t gu8_preloader = 0;*/
-/*volatile uint16_t gu16_t2_sw_counter  = 0;*/
-/*- FUNCTIONS DEFINITIONS ----------------------------------------------------------------------------------------------------------------------------*/
 
+extern volatile uint16_t gu16_preloader;
+/*- FUNCTIONS DEFINITIONS ----------------------------------------------------------------------------------------------------------------------------*/
 /**
  * Description: Initiates timer module. 
  * 
@@ -20,6 +19,9 @@ volatile static uint8_t gu8_t2Prescaler   = 0;
  */
 ERROR_STATUS Timer_Init(strTimerConfig_t * Timer_cfg)
 {
+   /* Define error state */
+   uint8_t au8_errorState = 0;
+   /* Check Timer_cfg value*/
    if(Timer_cfg != NULL)
    {
       switch(Timer_cfg->u16_timer_ch)
@@ -28,28 +30,37 @@ ERROR_STATUS Timer_Init(strTimerConfig_t * Timer_cfg)
             /* Initializing timer0 working mode */
             TCCR0 |= (uint8_t)(Timer_cfg->u16_mode);
             /* Set Timer0 prescaler */
-            gu8_t0Prescaler = (uint8_t)(Timer_cfg->u16_prescal);                    
+            gu8_t0Prescaler = (uint8_t)(Timer_cfg->u16_prescal);                                
          break;
          case TIMER_1:
             /* Initializing timer1 working mode */
             TCCR1 |= Timer_cfg->u16_mode;
-            TCCR1 |= 0xA000;  /*COM1A1/COM1B1 = 1 & COM1A0/COM1B0 = 0  -----> Clear OC1A/OC1B on compare match when up-counting. Set OC1A/OC1B on compare match when down counting.*/
+            //TCCR1 |= 0xA000;  /*COM1A1/COM1B1 = 1 & COM1A0/COM1B0 = 0  -----> Clear OC1A/OC1B on compare match when up-counting. Set OC1A/OC1B on compare match when down counting.*/
             /* Set Timer1 prescaler */
-            gu16_t1Prescaler = (Timer_cfg->u16_prescal);
+            gu16_t1Prescaler = (Timer_cfg->u16_prescal);            
          break;
          case TIMER_2:
             /* Initializing timer2 working mode */
             TCCR2 |= (uint8_t)(Timer_cfg->u16_mode);
             /* Set Timer2 prescaler */
-            gu8_t2Prescaler = (uint8_t)(Timer_cfg->u16_prescal);
+            gu8_t2Prescaler = (uint8_t)(Timer_cfg->u16_prescal);           
          break;        
       }
-      return E_OK;
+      /*-- Setting Interrupt Procedure --*/
+      /* 1 - set Global interrupt bit*/
+      sei();      
+      /* 2 - set TOIE2 */
+      TIMSK |= Timer_cfg->u16_interruptMask;
+      /* Success */      
+      au8_errorState = E_OK;
    }
    else
    {
-      return E_NOK; 
-   }   
+      /* Return Fail */
+      au8_errorState = E_NOK; 
+   }
+   
+   return au8_errorState;  
 }
 
 /**
@@ -200,18 +211,45 @@ ERROR_STATUS Timer_GetStatus(uint8_t Timer_CH_NO, uint8_t * Timer_status)
 
 /************************************************ Timers ISRs Control **********************************************************/
 ISR_TIMER0_OVF(){
-   /*reset pins*/
-   //gpioPinWrite(GPIOD,(BIT4|BIT5),LOW);
-   /*reload TCNT0*/
-   //TCNT0 = gu8_preloader;  //debug point
+   /*---- TMU Over Flow Procedure ----*/
+   /* 1 - Reload TCNT ---*/
+   Timer_SetValue(TIMER_0 , gu16_preloader);
+   Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));   
+   /* 2 - Increment Global tick counter --*/   
+   /* Debug Point */
+   PORTB_DIR = 0xff;
+   PORTB_DATA ^= 0xff;
+   
 }
+
+ISR_TIMER1_OVF(){
+   /*---- TMU Over Flow Procedure ----*/
+   /* 1 - Reload TCNT ---*/
+   Timer_SetValue(TIMER_1 , gu16_preloader);
+   Timer_SetValue(TIMER_1 , (T1_OV_VAL - gu16_preloader));   
+   /* 2 - Increment Global tick counter --*/   
+   /* Debug Point */
+   PORTB_DIR = 0xff;
+   PORTB_DATA ^= 0xff;
+   
+}
+
+ISR_TIMER2_OVF(){
+   /*---- TMU Over Flow Procedure ----*/
+   /* 1 - Reload TCNT ---*/
+   Timer_SetValue(TIMER_2 , gu16_preloader);
+   Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));   
+   /* 2 - Increment Global tick counter --*/   
+   /* Debug Point */  
+   PORTB_DIR = 0xff;
+   PORTB_DATA ^= 0xff;
+   
+}
+
+
 
 ISR_TIMER0_COMP(){
    /*set pins*/
    //gpioPinWrite(GPIOD,(BIT4|BIT5),HIGH);
 }
 
-ISR_TIMER2_OVF(){
-   /* decrement global software counter*/
-   //gu16_t2_sw_counter-=1;
-}
