@@ -12,11 +12,6 @@ main.d main.o: .././main.c .././Test/Test.h \
  .././Test/../ECUAL/Motor/../../std_types.h \
  .././Test/../ECUAL/SwICU/SwICU.h \
  .././Test/../ECUAL/SwICU/../../std_types.h \
- .././Test/../ECUAL/SwICU/../../MCAL/Timer/Timer.h \
- .././Test/../ECUAL/SwICU/../../MCAL/Timer/../../registers.h \
- .././Test/../ECUAL/SwICU/../../MCAL/Timer/../DIO/DIO.h \
- .././Test/../ECUAL/SwICU/../../MCAL/Timer/../../interrupt.h \
- .././Test/../ECUAL/SwICU/../../MCAL/Timer/../../common_macros.h \
  .././Test/../ECUAL/SwICU/../../interrupt.h \
  .././Test/../ECUAL/SwICU/../../common_macros.h \
  .././Test/../ECUAL/SwICU/../../MCAL/DIO/DIO.h .././Test/../ECUAL/Us/Us.h \
@@ -24,9 +19,8 @@ main.d main.o: .././main.c .././Test/Test.h \
  .././Test/../ECUAL/Us/../../common_macros.h \
  .././Test/../ECUAL/Us/../../MCAL/DIO/DIO.h \
  .././Test/../ECUAL/Us/../SwDelay/SwDelay.h \
- .././Test/../ECUAL/Us/../SwICU/SwICU.h .././Test/../MCAL/Timer/Timer.h \
- .././APP/CarSM/CarSM.h .././APP/CarSM/../../common_macros.h \
- .././APP/CarSM/../../std_types.h \
+ .././Test/../ECUAL/Us/../SwICU/SwICU.h .././APP/CarSM/CarSM.h \
+ .././APP/CarSM/../../common_macros.h .././APP/CarSM/../../std_types.h \
  .././APP/CarSM/../../ECUAL/SwDelay/SwDelay.h
 
 .././Test/Test.h:
@@ -65,16 +59,6 @@ main.d main.o: .././main.c .././Test/Test.h \
 
 .././Test/../ECUAL/SwICU/../../std_types.h:
 
-.././Test/../ECUAL/SwICU/../../MCAL/Timer/Timer.h:
-
-.././Test/../ECUAL/SwICU/../../MCAL/Timer/../../registers.h:
-
-.././Test/../ECUAL/SwICU/../../MCAL/Timer/../DIO/DIO.h:
-
-.././Test/../ECUAL/SwICU/../../MCAL/Timer/../../interrupt.h:
-
-.././Test/../ECUAL/SwICU/../../MCAL/Timer/../../common_macros.h:
-
 .././Test/../ECUAL/SwICU/../../interrupt.h:
 
 .././Test/../ECUAL/SwICU/../../common_macros.h:
@@ -92,8 +76,6 @@ main.d main.o: .././main.c .././Test/Test.h \
 .././Test/../ECUAL/Us/../SwDelay/SwDelay.h:
 
 .././Test/../ECUAL/Us/../SwICU/SwICU.h:
-
-.././Test/../MCAL/Timer/Timer.h:
 
 .././APP/CarSM/CarSM.h:
 

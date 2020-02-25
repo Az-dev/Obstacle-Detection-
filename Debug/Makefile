@@ -46,6 +46,8 @@ SUBDIRS :=  \
 ../MCAL/Timer \
 ../ECUAL \
 ../APP \
+../SL \
+../SL/TMU \
 ../Test
 
 
@@ -67,6 +69,8 @@ C_SRCS +=  \
 ../MCAL/PWM/PWM_Cfg.c \
 ../MCAL/Timer/Timer.c \
 ../MCAL/Timer/Timer_Cfg.c \
+../SL/TMU/TMU.c \
+../SL/TMU/TMU_PB_Cfg.c \
 ../Test/Test.c
 
 
@@ -93,6 +97,8 @@ MCAL/PWM/PWM.o \
 MCAL/PWM/PWM_Cfg.o \
 MCAL/Timer/Timer.o \
 MCAL/Timer/Timer_Cfg.o \
+SL/TMU/TMU.o \
+SL/TMU/TMU_PB_Cfg.o \
 Test/Test.o
 
 OBJS_AS_ARGS +=  \
@@ -112,6 +118,8 @@ MCAL/PWM/PWM.o \
 MCAL/PWM/PWM_Cfg.o \
 MCAL/Timer/Timer.o \
 MCAL/Timer/Timer_Cfg.o \
+SL/TMU/TMU.o \
+SL/TMU/TMU_PB_Cfg.o \
 Test/Test.o
 
 C_DEPS +=  \
@@ -131,6 +139,8 @@ MCAL/PWM/PWM.d \
 MCAL/PWM/PWM_Cfg.d \
 MCAL/Timer/Timer.d \
 MCAL/Timer/Timer_Cfg.d \
+SL/TMU/TMU.d \
+SL/TMU/TMU_PB_Cfg.d \
 Test/Test.d
 
 C_DEPS_AS_ARGS +=  \
@@ -150,6 +160,8 @@ MCAL/PWM/PWM.d \
 MCAL/PWM/PWM_Cfg.d \
 MCAL/Timer/Timer.d \
 MCAL/Timer/Timer_Cfg.d \
+SL/TMU/TMU.d \
+SL/TMU/TMU_PB_Cfg.d \
 Test/Test.d
 
 OUTPUT_FILE_PATH +=ObstacleDetection.elf
@@ -272,6 +284,20 @@ MCAL/Timer/Timer.o: ../MCAL/Timer/Timer.c
 	
 
 MCAL/Timer/Timer_Cfg.o: ../MCAL/Timer/Timer_Cfg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+SL/TMU/TMU.o: ../SL/TMU/TMU.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+SL/TMU/TMU_PB_Cfg.o: ../SL/TMU/TMU_PB_Cfg.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

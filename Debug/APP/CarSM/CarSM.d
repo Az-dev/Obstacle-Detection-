@@ -20,11 +20,6 @@ APP/CarSM/CarSM.d APP/CarSM/CarSM.o: ../APP/CarSM/CarSM.c \
  ../APP/CarSM/../../ECUAL/Us/../SwDelay/SwDelay.h \
  ../APP/CarSM/../../ECUAL/Us/../SwICU/SwICU.h \
  ../APP/CarSM/../../ECUAL/Us/../SwICU/../../std_types.h \
- ../APP/CarSM/../../ECUAL/Us/../SwICU/../../MCAL/Timer/Timer.h \
- ../APP/CarSM/../../ECUAL/Us/../SwICU/../../MCAL/Timer/../../registers.h \
- ../APP/CarSM/../../ECUAL/Us/../SwICU/../../MCAL/Timer/../DIO/DIO.h \
- ../APP/CarSM/../../ECUAL/Us/../SwICU/../../MCAL/Timer/../../interrupt.h \
- ../APP/CarSM/../../ECUAL/Us/../SwICU/../../MCAL/Timer/../../common_macros.h \
  ../APP/CarSM/../../ECUAL/Us/../SwICU/../../interrupt.h \
  ../APP/CarSM/../../ECUAL/Us/../SwICU/../../common_macros.h \
  ../APP/CarSM/../../ECUAL/Us/../SwICU/../../MCAL/DIO/DIO.h \
@@ -77,16 +72,6 @@ APP/CarSM/CarSM.d APP/CarSM/CarSM.o: ../APP/CarSM/CarSM.c \
 ../APP/CarSM/../../ECUAL/Us/../SwICU/SwICU.h:
 
 ../APP/CarSM/../../ECUAL/Us/../SwICU/../../std_types.h:
-
-../APP/CarSM/../../ECUAL/Us/../SwICU/../../MCAL/Timer/Timer.h:
-
-../APP/CarSM/../../ECUAL/Us/../SwICU/../../MCAL/Timer/../../registers.h:
-
-../APP/CarSM/../../ECUAL/Us/../SwICU/../../MCAL/Timer/../DIO/DIO.h:
-
-../APP/CarSM/../../ECUAL/Us/../SwICU/../../MCAL/Timer/../../interrupt.h:
-
-../APP/CarSM/../../ECUAL/Us/../SwICU/../../MCAL/Timer/../../common_macros.h:
 
 ../APP/CarSM/../../ECUAL/Us/../SwICU/../../interrupt.h:
 
