@@ -29,7 +29,7 @@ void TmuTest(void)
    TMU_Init(&gstrTMUConfig); // ---> success with different configurations , tested timer_setVal and asserted the TCNT value for different timers
    Timer_Start(TIMER_0,0);   
    while(1);
-   /*
+   */
 }
 
 /*
