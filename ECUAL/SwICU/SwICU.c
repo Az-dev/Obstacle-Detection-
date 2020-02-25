@@ -7,6 +7,8 @@
 /*- INCLUDES -----------------------------------------------------------------------------------------------------------------------*/
 #include "../SwICU/SwICU.h"
 #include "../SwDelay/SwDelay.h"
+#include "../../MCAL/Timer/Timer.h"
+#include "../../MCAL/Timer/Timer_Cfg.h"
 /*- GLOBAL VARIABLES DEFINITIONS ---------------------------------------------------------------------------------------------------*/
 volatile static uint8_t gu8_onFallPulseCapture_flag = 0;  /* this flag is when a Rising-to-Falling pulse is captured */
 volatile static uint16_t gu16_Icu_Time; 
