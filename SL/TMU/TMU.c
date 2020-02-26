@@ -10,7 +10,7 @@
 #include "TMU.h"
 /*- GLOBAL VARIABLES -----------------------------------------------------------------------------------------------*/
 static strTask_t garrTaskTMUBuffer[TMU_BUFFER_SIZE];  /* internal TMU tasks buffer*/
-static sint16_t gindex = TMU_BUFFER_SIZE;  
+static sint16_t gindex = 0;  
 volatile uint16_t gu16_preloader = 0;      /* this variable is (volatile,not static) as it must be shown to TIMER's ISR*/
 volatile uint32_t gu32_overflowTimes = 0;  /* counts number of over flows*/
 /*- FUNCITONS DEFINITIONS ------------------------------------------------------------------------------------------*/
@@ -111,16 +111,26 @@ EnmTMUError_t TMU_DeInit();
 */
 EnmTMUError_t TMU_Dispatch(void)
 {
-   /* Define Error state */
+    /* Define Error state */
    uint8_t au8_errorState;   
    /* Check if the buffer not empty */
-   if(0 < gindex)
+   if(0 <= gindex)
    {
-      uint16_t au16_iter = (uint16_t)gindex;
+      uint16_t au16_iter = 0;
       /* Search for the Task of the given function within TMU buffer*/
-      for(;au16_iter >= 0; au16_iter--)
+      for(;au16_iter <= gindex; au16_iter++)
       {
-         /* 1 - Check if task counter is a multiple of over flow timer to determine whether to execute task's function or not */
+         /*--- Start of Debug Point ---*/
+         /*         
+         garrTaskTMUBuffer[0].fn();
+         garrTaskTMUBuffer[1].fn();
+         garrTaskTMUBuffer[2].fn();
+         return ;
+         */
+         /* garrTaskTMUBuffer[au16_iter].fn(); */         
+         /*--- End of Debug Point ---*/
+                 
+         /* Check if task counter is a multiple of over flow timer to determine whether to execute task's function or not */
          if(0 == (gu32_overflowTimes % garrTaskTMUBuffer[au16_iter].counter))
          {
             /* 1 - Execute Task Function */
@@ -131,10 +141,12 @@ EnmTMUError_t TMU_Dispatch(void)
                /* remove the Task : by replacing it with the last task in the buffer */
                garrTaskTMUBuffer[au16_iter] = garrTaskTMUBuffer[gindex];
                /* Increment the size */
-               gindex++;
-            }            
-         }                         
-      }      
+               gindex--;
+            }
+         }
+                                  
+      } 
+      return;     
    }else{
       /* return error code array is empty */;
       au8_errorState = BUFFER_EMPTY;      
@@ -170,8 +182,8 @@ EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* task_fn)(void) , uint8
    if(NULL != task_fn)
    {
       /*---- Enable Interrupt ----*/
-      /*---- Add Task to TMU Buffer ----*/
-      if(0 <= gindex)
+      /*---- Add Task to TMU Buffer while buffer is not full ----*/
+      if(TMU_BUFFER_SIZE > gindex)
       {
          /* Create a new task */
          strTask_t *austr_Task = NULL;
@@ -179,10 +191,10 @@ EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* task_fn)(void) , uint8
          austr_Task->counter = duration;
          austr_Task->work_mode = work_mode;         
          /* Append the task to TMU buffer */
-         garrTaskTMUBuffer[TMU_BUFFER_SIZE - gindex] = *austr_Task;
-         /* Decrement gindex */
-         gindex--;
-         }else{
+         garrTaskTMUBuffer[gindex] = *austr_Task;
+         /* increment gindex */
+         gindex++;
+      }else{
          /* return error code buffer is full*/
          au8_errorState = BUFFER_FULL;
       }
