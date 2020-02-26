@@ -2,13 +2,14 @@
 #include "Timer.h"
 
 
-/*- GLOBAL STATIC VARIABLES --------------------------------------------------------------------------------------------------------------------------*/
+/*- GLOBAL VARIABLES --------------------------------------------------------------------------------------------------------------------------*/
 /*---- Timers prescalers ----*/
 volatile static uint8_t gu8_t0Prescaler   = 0;
 volatile static uint16_t gu16_t1Prescaler = 0;
 volatile static uint8_t gu8_t2Prescaler   = 0;
-
+/*---- TMU related variables ---*/
 extern volatile uint16_t gu16_preloader;
+extern volatile uint32_t gu32_overflowTimes;
 /*- FUNCTIONS DEFINITIONS ----------------------------------------------------------------------------------------------------------------------------*/
 /**
  * Description: Initiates timer module. 
@@ -212,38 +213,26 @@ ERROR_STATUS Timer_GetStatus(uint8_t Timer_CH_NO, uint8_t * Timer_status)
 /************************************************ Timers ISRs Control **********************************************************/
 ISR_TIMER0_OVF(){
    /*---- TMU Over Flow Procedure ----*/
-   /* 1 - Reload TCNT ---*/
-   Timer_SetValue(TIMER_0 , gu16_preloader);
+   /* 1 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));   
-   /* 2 - Increment Global tick counter --*/   
-   /* Debug Point */
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0xff;
-   
+   /* 2 - Increment Global over flow times counter --*/
+   gu32_overflowTimes++;  
 }
 
 ISR_TIMER1_OVF(){
    /*---- TMU Over Flow Procedure ----*/
-   /* 1 - Reload TCNT ---*/
-   Timer_SetValue(TIMER_1 , gu16_preloader);
+   /* 1 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_1 , (T1_OV_VAL - gu16_preloader));   
-   /* 2 - Increment Global tick counter --*/   
-   /* Debug Point */
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0xff;
-   
+   /* 2 - Increment Global over flow times counter --*/
+   gu32_overflowTimes++;  
 }
 
 ISR_TIMER2_OVF(){
    /*---- TMU Over Flow Procedure ----*/
-   /* 1 - Reload TCNT ---*/
-   Timer_SetValue(TIMER_2 , gu16_preloader);
+   /* 1 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));   
-   /* 2 - Increment Global tick counter --*/   
-   /* Debug Point */  
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0xff;
-   
+   /* 2 - Increment Global over flow times counter --*/
+   gu32_overflowTimes++;  
 }
 
 
