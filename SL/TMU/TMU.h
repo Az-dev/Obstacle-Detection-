@@ -21,18 +21,20 @@
 #define  TIMER_2  2
 
 /*- TYPEDEFS ------------------------------------------------------------------------------------------------------*/
+//typedef void (* fn)(void);
 /*------- Error Enum -------*/
 typedef enum EnmTMUError
 {
    INIT_OK  = 0,
    INIT_NOK = 1,
-   
-   
+   BUFFER_FULL = 3,
+   BUFFER_EMPTY = 4,
+   INVALID_TASK_PARAM = 5,   
 }EnmTMUError_t;
 /*------- Task Struct ------*/
 typedef struct strTask
 {
-   void (* fn)(void);
+   void (* fn)(void) ;
    uint16_t counter;
    //uint8_t ready_flag; 
    uint8_t work_mode;  
@@ -63,36 +65,32 @@ extern EnmTMUError_t TMU_Init(const strTMU_Cfg_t * strTMU_Init);
 extern EnmTMUError_t TMU_DeInit();
 
 /*
+*  Description : Iterate on the tasks to decide on the task to be executed.
 *
+*  @param void
 *
-*
+*  @return EnmTMUError_t
 */
-extern EnmTMUError_t TMU_Dispatch();
+extern EnmTMUError_t TMU_Dispatch(void);
 
 /*
 *  Description : Adds a Task instance to TMU tasks Buffer.
 *
 *  @param uint16_t duration
-*  @param void (* fn)(void)
+*  @param void (* task_fn)(void)                // A function-pointer to task function
 *  uint8_t work_mode                //States whether the task to be add will be PERIODIC or ONESHOOT
 *
 *  @param EnmTMUError_t
 */
-extern EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* fn)(void) , uint8_t work_mode);
+extern EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* task_fn)(void)  , uint8_t work_mode);
 
 /*
 *  Description : Removes a task form TMU queue.
 *
-*  @param @param void (* call_back)(void)
+*  @param void (* task_fn)(void)
 *
 *  @return EnmTMUError_t
 */
-extern EnmTMUError_t TMU_Stop_Timer(void (* call_back)(void));
-
-
-
-
-
-
+extern EnmTMUError_t TMU_Stop_Timer(void (* task_fn)(void));
 
 #endif /* TMU_H_ */
