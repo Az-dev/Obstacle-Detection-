@@ -129,7 +129,7 @@ EnmTMUError_t TMU_Dispatch(void)
             if(ONESHOOT == garrTaskTMUBuffer[au16_iter].work_mode)
             {
                /* remove the Task : by replacing it with the last task in the buffer */
-               garrTaskTMUBuffer[au16_iter] = garrTaskTMUBuffer[au16_iter];
+               garrTaskTMUBuffer[au16_iter] = garrTaskTMUBuffer[gindex];
                /* Increment the size */
                gindex++;
             }            
@@ -153,6 +153,17 @@ EnmTMUError_t TMU_Dispatch(void)
 */
 EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* task_fn)(void) , uint8_t work_mode)
 {
+   /*--- Start Debug Point (success) ----*/
+   /* Create a new task */
+   /*
+   strTask_t *austr_Task = NULL;
+   austr_Task->fn = task_fn;
+   austr_Task->counter = duration;
+   austr_Task->work_mode = work_mode;
+   garrTaskTMUBuffer[0] = *austr_Task;
+   return 0;
+   */
+   /*--- End Debug Point ---*/
    /* Define Error state */
    uint8_t au8_errorState;
    
@@ -163,15 +174,12 @@ EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* task_fn)(void) , uint8
       if(0 <= gindex)
       {
          /* Create a new task */
-         strTask_t austr_Task =
-         {
-            task_fn,
-            duration,
-            //uint8_t ready_flag;
-            work_mode
-         };
+         strTask_t *austr_Task = NULL;
+         austr_Task->fn = task_fn;
+         austr_Task->counter = duration;
+         austr_Task->work_mode = work_mode;         
          /* Append the task to TMU buffer */
-         garrTaskTMUBuffer[TMU_BUFFER_SIZE - gindex] = austr_Task;
+         garrTaskTMUBuffer[TMU_BUFFER_SIZE - gindex] = *austr_Task;
          /* Decrement gindex */
          gindex--;
          }else{
@@ -183,6 +191,22 @@ EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* task_fn)(void) , uint8
    }  
    return au8_errorState;
 }
+
+/*---- Buffer Debug Point -----*/
+void setBufferElement(strTask_t * str)
+{
+   garrTaskTMUBuffer[0] = *str;
+   //garrTaskTMUBuffer[1] = *str;
+   //garrTaskTMUBuffer[2] = *str;  
+}
+
+void getBufferElements(strTask_t * str)
+{
+   //*str = garrTaskTMUBuffer[0];
+   //*str = garrTaskTMUBuffer[1];
+   *str = garrTaskTMUBuffer[2];    
+}
+/*---- End of Buffer Debug Point ---*/
 
 /*
 *  Description : Removes a task form TMU queue.
@@ -208,7 +232,7 @@ EnmTMUError_t TMU_Stop_Timer(void (* task_fn)(void))
             if(garrTaskTMUBuffer[au16_iter].fn == task_fn)
             {
                /* Then remove the Task : by replacing it with the last task in the buffer */
-               garrTaskTMUBuffer[au16_iter] = garrTaskTMUBuffer[au16_iter];
+               garrTaskTMUBuffer[au16_iter] = garrTaskTMUBuffer[gindex];
                /* Increment the size */
                gindex++;
             }
