@@ -138,16 +138,21 @@ EnmTMUError_t TMU_Dispatch(void)
             /* 2 - See Whether the task is periodic or one shoot -after its execution- */
             if(ONESHOOT == garrTaskTMUBuffer[au16_iter].work_mode)
             {
-               /* remove the Task : by replacing it with the last task in the buffer */
-               garrTaskTMUBuffer[au16_iter] = garrTaskTMUBuffer[gindex];
-               /* Increment the size */
-               gindex--;
+               /* Case of buffer contains only one element */
+               if(0 == gindex) gindex = -1;
+               else
+               {
+                  /* remove the Task : by replacing it with the last task in the buffer */
+                  garrTaskTMUBuffer[au16_iter] = garrTaskTMUBuffer[gindex];
+                  /* Decrement gindex */
+                  gindex--;                  
+               }               
             }
-         }
-                                  
-      } 
-      return;     
-   }else{
+         }                                  
+      }           
+   }
+   else
+   {
       /* return error code array is empty */;
       au8_errorState = BUFFER_EMPTY;      
    }
