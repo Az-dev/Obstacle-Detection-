@@ -10,9 +10,9 @@
 #include "TMU.h"
 /*- GLOBAL VARIABLES -----------------------------------------------------------------------------------------------*/
 static strTask_t garrTaskTMUBuffer[TMU_BUFFER_SIZE];  /* internal TMU tasks buffer*/
-static sint16_t gindex = 0;  
+static sint16_t gindex = -1;  
 volatile uint16_t gu16_preloader = 0;      /* this variable is (volatile,not static) as it must be shown to TIMER's ISR*/
-volatile uint32_t gu32_overflowTimes = 0;  /* counts number of over flows*/
+
 /*- FUNCITONS DEFINITIONS ------------------------------------------------------------------------------------------*/
 /*
 *  Description : Initializes the given timer channel with the given resolution.
@@ -136,7 +136,7 @@ EnmTMUError_t TMU_Dispatch(void)
             /* 1 - Execute Task Function */
             garrTaskTMUBuffer[au16_iter].fn();
             /* 2 - See Whether the task is periodic or one shoot -after its execution- */
-            if(ONESHOOT == garrTaskTMUBuffer[au16_iter].work_mode)
+            if((uint8_t)ONESHOOT == garrTaskTMUBuffer[au16_iter].work_mode)
             {
                /* Case of buffer contains only one element */
                if(0 == gindex) gindex = -1;
@@ -212,16 +212,16 @@ EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* task_fn)(void) , uint8
 /*---- Buffer Debug Point -----*/
 void setBufferElement(strTask_t * str)
 {
-   garrTaskTMUBuffer[0] = *str;
+   //garrTaskTMUBuffer[0] = *str;
    //garrTaskTMUBuffer[1] = *str;
-   //garrTaskTMUBuffer[2] = *str;  
+   garrTaskTMUBuffer[2] = *str;  
 }
 
-void getBufferElements(strTask_t * str)
+void getBufferElement(strTask_t * str)
 {
-   //*str = garrTaskTMUBuffer[0];
+   *str = garrTaskTMUBuffer[0];
    //*str = garrTaskTMUBuffer[1];
-   *str = garrTaskTMUBuffer[2];    
+   //*str = garrTaskTMUBuffer[2];    
 }
 /*---- End of Buffer Debug Point ---*/
 
