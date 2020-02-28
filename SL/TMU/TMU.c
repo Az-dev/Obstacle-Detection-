@@ -116,7 +116,7 @@ EnmTMUError_t TMU_Dispatch(void)
    /* Check if the buffer not empty */
    if(0 <= gindex)
    {
-      uint16_t au16_iter = 0;
+      sint16_t au16_iter = 0;
       /* Search for the Task of the given function within TMU buffer*/
       for(;au16_iter <= gindex; au16_iter++)
       {
@@ -136,7 +136,7 @@ EnmTMUError_t TMU_Dispatch(void)
             /* 1 - Execute Task Function */
             garrTaskTMUBuffer[au16_iter].fn();
             /* 2 - See Whether the task is periodic or one shoot -after its execution- */
-            if((uint8_t)ONESHOOT == garrTaskTMUBuffer[au16_iter].work_mode)
+            if(ONESHOOT == garrTaskTMUBuffer[au16_iter].work_mode)
             {
                /* Case of buffer contains only one element */
                if(0 == gindex) gindex = -1;
