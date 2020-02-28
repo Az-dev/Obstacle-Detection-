@@ -194,11 +194,11 @@ EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* task_fn)(void) , uint8
          strTask_t *austr_Task = NULL;
          austr_Task->fn = task_fn;
          austr_Task->counter = duration;
-         austr_Task->work_mode = work_mode;         
+         austr_Task->work_mode = work_mode;
+         /* Increment gindex : to point to the next empty location to store the new task */
+         gindex++;         
          /* Append the task to TMU buffer */
-         garrTaskTMUBuffer[gindex] = *austr_Task;
-         /* increment gindex */
-         gindex++;
+         garrTaskTMUBuffer[gindex] = *austr_Task;         
       }else{
          /* return error code buffer is full*/
          au8_errorState = BUFFER_FULL;
@@ -219,9 +219,9 @@ void setBufferElement(strTask_t * str)
 
 void getBufferElement(strTask_t * str)
 {
-   *str = garrTaskTMUBuffer[0];
+   //*str = garrTaskTMUBuffer[0];
    //*str = garrTaskTMUBuffer[1];
-   //*str = garrTaskTMUBuffer[2];    
+   *str = garrTaskTMUBuffer[2];    
 }
 /*---- End of Buffer Debug Point ---*/
 
