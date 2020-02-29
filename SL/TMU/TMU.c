@@ -12,6 +12,7 @@
 static strTask_t garrTaskTMUBuffer[TMU_BUFFER_SIZE];  /* internal TMU tasks buffer*/
 static sint16_t gindex = -1;  
 volatile uint16_t gu16_preloader = 0;      /* this variable is (volatile,not static) as it must be shown to TIMER's ISR*/
+//extern volatile uint32_t gu32_overflowTimes;
 
 /*- FUNCITONS DEFINITIONS ------------------------------------------------------------------------------------------*/
 /*
@@ -120,18 +121,8 @@ EnmTMUError_t TMU_Dispatch(void)
       /* Search for the Task of the given function within TMU buffer*/
       for(;au16_iter <= gindex; au16_iter++)
       {
-         /*--- Start of Debug Point ---*/
-         /*         
-         garrTaskTMUBuffer[0].fn();
-         garrTaskTMUBuffer[1].fn();
-         garrTaskTMUBuffer[2].fn();
-         return ;
-         */
-         /* garrTaskTMUBuffer[au16_iter].fn(); */         
-         /*--- End of Debug Point ---*/
-                 
          /* Check if task counter is a multiple of over flow timer to determine whether to execute task's function or not */
-         if(0 == (gu32_overflowTimes % garrTaskTMUBuffer[au16_iter].counter))
+         if((0 == (gu32_overflowTimes % garrTaskTMUBuffer[au16_iter].counter)) && (0 != gu32_overflowTimes))
          {
             /* 1 - Execute Task Function */
             garrTaskTMUBuffer[au16_iter].fn();
@@ -208,22 +199,6 @@ EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* task_fn)(void) , uint8
    }  
    return au8_errorState;
 }
-
-/*---- Buffer Debug Point -----*/
-void setBufferElement(strTask_t * str)
-{
-   //garrTaskTMUBuffer[0] = *str;
-   //garrTaskTMUBuffer[1] = *str;
-   garrTaskTMUBuffer[2] = *str;  
-}
-
-void getBufferElement(strTask_t * str)
-{
-   //*str = garrTaskTMUBuffer[0];
-   //*str = garrTaskTMUBuffer[1];
-   *str = garrTaskTMUBuffer[2];    
-}
-/*---- End of Buffer Debug Point ---*/
 
 /*
 *  Description : Removes a task form TMU queue.

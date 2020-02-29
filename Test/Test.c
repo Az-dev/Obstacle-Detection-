@@ -16,20 +16,26 @@
 
 void taskA(void)
 {
-   PORTA_DIR = 0xff;
-   PORTA_DATA ^= 0xff;   
+   PORTB_DIR = 0xff;
+   PORTB_DATA ^= 0x10;   
 }
 
 void taskB(void)
 {
    PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0xff;
+   PORTB_DATA ^= 0x20;
 }
 
 void taskC(void)
 {
-   PORTC_DIR = 0xff;
-   PORTC_DATA ^= 0xff;
+   PORTB_DIR = 0xff;
+   PORTB_DATA ^= 0x40;
+}
+
+void taskD(void)
+{
+   PORTB_DIR = 0xff;
+   PORTB_DATA ^= 0x80;
 }
 /*
 *  Description : Tests TMU unit.
@@ -40,58 +46,16 @@ void taskC(void)
 */
 void TmuTest(void)
 {
-   /* -- Testing TMU Init (passed) -- */
-   /*
-   TMU_Init(&gstrTMUConfig); // ---> success with different configurations , tested timer_setVal and asserted the TCNT value for different timers
-   */
-   /*-- End of Testing TMU Init -----*/
-   
-   /*-- Buffer Debug Point (passed) --*/ 
-   /* 
-   TMU_Init(&gstrTMUConfig); 
-   Timer_Start(TIMER_1,0);   
-   strTask_t in_str;
-   strTask_t out_str;
-   in_str.fn = taskA;
-   setBufferElements(&in_str);
-   getBufferElements(&out_str); 
-   while(1) out_str.fn();
-   */  
-   /*-- End of buffer deubug point ---*/
-   
-   /*-- Start Test of TMU_Start_Timer (TMU_Start_Timer passes)--*/ 
-   /*
-   strTask_t out_str;  
-   TMU_Init(&gstrTMUConfig); 
-   Timer_Start(TIMER_1,0);
-   TMU_Start_Timer(10,taskA,PERIODIC);
-   TMU_Start_Timer(10,taskB,PERIODIC);
-   TMU_Start_Timer(10,taskC,PERIODIC);
-   getBufferElements(&out_str); 
-   while(1) out_str.fn();
-   */    
-   /*-- End test of TMU_Start_Timer ---*/
-   
-   
-   
-   
    TMU_Init(&gstrTMUConfig);   
-   TMU_Start_Timer(10,taskA,PERIODIC);
-   TMU_Start_Timer(10,taskB,PERIODIC);
-   TMU_Start_Timer(10,taskC,PERIODIC);
-   while(1)  TMU_Dispatch();
-   
-   
-  
-   
-   
-   
-   
-     
-    
-        
-   
-   
+   TMU_Start_Timer(3,taskA,PERIODIC);   
+   //TMU_Start_Timer(10,taskB,PERIODIC);
+   //TMU_Start_Timer(10,taskC,PERIODIC);
+   //TMU_Start_Timer(10,taskD,PERIODIC);  
+   Timer_Start(TIMER_1,0);   
+   while(1)
+   {      
+      TMU_Dispatch();          
+   }
 }
 
 /*
