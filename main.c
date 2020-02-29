@@ -10,8 +10,8 @@
 /*- Main FUNCTION DEFINITION ---------------------------------------------------------------------------------------------------*/
 int main(void)
 {
-   //TimerTest(); /* ---> test passed*/
    TmuTest();
+   //TimerTest(); /* ---> test passed*/   
    /* DioTest();  ----> test passed */
    /* HwPwmTest(); ---> bypassed    */
    /* MotorTest(); ---> test passed and approved HwPWM */ 

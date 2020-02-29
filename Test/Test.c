@@ -48,9 +48,9 @@ void TmuTest(void)
 {
    TMU_Init(&gstrTMUConfig);   
    TMU_Start_Timer(3,taskA,PERIODIC);   
-   //TMU_Start_Timer(10,taskB,PERIODIC);
-   //TMU_Start_Timer(10,taskC,PERIODIC);
-   //TMU_Start_Timer(10,taskD,PERIODIC);  
+   TMU_Start_Timer(20,taskB,PERIODIC);
+   TMU_Start_Timer(50,taskC,PERIODIC);
+   TMU_Start_Timer(60,taskD,PERIODIC);  
    Timer_Start(TIMER_1,0);   
    while(1)
    {      
