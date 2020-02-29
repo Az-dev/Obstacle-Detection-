@@ -20,6 +20,10 @@
 #define  TIMER_1  1
 #define  TIMER_2  2
 
+/*- GLOBALS & EXTERNS -------------------------------------------------------------------------------------------------------------------------------*/
+/*---- Timer related variables ---*/
+extern volatile uint32_t gu32_overflowTimes;
+extern volatile uint8_t gu8_excuteFlag;
 /*- TYPEDEFS ------------------------------------------------------------------------------------------------------*/
 //typedef void (* fn)(void);
 /*------- Error Enum -------*/

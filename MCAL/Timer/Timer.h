@@ -112,9 +112,11 @@
 #define T2_POLLING            0
 #define T2_INTERRUPT_NORMAL   0x40
 #define T2_INTERRUPT_CMP      0x80
-
-/*- STRUCTS ----------------------------------------------------------------------------------------------------------------------------------------*/
-typedef struct strTimerConfig_t{
+/*- GLOBALS & EXTERNS -------------------------------------------------------------------------------------------------------------------------------*/
+/*---- TMU related variables ---*/
+extern volatile uint16_t gu16_preloader;
+/*- TYPEDEFS ----------------------------------------------------------------------------------------------------------------------------------------*/
+typedef struct strTimerConfig{
    uint16_t u16_timer_ch;
    uint16_t u16_mode;
    uint16_t u16_oc;

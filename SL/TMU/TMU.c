@@ -12,7 +12,6 @@
 static strTask_t garrTaskTMUBuffer[TMU_BUFFER_SIZE];  /* internal TMU tasks buffer*/
 static sint16_t gindex = -1;  
 volatile uint16_t gu16_preloader = 0;      /* this variable is (volatile,not static) as it must be shown to TIMER's ISR*/
-//extern volatile uint32_t gu32_overflowTimes;
 
 /*- FUNCITONS DEFINITIONS ------------------------------------------------------------------------------------------*/
 /*
@@ -122,11 +121,13 @@ EnmTMUError_t TMU_Dispatch(void)
       for(;au16_iter <= gindex; au16_iter++)
       {
          /* Check if task counter is a multiple of over flow timer to determine whether to execute task's function or not */
-         if((0 == (gu32_overflowTimes % garrTaskTMUBuffer[au16_iter].counter)) && (0 != gu32_overflowTimes))
+         if((0 == (gu32_overflowTimes % garrTaskTMUBuffer[au16_iter].counter)) && (0 != gu32_overflowTimes) && (1 == gu8_excuteFlag))
          {
-            /* 1 - Execute Task Function */
-            garrTaskTMUBuffer[au16_iter].fn();
-            /* 2 - See Whether the task is periodic or one shoot -after its execution- */
+            /* 1 - pull down execute flag */
+            gu8_excuteFlag = 0;
+            /* 2 - Execute Task Function */
+            garrTaskTMUBuffer[au16_iter].fn();                      
+            /* 3 - See Whether the task is periodic or one shoot -after its execution- */
             if(ONESHOOT == garrTaskTMUBuffer[au16_iter].work_mode)
             {
                /* Case of buffer contains only one element */
