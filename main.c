@@ -23,8 +23,8 @@ int main(void)
    //Car_SM_Update();
    /*------------------- END CAR APPLICATION   ------------------------*/ 
    /*---------------------- Start SPI test ----------------------------*/
-   //masterSpi();
-   slaveSpi(); 
+   masterSpi();
+   //slaveSpi(); 
    /*---------------------- End SPI test ------------------------------*/ 
     
 }
