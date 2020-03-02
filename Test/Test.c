@@ -12,7 +12,45 @@
 #include "../MCAL/Timer/Timer_Cfg.h"
 #include "../SL/TMU/TMU.h"
 #include "../SL/TMU/TMU_PB_Cfg.h"
+#include "../MCAL/SPI/SPI.h"
+#include "../MCAL/SPI/SPI_Cfg.h"
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
+
+void masterSpi(void)
+{
+   sei();
+   uint8_t data = 10;
+   /* Initialize master */
+   SPI_Init(&gstr_MasterCfg);
+   PORTB_DIR = 0b10110000; 
+   SPI_WriteByte(&data);
+    
+   while(1)
+   {
+      data++;
+      SPI_WriteByte(&data);
+      softwareDelayMs(50);
+   }; 
+}
+
+/*
+* Description: Tests SPI module in slave mode
+*
+*  @param void
+*
+*  @return void
+*/
+void slaveSpi(void)
+{
+    uint8_t data; 
+    sei();   
+    /* Initialize master */
+    SPI_Init(&gstr_SlaveCfg);
+    PORTB_DIR = 0b01000000; 
+    SPI_ReadByte(&data);   
+    while(1);
+       
+}
 
 void taskA(void)
 {

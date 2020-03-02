@@ -10,7 +10,7 @@
 /*- Main FUNCTION DEFINITION ---------------------------------------------------------------------------------------------------*/
 int main(void)
 {
-   TmuTest();
+   //TmuTest();
    //TimerTest(); /* ---> test passed*/   
    /* DioTest();  ----> test passed */
    /* HwPwmTest(); ---> bypassed    */
@@ -22,6 +22,10 @@ int main(void)
    //Car_SM_Init();
    //Car_SM_Update();
    /*------------------- END CAR APPLICATION   ------------------------*/ 
+   /*---------------------- Start SPI test ----------------------------*/
+   //masterSpi();
+   slaveSpi(); 
+   /*---------------------- End SPI test ------------------------------*/ 
     
 }
 

@@ -91,6 +91,24 @@ void IcuWithUsTest(void);
 */
 void TmuTest(void);
 
+/*
+* Description: Tests SPI module in master mode
+*
+*  @param void 
+*
+*  @return void
+*/
+void masterSpi(void);
+
+/*
+* Description: Tests SPI module in slave mode
+*
+*  @param void
+*
+*  @return void
+*/
+void slaveSpi(void);
+
 
 
 
