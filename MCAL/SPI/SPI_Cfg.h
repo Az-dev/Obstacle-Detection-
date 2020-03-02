@@ -12,4 +12,5 @@
 extern str_SPI_Cfg_t gstr_MasterCfg;
 extern str_SPI_Cfg_t gstr_SlaveCfg;
 
+
 #endif /* SPI_CFG_H_ */

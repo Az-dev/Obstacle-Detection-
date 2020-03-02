@@ -16,7 +16,7 @@ str_SPI_Cfg_t gstr_MasterCfg =
    MSTR_SEL,
    CLK_POL_PHA_MODE_0,
    Fosc_128,
-   SPI_2X_DIS
+   SPI_2X_DIS,   
 };
 
 /*--- SPI configuration struct (Slave) Interrupt-mode ---*/
@@ -28,5 +28,5 @@ str_SPI_Cfg_t gstr_SlaveCfg =
    SLV_SEL,
    CLK_POL_PHA_MODE_0,
    Fosc_128,
-   SPI_2X_DIS
+   SPI_2X_DIS,   
 };

@@ -45,8 +45,8 @@
 #define SPI_2X_EN    0x01
 #define SPI_2X_DIS   0x00
 
-/* Setting Interrupt flag */
-#define SPIF_SET    0X80
+/* Interrupt flag */
+#define SPIF    0X80
 
 /*- TYPEDEFS --------------------------------------------------------------------------------------------------------*/
 /*--- SPI configuration struct ---*/
@@ -58,7 +58,7 @@ typedef struct str_SPI_Cfg
    uint8_t SPI_MS_Sel;
    uint8_t SPI_CK_mode;
    uint8_t SPI_freq_mode;
-   uint8_t SPI_2X_En;  
+   uint8_t SPI_2X_En;   
 }str_SPI_Cfg_t;
 /*--- SPI Error Enum ----*/
 typedef enum EnumSPIError
@@ -96,6 +96,6 @@ extern EnumSPIError_t SPI_WriteByte(uint8_t * Data_byte);
 *
 *  @return EnumSPIError
 */
-extern EnumSPIError_t SPI_ReadByte(uint8_t * Data_byte);
+extern EnumSPIError_t SPI_ReadByte(volatile uint8_t * Data_byte);
 
 #endif /* SPI_H_ */
