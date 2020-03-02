@@ -19,6 +19,8 @@ ____
 #### Application Layer (APP) 
 1. Steering : A module for implementing the wheels-steering functionality.
 2. CarSm    : A module that implements system state machine of the moving and obstacle detection mechanism.
+#### Service Layer (SL)
+1. TMU      : A module that represents a timer management unit.
 ----
 * ####   Components and packages used for implementing this work :
 
