@@ -34,5 +34,9 @@ MCAL\Timer\Timer.c
 
 MCAL\Timer\Timer_Cfg.c
 
+SL\TMU\TMU.c
+
+SL\TMU\TMU_PB_Cfg.c
+
 Test\Test.c
 

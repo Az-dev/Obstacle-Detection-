@@ -10,7 +10,6 @@
 #define SWICU_H_
 /*- INCLUDES -----------------------------------------------------------------------------------------------------------------------*/
 #include "../../std_types.h"
-#include "../../MCAL/Timer/Timer.h"
 #include "../../interrupt.h"
 #include "../../common_macros.h"
 #include "../../MCAL/DIO/DIO.h"

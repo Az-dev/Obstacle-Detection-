@@ -8,7 +8,56 @@
 #include "Test.h"
 #include "../ECUAL/LCD/char_lcd.h"
 #include "../ECUAL/SwDelay/SwDelay.h"
+#include "../MCAL/Timer/Timer.h"
+#include "../MCAL/Timer/Timer_Cfg.h"
+#include "../SL/TMU/TMU.h"
+#include "../SL/TMU/TMU_PB_Cfg.h"
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
+
+void taskA(void)
+{
+   PORTB_DIR = 0xff;
+   PORTB_DATA ^= 0x10;   
+}
+
+void taskB(void)
+{
+   PORTB_DIR = 0xff;
+   PORTB_DATA ^= 0x20;
+}
+
+void taskC(void)
+{
+   PORTB_DIR = 0xff;
+   PORTB_DATA ^= 0x40;
+}
+
+void taskD(void)
+{
+   PORTB_DIR = 0xff;
+   PORTB_DATA ^= 0x80;
+}
+/*
+*  Description : Tests TMU unit.
+*
+*  @param void
+*
+*  @return void
+*/
+void TmuTest(void)
+{
+   TMU_Init(&gstrTMUConfig);   
+   TMU_Start_Timer(3,taskA,PERIODIC);   
+   TMU_Start_Timer(20,taskB,PERIODIC);
+   TMU_Start_Timer(50,taskC,PERIODIC);
+   TMU_Start_Timer(60,taskD,PERIODIC);  
+   Timer_Start(TIMER_1,0);   
+   while(1)
+   {      
+      TMU_Dispatch();          
+   }
+}
+
 /*
 *  Description : tests Timer module.
 *
@@ -18,17 +67,25 @@
 */
 void TimerTest(void)
 {
+   /*
+   Timer_Init(&gstrTimer0TmuConfig); ---> Test passed with different structs of configurations
+   Timer_Init(&gstrTimerConfig);    
+   Timer_Start(TIMER_0,0);         ---> Test passed with different structs of configurations
+   Timer_Start(TIMER_2,0);         ---> Test passed with different structs of configurations
+   while(1);
+   */
+   
    /*Initialize timer 2*/
-   Timer_Init(&gstrTimerConfig);
+   //Timer_Init(&gstrTimerConfig);
    /* Start timer 2*/
-   Timer_Start(TIMER_2,0);
-   while (1)
-   {
-      softwareDelayMs(5000); 
-      break;   /* Breaking the loop for the purpose of testing Timer_Stop() */
-   }
+   //Timer_Start(TIMER_2,0);
+   //while (1)
+   //{
+   //   softwareDelayMs(5000); 
+   //   break;   /* Breaking the loop for the purpose of testing Timer_Stop() */
+   //}
    /* Stop timer 2*/ 
-   Timer_Stop(TIMER_2);   
+   //Timer_Stop(TIMER_2);   
 }
 
 
