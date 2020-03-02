@@ -77,4 +77,8 @@
 #define  UBRRH       *((reg_type8_t) 0x40)   //!!
 #define  UBRRL       *((reg_type8_t) 0x29)
 
+/*---- SPI Registers ----*/
+#define  SPCR         *((reg_type8_t) 0x2D)
+#define  SPSR         *((reg_type8_t) 0x2E)
+#define  SPDR         *((reg_type8_t) 0x2F)
 #endif /* REGISTERS_H_ */
