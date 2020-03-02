@@ -27,9 +27,10 @@ void masterSpi(void)
     
    while(1)
    {
-      data++;
-      SPI_WriteByte(&data);
-      softwareDelayMs(50);
+      //data++;
+      //SPI_WriteByte(&data);
+      //softwareDelayMs(50);
+      //SPI_ReadByte(&data); 
    }; 
 }
 
