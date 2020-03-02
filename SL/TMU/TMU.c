@@ -14,6 +14,11 @@ static sint16_t gindex = -1;
 volatile uint16_t gu16_preloader = 0;      /* this variable is (volatile,not static) as it must be shown to TIMER's ISR*/
 
 /*- FUNCITONS DEFINITIONS ------------------------------------------------------------------------------------------*/
+
+//static void TMU_CallBack(void)
+//{
+   
+//}
 /*
 *  Description : Initializes the given timer channel with the given resolution.
 *
@@ -114,24 +119,30 @@ EnmTMUError_t TMU_Dispatch(void)
     /* Define Error state */
    uint8_t au8_errorState;   
    /* Check if the buffer not empty */
-   if(0 <= gindex)
+   if((0 <= gindex) && (1 == gu8_excuteFlag))
    {
       sint16_t au16_iter = 0;
+      uint32_t au32_overFlowTimes = gu32_overflowTimes;
+      /* 1 - pull down execute flag */
+      gu8_excuteFlag = 0;
+      
       /* Search for the Task of the given function within TMU buffer*/
       for(;au16_iter <= gindex; au16_iter++)
       {
          /* Check if task counter is a multiple of over flow timer to determine whether to execute task's function or not */
-         if((0 == (gu32_overflowTimes % garrTaskTMUBuffer[au16_iter].counter)) && (0 != gu32_overflowTimes) && (1 == gu8_excuteFlag))
-         {
-            /* 1 - pull down execute flag */
-            gu8_excuteFlag = 0;
+         if((0 == (au32_overFlowTimes % garrTaskTMUBuffer[au16_iter].counter)) && (0 != au32_overFlowTimes))
+         {            
             /* 2 - Execute Task Function */
             garrTaskTMUBuffer[au16_iter].fn();                      
             /* 3 - See Whether the task is periodic or one shoot -after its execution- */
             if(ONESHOOT == garrTaskTMUBuffer[au16_iter].work_mode)
             {
                /* Case of buffer contains only one element */
-               if(0 == gindex) gindex = -1;
+               if(0 == gindex)               
+               {
+                  /* Decrement gindex*/
+                  gindex = -1;
+               }                
                else
                {
                   /* remove the Task : by replacing it with the last task in the buffer */
