@@ -17,12 +17,15 @@
 #include "../MCAL/DIO/DIO.h"
 #include "../MCAL/USART/usart.h"
 #include "../MCAL/USART/usart_Cfg.h"
+#include "../interrupt.h"
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
-
+extern volatile uint8_t ch;
 void myUsartFullDuplexInterruptTest(void)
 {
-   Usart_Init(&usart_init_config);    
-   while(1);  
+   sei();
+   Usart_Init(&usart_init_config); 
+         
+   while(1) UsartWriteTx(ch);  
 }
 
 

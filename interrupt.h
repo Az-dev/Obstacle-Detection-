@@ -44,4 +44,9 @@ void __vector_13(void)
 void __vector_14(void) __attribute__ ((interrupt));\
 void __vector_14(void)
 
+/*ISR_USART_TX_COMPLETE*/
+#define ISR_USART_TX()\
+void __vector_15(void) __attribute__ ((interrupt));\
+void __vector_15(void)
+
 #endif /* INTERRUPT_H_ */

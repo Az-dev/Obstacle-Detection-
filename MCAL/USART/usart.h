@@ -5,6 +5,7 @@
 #include "../../std_types.h"
 /*- DEFINES --------------------------------------------------------------------------------------------------------*/
 #define BAUDE_RATE 103 /* this value generates baude rate of 9600 at Fosc = 16MHz */
+//volatile uint8_t ch  = 0;
 /*- TYPEDEFS -------------------------------------------------------------------------------------------------------*/
 /*---- 1 - (UCSRC) CONFIG ENUMS ----*/
 /* Select mode enum : whether Asynchronous or Synchronous */

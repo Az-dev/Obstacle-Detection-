@@ -3,7 +3,7 @@
 #include "../../interrupt.h"
 
 /*- GLOBAL VARIALBLES ---------------------------------------------------------------------------------------------*/
-volatile uint8_t * ch = NULL;
+volatile uint8_t ch  = 0;
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------*/
 /*
 *  Description : Initializes USART.
@@ -19,17 +19,17 @@ EnumUSARTError_t Usart_Init(gstr_usart_init_t * USART_InitCfg)
    if(NULL != USART_InitCfg)
    {
       /*----------------- initializing (UCSRC) -----------------*/
-      UCSRC |= (USART_InitCfg->usart_mode_sel|USART_InitCfg->stop_bit_sel|USART_InitCfg->reg_sel_mode|0x06); /*0x05 becuase we want UCSZ0:1 to be set to 1 1 ---> in order to obtain 8-bit width character*/
+      UCSRC |= (USART_InitCfg->usart_mode_sel|USART_InitCfg->stop_bit_sel|USART_InitCfg->reg_sel_mode|0x06); /*0x06 becuase we want UCSZ0:1 to be set to 1 1 ---> in order to obtain 8-bit width character*/
       //UCSRC |= 0x85; /*works fine*/
       /*----------------- initializing (UCSRB) -----------------*/
-      UCSRB |= (USART_InitCfg->interrupt_mode_sel | (USART_InitCfg->usart_dir_sel & (~(0x04) & ~(0x03))));
+      UCSRB |= ((USART_InitCfg->interrupt_mode_sel | USART_InitCfg->usart_dir_sel) & (~(0x04)) & (~(0x03)));
       //UCSRB  |= 0xB8;
       /*----------------- initializing (UCSRA) -----------------*/
       //UCSRA &= ~(0x1C); /* Check that FE & DOR & PE is set to zero*/
       UCSRA |= (USART_InitCfg->double_speed_select & ~(0x1C));
       /*------------------ initialize baude rate ---------------*/
       UBRRL = BAUDE_RATE;
-      /*------------------ Character size select  ---------------*/
+      /*------------------ Character size select  ---------------*/      
       /*---- setting it to 8-bit -----*/
       //UCSRC |= 0x05;
       //UCSRB &= ~(0x04); /* ----> check this if it will work or not */
@@ -59,7 +59,7 @@ EnumUSARTError_t UsartReadRx(uint8_t * data_byte)
    /* Check Null pointer */
    if(NULL != data_byte)
    {
-      *data_byte = UDR;
+      *data_byte = UDR;      
       /* Report success*/
       au8_errorState = USART_BYTE_READ_SUCCESS;      
    }
@@ -131,15 +131,24 @@ EnumUSARTError_t ResetUDR(void)
 */
 ISR_USART_RX()
 {
-   /* on successful character reception : you can read the new character */    
-   UsartReadRx(ch);         
+   /* on successful character reception : you can read the new character */  
+   UsartReadRx(&ch);   
 }
 
 /*
 * USART when data register is empty
 */
-ISR_USART_UDRE()
+//ISR_USART_UDRE()
+//{
+//   ch = 10;
+//   /* if data register is empty : you can write a new character. */   
+//   UsartWriteTx(&ch);
+//   /* Disable interrupt of UDER */
+//   UCSRB &= ~(DATA_REGISTER_EMPTY_EN);       
+//}
+
+ISR_USART_TX()
 {
-   /* if data register is empty : you can write a new character. */   
-   UsartWriteTx(ch);      
+   /* if data register is empty : you can write a new character. */
+   UsartWriteTx(&ch);   
 }
