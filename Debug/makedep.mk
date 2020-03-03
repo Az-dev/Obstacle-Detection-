@@ -30,9 +30,17 @@ MCAL\PWM\PWM.c
 
 MCAL\PWM\PWM_Cfg.c
 
+MCAL\SPI\SPI.c
+
+MCAL\SPI\SPI_Cfg.c
+
 MCAL\Timer\Timer.c
 
 MCAL\Timer\Timer_Cfg.c
+
+MCAL\USART\usart.c
+
+MCAL\USART\usart_Cfg.c
 
 SL\TMU\TMU.c
 

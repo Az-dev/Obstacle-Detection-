@@ -28,7 +28,12 @@ Test/Test.d Test/Test.o: ../Test/Test.c ../Test/Test.h \
  ../Test/../MCAL/Timer/../../common_macros.h \
  ../Test/../MCAL/Timer/Timer_Cfg.h ../Test/../SL/TMU/TMU.h \
  ../Test/../SL/TMU/../../std_types.h ../Test/../SL/TMU/TMU_PREB_Cfg.h \
- ../Test/../SL/TMU/TMU_PB_Cfg.h
+ ../Test/../SL/TMU/TMU_PB_Cfg.h ../Test/../MCAL/SPI/SPI.h \
+ ../Test/../MCAL/SPI/../../std_types.h ../Test/../MCAL/SPI/SPI_Cfg.h \
+ ../Test/../MCAL/USART/usart.h ../Test/../MCAL/USART/../../registers.h \
+ ../Test/../MCAL/USART/../../std_types.h \
+ ../Test/../MCAL/USART/usart_Cfg.h \
+ ../Test/../MCAL/USART/../../MCAL/DIO/DIO.h
 
 ../Test/Test.h:
 
@@ -113,3 +118,19 @@ Test/Test.d Test/Test.o: ../Test/Test.c ../Test/Test.h \
 ../Test/../SL/TMU/TMU_PREB_Cfg.h:
 
 ../Test/../SL/TMU/TMU_PB_Cfg.h:
+
+../Test/../MCAL/SPI/SPI.h:
+
+../Test/../MCAL/SPI/../../std_types.h:
+
+../Test/../MCAL/SPI/SPI_Cfg.h:
+
+../Test/../MCAL/USART/usart.h:
+
+../Test/../MCAL/USART/../../registers.h:
+
+../Test/../MCAL/USART/../../std_types.h:
+
+../Test/../MCAL/USART/usart_Cfg.h:
+
+../Test/../MCAL/USART/../../MCAL/DIO/DIO.h:
