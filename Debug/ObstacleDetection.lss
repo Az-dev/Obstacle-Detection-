@@ -3,31 +3,31 @@ ObstacleDetection.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000049c  00000000  00000000  00000094  2**1
+  0 .text         0000043c  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000008  00800060  0000049c  00000530  2**0
+  1 .data         00000008  00800060  0000043c  000004d0  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000011  00800068  00800068  00000538  2**0
+  2 .bss          00000010  00800068  00800068  000004d8  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000538  2**0
+  3 .comment      00000030  00000000  00000000  000004d8  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000568  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000508  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000218  00000000  00000000  000005a4  2**0
+  5 .debug_aranges 00000218  00000000  00000000  00000544  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000027b8  00000000  00000000  000007bc  2**0
+  6 .debug_info   00002842  00000000  00000000  0000075c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000e4c  00000000  00000000  00002f74  2**0
+  7 .debug_abbrev 00000ec4  00000000  00000000  00002f9e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000010db  00000000  00000000  00003dc0  2**0
+  8 .debug_line   000010fb  00000000  00000000  00003e62  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000554  00000000  00000000  00004e9c  2**2
+  9 .debug_frame  000004e4  00000000  00000000  00004f60  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000d88  00000000  00000000  000053f0  2**0
+ 10 .debug_str    00000d88  00000000  00000000  00005444  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000ef2  00000000  00000000  00006178  2**0
+ 11 .debug_loc    00000dfc  00000000  00000000  000061cc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000190  00000000  00000000  0000706a  2**0
+ 12 .debug_ranges 00000190  00000000  00000000  00006fc8  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -46,9 +46,9 @@ Disassembly of section .text:
   28:	0c 94 ba 01 	jmp	0x374	; 0x374 <__vector_10>
   2c:	0c 94 1c 01 	jmp	0x238	; 0x238 <__vector_11>
   30:	0c 94 a5 00 	jmp	0x14a	; 0x14a <__vector_12>
-  34:	0c 94 f5 01 	jmp	0x3ea	; 0x3ea <__vector_13>
-  38:	0c 94 1e 02 	jmp	0x43c	; 0x43c <__vector_14>
-  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 ec 01 	jmp	0x3d8	; 0x3d8 <__vector_13>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 fe 01 	jmp	0x3fc	; 0x3fc <__vector_15>
   40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -67,7 +67,7 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	ec e9       	ldi	r30, 0x9C	; 156
+  66:	ec e3       	ldi	r30, 0x3C	; 60
   68:	f4 e0       	ldi	r31, 0x04	; 4
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
@@ -86,11 +86,11 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	a9 37       	cpi	r26, 0x79	; 121
+  80:	a8 37       	cpi	r26, 0x78	; 120
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 a0 00 	call	0x140	; 0x140 <main>
-  8a:	0c 94 4c 02 	jmp	0x498	; 0x498 <_exit>
+  8a:	0c 94 1c 02 	jmp	0x438	; 0x438 <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -240,7 +240,7 @@ ISR_INT2()
    /*---------------------- End SPI test ------------------------------*/
    /*---------------------- Start Uart test ---------------------------*/   
    myUsartFullDuplexInterruptTest();
- 140:	0e 94 47 02 	call	0x48e	; 0x48e <myUsartFullDuplexInterruptTest>
+ 140:	0e 94 11 02 	call	0x422	; 0x422 <myUsartFullDuplexInterruptTest>
    /*---------------------- End Uart Test -----------------------------*/ 
     
 }
@@ -442,8 +442,8 @@ ISR_TIMER0_OVF(){
  278:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <gu8_excuteFlag>
    /* 3 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));   
- 27c:	20 91 77 00 	lds	r18, 0x0077	; 0x800077 <gu16_preloader>
- 280:	30 91 78 00 	lds	r19, 0x0078	; 0x800078 <gu16_preloader+0x1>
+ 27c:	20 91 76 00 	lds	r18, 0x0076	; 0x800076 <gu16_preloader>
+ 280:	30 91 77 00 	lds	r19, 0x0077	; 0x800077 <gu16_preloader+0x1>
 ERROR_STATUS Timer_SetValue(uint8_t Timer_CH_NO, uint16_t Timer_value)
 {
    switch(Timer_CH_NO)
@@ -506,8 +506,8 @@ ISR_TIMER1_OVF(){
  2e0:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <gu8_excuteFlag>
    /* 3 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_1 , (T1_OV_VAL - gu16_preloader));     
- 2e4:	80 91 77 00 	lds	r24, 0x0077	; 0x800077 <gu16_preloader>
- 2e8:	90 91 78 00 	lds	r25, 0x0078	; 0x800078 <gu16_preloader+0x1>
+ 2e4:	80 91 76 00 	lds	r24, 0x0076	; 0x800076 <gu16_preloader>
+ 2e8:	90 91 77 00 	lds	r25, 0x0077	; 0x800077 <gu16_preloader+0x1>
  2ec:	91 95       	neg	r25
  2ee:	81 95       	neg	r24
  2f0:	91 09       	sbc	r25, r1
@@ -570,8 +570,8 @@ ISR_TIMER2_OVF(){
  348:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <gu8_excuteFlag>
    /* 3 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));   
- 34c:	20 91 77 00 	lds	r18, 0x0077	; 0x800077 <gu16_preloader>
- 350:	30 91 78 00 	lds	r19, 0x0078	; 0x800078 <gu16_preloader+0x1>
+ 34c:	20 91 76 00 	lds	r18, 0x0076	; 0x800076 <gu16_preloader>
+ 350:	30 91 77 00 	lds	r19, 0x0077	; 0x800077 <gu16_preloader+0x1>
       break;
       case TIMER_1:
          TCNT1 = Timer_value;
@@ -640,11 +640,11 @@ ISR_TIMER0_COMP(){
  39c:	93 81       	ldd	r25, Z+3	; 0x03
  39e:	89 2b       	or	r24, r25
  3a0:	80 bd       	out	0x20, r24	; 32
- 3a2:	8a b1       	in	r24, 0x0a	; 10
- 3a4:	25 81       	ldd	r18, Z+5	; 0x05
- 3a6:	28 7f       	andi	r18, 0xF8	; 248
- 3a8:	94 81       	ldd	r25, Z+4	; 0x04
- 3aa:	89 2b       	or	r24, r25
+ 3a2:	2a b1       	in	r18, 0x0a	; 10
+ 3a4:	84 81       	ldd	r24, Z+4	; 0x04
+ 3a6:	95 81       	ldd	r25, Z+5	; 0x05
+ 3a8:	89 2b       	or	r24, r25
+ 3aa:	88 7f       	andi	r24, 0xF8	; 248
  3ac:	82 2b       	or	r24, r18
  3ae:	8a b9       	out	0x0a, r24	; 10
  3b0:	9b b1       	in	r25, 0x0b	; 11
@@ -659,139 +659,113 @@ ISR_TIMER0_COMP(){
  3c2:	81 e0       	ldi	r24, 0x01	; 1
  3c4:	08 95       	ret
 
-000003c6 <UsartReadRx>:
+000003c6 <UsartWriteTx>:
  3c6:	00 97       	sbiw	r24, 0x00	; 0
- 3c8:	29 f0       	breq	.+10     	; 0x3d4 <UsartReadRx+0xe>
- 3ca:	2c b1       	in	r18, 0x0c	; 12
- 3cc:	fc 01       	movw	r30, r24
- 3ce:	20 83       	st	Z, r18
- 3d0:	84 e0       	ldi	r24, 0x04	; 4
+ 3c8:	29 f0       	breq	.+10     	; 0x3d4 <UsartWriteTx+0xe>
+ 3ca:	fc 01       	movw	r30, r24
+ 3cc:	80 81       	ld	r24, Z
+ 3ce:	8c b9       	out	0x0c, r24	; 12
+ 3d0:	82 e0       	ldi	r24, 0x02	; 2
  3d2:	08 95       	ret
  3d4:	81 e0       	ldi	r24, 0x01	; 1
  3d6:	08 95       	ret
 
-000003d8 <UsartWriteTx>:
- 3d8:	00 97       	sbiw	r24, 0x00	; 0
- 3da:	29 f0       	breq	.+10     	; 0x3e6 <UsartWriteTx+0xe>
- 3dc:	fc 01       	movw	r30, r24
- 3de:	80 81       	ld	r24, Z
- 3e0:	8c b9       	out	0x0c, r24	; 12
- 3e2:	82 e0       	ldi	r24, 0x02	; 2
- 3e4:	08 95       	ret
- 3e6:	81 e0       	ldi	r24, 0x01	; 1
- 3e8:	08 95       	ret
-
-000003ea <__vector_13>:
+000003d8 <__vector_13>:
 /*--------------------------------------------------- Interrupt handlers  -----------------------------------------*/
 /*
 * USART on successful character receive completion interrupt handler 
 */
 ISR_USART_RX()
 {
- 3ea:	78 94       	sei
- 3ec:	1f 92       	push	r1
- 3ee:	0f 92       	push	r0
- 3f0:	0f b6       	in	r0, 0x3f	; 63
- 3f2:	0f 92       	push	r0
- 3f4:	11 24       	eor	r1, r1
- 3f6:	2f 93       	push	r18
- 3f8:	3f 93       	push	r19
- 3fa:	4f 93       	push	r20
- 3fc:	5f 93       	push	r21
- 3fe:	6f 93       	push	r22
- 400:	7f 93       	push	r23
- 402:	8f 93       	push	r24
- 404:	9f 93       	push	r25
- 406:	af 93       	push	r26
- 408:	bf 93       	push	r27
- 40a:	ef 93       	push	r30
- 40c:	ff 93       	push	r31
-   /* on successful character reception : you can read the new character */    
-   UsartReadRx(ch);         
- 40e:	80 91 75 00 	lds	r24, 0x0075	; 0x800075 <ch>
- 412:	90 91 76 00 	lds	r25, 0x0076	; 0x800076 <ch+0x1>
- 416:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <UsartReadRx>
-}
- 41a:	ff 91       	pop	r31
- 41c:	ef 91       	pop	r30
- 41e:	bf 91       	pop	r27
- 420:	af 91       	pop	r26
- 422:	9f 91       	pop	r25
- 424:	8f 91       	pop	r24
- 426:	7f 91       	pop	r23
- 428:	6f 91       	pop	r22
- 42a:	5f 91       	pop	r21
- 42c:	4f 91       	pop	r20
- 42e:	3f 91       	pop	r19
- 430:	2f 91       	pop	r18
- 432:	0f 90       	pop	r0
- 434:	0f be       	out	0x3f, r0	; 63
- 436:	0f 90       	pop	r0
- 438:	1f 90       	pop	r1
- 43a:	18 95       	reti
-
-0000043c <__vector_14>:
-
-/*
-* USART when data register is empty
-*/
-ISR_USART_UDRE()
+ 3d8:	78 94       	sei
+ 3da:	1f 92       	push	r1
+ 3dc:	0f 92       	push	r0
+ 3de:	0f b6       	in	r0, 0x3f	; 63
+ 3e0:	0f 92       	push	r0
+ 3e2:	11 24       	eor	r1, r1
+ 3e4:	8f 93       	push	r24
+   /* Define error state */
+   uint8_t au8_errorState = 0;
+   /* Check Null pointer */
+   if(NULL != data_byte)
+   {
+      *data_byte = UDR;      
+ 3e6:	8c b1       	in	r24, 0x0c	; 12
+ 3e8:	80 93 75 00 	sts	0x0075, r24	; 0x800075 <ch>
+ISR_USART_RX()
 {
- 43c:	78 94       	sei
- 43e:	1f 92       	push	r1
- 440:	0f 92       	push	r0
- 442:	0f b6       	in	r0, 0x3f	; 63
- 444:	0f 92       	push	r0
- 446:	11 24       	eor	r1, r1
- 448:	2f 93       	push	r18
- 44a:	3f 93       	push	r19
- 44c:	4f 93       	push	r20
- 44e:	5f 93       	push	r21
- 450:	6f 93       	push	r22
- 452:	7f 93       	push	r23
- 454:	8f 93       	push	r24
- 456:	9f 93       	push	r25
- 458:	af 93       	push	r26
- 45a:	bf 93       	push	r27
- 45c:	ef 93       	push	r30
- 45e:	ff 93       	push	r31
-   /* if data register is empty : you can write a new character. */   
-   UsartWriteTx(ch);      
- 460:	80 91 75 00 	lds	r24, 0x0075	; 0x800075 <ch>
- 464:	90 91 76 00 	lds	r25, 0x0076	; 0x800076 <ch+0x1>
- 468:	0e 94 ec 01 	call	0x3d8	; 0x3d8 <UsartWriteTx>
- 46c:	ff 91       	pop	r31
- 46e:	ef 91       	pop	r30
- 470:	bf 91       	pop	r27
- 472:	af 91       	pop	r26
- 474:	9f 91       	pop	r25
- 476:	8f 91       	pop	r24
- 478:	7f 91       	pop	r23
- 47a:	6f 91       	pop	r22
- 47c:	5f 91       	pop	r21
- 47e:	4f 91       	pop	r20
- 480:	3f 91       	pop	r19
- 482:	2f 91       	pop	r18
- 484:	0f 90       	pop	r0
- 486:	0f be       	out	0x3f, r0	; 63
- 488:	0f 90       	pop	r0
- 48a:	1f 90       	pop	r1
- 48c:	18 95       	reti
+   /* on successful character reception : you can read the new character */  
+   UsartReadRx(&ch);
+   /* Transmit this value : since transmit is open then close it */
+   TCNT2 = UDR;
+ 3ec:	8c b1       	in	r24, 0x0c	; 12
+ 3ee:	84 bd       	out	0x24, r24	; 36
+}
+ 3f0:	8f 91       	pop	r24
+ 3f2:	0f 90       	pop	r0
+ 3f4:	0f be       	out	0x3f, r0	; 63
+ 3f6:	0f 90       	pop	r0
+ 3f8:	1f 90       	pop	r1
+ 3fa:	18 95       	reti
 
-0000048e <myUsartFullDuplexInterruptTest>:
-#include "../MCAL/USART/usart_Cfg.h"
+000003fc <__vector_15>:
+//   /* Disable interrupt of UDER */
+//   UCSRB &= ~(DATA_REGISTER_EMPTY_EN);       
+//}
+
+ISR_USART_TX()
+{
+ 3fc:	78 94       	sei
+ 3fe:	1f 92       	push	r1
+ 400:	0f 92       	push	r0
+ 402:	0f b6       	in	r0, 0x3f	; 63
+ 404:	0f 92       	push	r0
+ 406:	11 24       	eor	r1, r1
+ 408:	8f 93       	push	r24
+   ch = 10;
+ 40a:	8a e0       	ldi	r24, 0x0A	; 10
+ 40c:	80 93 75 00 	sts	0x0075, r24	; 0x800075 <ch>
+   uint8_t au8_errorState = 0;
+   /* Check NULL pointer */
+   if(NULL != data_byte)
+   {
+      /* Write value  to UDR */
+      UDR = * data_byte;
+ 410:	80 91 75 00 	lds	r24, 0x0075	; 0x800075 <ch>
+ 414:	8c b9       	out	0x0c, r24	; 12
+{
+   ch = 10;
+   /* if data register is empty : you can write a new character. */
+   UsartWriteTx(&ch);
+   
+ 416:	8f 91       	pop	r24
+ 418:	0f 90       	pop	r0
+ 41a:	0f be       	out	0x3f, r0	; 63
+ 41c:	0f 90       	pop	r0
+ 41e:	1f 90       	pop	r1
+ 420:	18 95       	reti
+
+00000422 <myUsartFullDuplexInterruptTest>:
+#include "../interrupt.h"
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
-
+extern volatile uint8_t ch;
 void myUsartFullDuplexInterruptTest(void)
 {
-   Usart_Init(&usart_init_config);    
- 48e:	80 e6       	ldi	r24, 0x60	; 96
- 490:	90 e0       	ldi	r25, 0x00	; 0
- 492:	0e 94 c5 01 	call	0x38a	; 0x38a <Usart_Init>
- 496:	ff cf       	rjmp	.-2      	; 0x496 <myUsartFullDuplexInterruptTest+0x8>
+   sei();
+ 422:	78 94       	sei
+   Usart_Init(&usart_init_config); 
+ 424:	80 e6       	ldi	r24, 0x60	; 96
+ 426:	90 e0       	ldi	r25, 0x00	; 0
+ 428:	0e 94 c5 01 	call	0x38a	; 0x38a <Usart_Init>
+         
+   while(1) UsartWriteTx(ch);  
+ 42c:	80 91 75 00 	lds	r24, 0x0075	; 0x800075 <ch>
+ 430:	90 e0       	ldi	r25, 0x00	; 0
+ 432:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <UsartWriteTx>
+ 436:	fa cf       	rjmp	.-12     	; 0x42c <myUsartFullDuplexInterruptTest+0xa>
 
-00000498 <_exit>:
- 498:	f8 94       	cli
+00000438 <_exit>:
+ 438:	f8 94       	cli
 
-0000049a <__stop_program>:
- 49a:	ff cf       	rjmp	.-2      	; 0x49a <__stop_program>
+0000043a <__stop_program>:
+ 43a:	ff cf       	rjmp	.-2      	; 0x43a <__stop_program>

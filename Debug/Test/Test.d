@@ -33,7 +33,7 @@ Test/Test.d Test/Test.o: ../Test/Test.c ../Test/Test.h \
  ../Test/../MCAL/USART/usart.h ../Test/../MCAL/USART/../../registers.h \
  ../Test/../MCAL/USART/../../std_types.h \
  ../Test/../MCAL/USART/usart_Cfg.h \
- ../Test/../MCAL/USART/../../MCAL/DIO/DIO.h
+ ../Test/../MCAL/USART/../../MCAL/DIO/DIO.h ../Test/../interrupt.h
 
 ../Test/Test.h:
 
@@ -134,3 +134,5 @@ Test/Test.d Test/Test.o: ../Test/Test.c ../Test/Test.h \
 ../Test/../MCAL/USART/usart_Cfg.h:
 
 ../Test/../MCAL/USART/../../MCAL/DIO/DIO.h:
+
+../Test/../interrupt.h:
