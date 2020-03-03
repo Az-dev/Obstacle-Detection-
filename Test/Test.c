@@ -14,7 +14,17 @@
 #include "../SL/TMU/TMU_PB_Cfg.h"
 #include "../MCAL/SPI/SPI.h"
 #include "../MCAL/SPI/SPI_Cfg.h"
+#include "../MCAL/DIO/DIO.h"
+#include "../MCAL/USART/usart.h"
+#include "../MCAL/USART/usart_Cfg.h"
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
+
+void myUsartFullDuplexInterruptTest(void)
+{
+   Usart_Init(&usart_init_config);    
+   while(1);  
+}
+
 
 void masterSpi(void)
 {

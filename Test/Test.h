@@ -20,6 +20,15 @@
 /*- FUNCTION PROTOTYPES ---------------------------------------------------------------------------------------------------*/
 
 /*
+*  Description : tests usart as reciever/transmitter in interrupt mode.
+*
+*  @param void
+*
+*  @return void
+*/
+void myUsartFullDuplexInterruptTest(void);
+
+/*
 *  Description : tests Timer module.
 *
 *  @param void
