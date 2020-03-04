@@ -185,7 +185,7 @@ EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* task_fn)(void) , uint8
    */
    /*--- End Debug Point ---*/
    /* Define Error state */
-   uint8_t au8_errorState;
+   uint8_t au8_errorState = 0;
    
    if(NULL != task_fn)
    {
