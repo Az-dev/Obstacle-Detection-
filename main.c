@@ -26,9 +26,10 @@ int main(void)
    //masterSpi();
    //slaveSpi(); 
    /*---------------------- End SPI test ------------------------------*/
-   /*---------------------- Start Uart test ---------------------------*/   
-   myUsartFullDuplexInterruptTest();
-   /*---------------------- End Uart Test -----------------------------*/ 
+   
+   /*---------------------- Start UART test ---------------------------*/   
+   //myUsartFullDuplexInterruptTest(); // ----> test passed for both transmission and reciption
+   /*---------------------- End UART Test -----------------------------*/ 
     
 }
 

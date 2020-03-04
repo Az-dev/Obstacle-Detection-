@@ -21,12 +21,25 @@
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
 void myUsartFullDuplexInterruptTest(void)
 {
-   sei();
-   volatile uint8_t ch = 10;
-   Usart_Init(&usart_init_config);
-   /* Initiate write operation */ 
-   UsartWriteTx(&ch);      
-   while(1);  
+   sei();   
+   uint8_t ch = 0;
+   uint8_t state = 0;     
+   Usart_Init(&usart_init_config);        
+   while(1)
+   {
+      state = getTransmissionState();     
+      switch(state)
+      {
+         case USART_BYTE_TRANSMIT_SUCCESS:
+            /* Read byte transmitted to udr*/
+            UsartReadRx(&ch);             
+            /* Write a the same character to be transmitted again*/
+            UsartWriteTx(&ch);
+         break;
+    
+      }
+      
+   }
 }
 
 
