@@ -3,31 +3,31 @@ ObstacleDetection.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000444  00000000  00000000  00000094  2**1
+  0 .text         0000038e  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000008  00800060  00000444  000004d8  2**0
+  1 .data         00000000  00800060  00800060  00000402  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000010  00800068  00800068  000004e0  2**0
+  2 .bss          00000010  00800060  00800060  00000402  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000004e0  2**0
+  3 .comment      00000030  00000000  00000000  00000402  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000510  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000434  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000218  00000000  00000000  0000054c  2**0
+  5 .debug_aranges 00000178  00000000  00000000  00000470  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000288f  00000000  00000000  00000764  2**0
+  6 .debug_info   0000164f  00000000  00000000  000005e8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000e4e  00000000  00000000  00002ff3  2**0
+  7 .debug_abbrev 00000b2a  00000000  00000000  00001c37  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000111e  00000000  00000000  00003e41  2**0
+  8 .debug_line   00000acf  00000000  00000000  00002761  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000004e4  00000000  00000000  00004f60  2**2
+  9 .debug_frame  00000380  00000000  00000000  00003230  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000de0  00000000  00000000  00005444  2**0
+ 10 .debug_str    00000bed  00000000  00000000  000035b0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000e73  00000000  00000000  00006224  2**0
+ 11 .debug_loc    00000c0d  00000000  00000000  0000419d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000190  00000000  00000000  00007097  2**0
+ 12 .debug_ranges 00000118  00000000  00000000  00004daa  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -38,15 +38,15 @@ Disassembly of section .text:
    8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
    c:	0c 94 49 00 	jmp	0x92	; 0x92 <__vector_3>
   10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  14:	0c 94 80 01 	jmp	0x300	; 0x300 <__vector_5>
+  14:	0c 94 77 01 	jmp	0x2ee	; 0x2ee <__vector_5>
   18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  24:	0c 94 4f 01 	jmp	0x29e	; 0x29e <__vector_9>
-  28:	0c 94 b5 01 	jmp	0x36a	; 0x36a <__vector_10>
-  2c:	0c 94 1a 01 	jmp	0x234	; 0x234 <__vector_11>
-  30:	0c 94 a4 00 	jmp	0x148	; 0x148 <__vector_12>
-  34:	0c 94 f9 01 	jmp	0x3f2	; 0x3f2 <__vector_13>
+  24:	0c 94 46 01 	jmp	0x28c	; 0x28c <__vector_9>
+  28:	0c 94 ac 01 	jmp	0x358	; 0x358 <__vector_10>
+  2c:	0c 94 11 01 	jmp	0x222	; 0x222 <__vector_11>
+  30:	0c 94 a2 00 	jmp	0x144	; 0x144 <__vector_12>
+  34:	0c 94 b6 01 	jmp	0x36c	; 0x36c <__vector_13>
   38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -67,18 +67,18 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e4 e4       	ldi	r30, 0x44	; 68
-  68:	f4 e0       	ldi	r31, 0x04	; 4
+  66:	ee e8       	ldi	r30, 0x8E	; 142
+  68:	f3 e0       	ldi	r31, 0x03	; 3
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
-  70:	a8 36       	cpi	r26, 0x68	; 104
+  70:	a0 36       	cpi	r26, 0x60	; 96
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
 
 00000076 <__do_clear_bss>:
   76:	20 e0       	ldi	r18, 0x00	; 0
-  78:	a8 e6       	ldi	r26, 0x68	; 104
+  78:	a0 e6       	ldi	r26, 0x60	; 96
   7a:	b0 e0       	ldi	r27, 0x00	; 0
   7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
@@ -86,11 +86,11 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	a8 37       	cpi	r26, 0x78	; 120
+  80:	a0 37       	cpi	r26, 0x70	; 112
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 9f 00 	call	0x13e	; 0x13e <main>
-  8a:	0c 94 20 02 	jmp	0x440	; 0x440 <_exit>
+  8a:	0c 94 c5 01 	jmp	0x38a	; 0x38a <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -132,7 +132,7 @@ ISR_INT2()
   ba:	60 e0       	ldi	r22, 0x00	; 0
   bc:	70 e0       	ldi	r23, 0x00	; 0
   be:	82 e0       	ldi	r24, 0x02	; 2
-  c0:	0e 94 ba 00 	call	0x174	; 0x174 <Timer_Start>
+  c0:	0e 94 b1 00 	call	0x162	; 0x162 <Timer_Start>
       /*-- Change edge Procedure ----------*/
       /* 1 - Disable INT2 -----------------*/
       GICR &= ~(BIT5);
@@ -171,23 +171,23 @@ ISR_INT2()
       /*stop timer counter*/
       Timer_Stop(TIMER_2);      
   e4:	82 e0       	ldi	r24, 0x02	; 2
-  e6:	0e 94 da 00 	call	0x1b4	; 0x1b4 <Timer_Stop>
+  e6:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <Timer_Stop>
       /*read TCNT2*/
       Timer_GetValue(TIMER_2,(uint16_t *)&gu16_Icu_Time);
-  ea:	68 e6       	ldi	r22, 0x68	; 104
+  ea:	60 e6       	ldi	r22, 0x60	; 96
   ec:	70 e0       	ldi	r23, 0x00	; 0
   ee:	82 e0       	ldi	r24, 0x02	; 2
-  f0:	0e 94 f8 00 	call	0x1f0	; 0x1f0 <Timer_GetValue>
+  f0:	0e 94 ef 00 	call	0x1de	; 0x1de <Timer_GetValue>
       /*-- Set gu8_onFallPulseCapture_flag for 1 (to start reading time of the counted value) --*/
       gu8_onFallPulseCapture_flag = 1;      
   f4:	81 e0       	ldi	r24, 0x01	; 1
-  f6:	80 93 6a 00 	sts	0x006A, r24	; 0x80006a <gu8_onFallPulseCapture_flag>
+  f6:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <gu8_onFallPulseCapture_flag>
       /*Reset TCNT2*/
       Timer_SetValue(TIMER_2,0);          
   fa:	60 e0       	ldi	r22, 0x00	; 0
   fc:	70 e0       	ldi	r23, 0x00	; 0
   fe:	82 e0       	ldi	r24, 0x02	; 2
- 100:	0e 94 ea 00 	call	0x1d4	; 0x1d4 <Timer_SetValue>
+ 100:	0e 94 e1 00 	call	0x1c2	; 0x1c2 <Timer_SetValue>
       /*------ change edge -----*/      
       /* 1 - Disable INT2 */
       GICR &= ~(BIT5);
@@ -233,528 +233,385 @@ ISR_INT2()
  13c:	18 95       	reti
 
 0000013e <main>:
-   //masterSpi();
-   //slaveSpi(); 
-   /*---------------------- End SPI test ------------------------------*/
    
    /*---------------------- Start UART test ---------------------------*/   
-   myUsartFullDuplexInterruptTest(); // ----> test passed for both transmission and reciption
- 13e:	0e 94 08 02 	call	0x410	; 0x410 <myUsartFullDuplexInterruptTest>
+   //myUsartFullDuplexInterruptTest(); // ----> test passed for both transmission and reciption
    /*---------------------- End UART Test -----------------------------*/ 
     
 }
- 142:	80 e0       	ldi	r24, 0x00	; 0
- 144:	90 e0       	ldi	r25, 0x00	; 0
- 146:	08 95       	ret
+ 13e:	80 e0       	ldi	r24, 0x00	; 0
+ 140:	90 e0       	ldi	r25, 0x00	; 0
+ 142:	08 95       	ret
 
-00000148 <__vector_12>:
+00000144 <__vector_12>:
    return au8_errorState;
 }
 
 /*--------------------------------------------- ISR CONTROL ------------------------------------------------------*/
 ISR_SPI()
 { 
- 148:	1f 92       	push	r1
+ 144:	1f 92       	push	r1
+ 146:	0f 92       	push	r0
+ 148:	0f b6       	in	r0, 0x3f	; 63
  14a:	0f 92       	push	r0
- 14c:	0f b6       	in	r0, 0x3f	; 63
- 14e:	0f 92       	push	r0
- 150:	11 24       	eor	r1, r1
- 152:	8f 93       	push	r24
-   /* Define error state*/
-   uint8_t au8_errorState = 0;
-   if(NULL != Data_byte)
-   {
-      /* Read Data from SPDR*/
-      *Data_byte = SPDR;        
- 154:	8f b1       	in	r24, 0x0f	; 15
- 156:	84 bd       	out	0x24, r24	; 36
-{ 
-     
-   /*--- Read the transmitted byte when transmission is complete ---*/  
-   SPI_ReadByte(&TCNT2); 
-   /*--- Write the new Byte ----*/ 
-   gu8_readByte++;
- 158:	80 91 6b 00 	lds	r24, 0x006B	; 0x80006b <gu8_readByte>
- 15c:	8f 5f       	subi	r24, 0xFF	; 255
- 15e:	80 93 6b 00 	sts	0x006B, r24	; 0x80006b <gu8_readByte>
-   /* Define error state*/
-   uint8_t au8_errorState = 0;  
-   if(NULL != Data_byte)
-   {
-      /* Write Data */
-      SPDR = *Data_byte;
- 162:	80 91 6b 00 	lds	r24, 0x006B	; 0x80006b <gu8_readByte>
- 166:	8f b9       	out	0x0f, r24	; 15
-   /*--- Read the transmitted byte when transmission is complete ---*/  
-   SPI_ReadByte(&TCNT2); 
-   /*--- Write the new Byte ----*/ 
-   gu8_readByte++;
-   SPI_WriteByte(&gu8_readByte);  
+ 14c:	11 24       	eor	r1, r1
+ 14e:	8f 93       	push	r24
+   /* Raise transmission complete flag */
+   gu8_transmissionComplete = 1;
+ 150:	81 e0       	ldi	r24, 0x01	; 1
+ 152:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <gu8_transmissionComplete>
 }
- 168:	8f 91       	pop	r24
- 16a:	0f 90       	pop	r0
- 16c:	0f be       	out	0x3f, r0	; 63
- 16e:	0f 90       	pop	r0
- 170:	1f 90       	pop	r1
- 172:	18 95       	reti
+ 156:	8f 91       	pop	r24
+ 158:	0f 90       	pop	r0
+ 15a:	0f be       	out	0x3f, r0	; 63
+ 15c:	0f 90       	pop	r0
+ 15e:	1f 90       	pop	r1
+ 160:	18 95       	reti
 
-00000174 <Timer_Start>:
+00000162 <Timer_Start>:
    }
    else
    {
       return E_NOK;
    }
 }
- 174:	81 30       	cpi	r24, 0x01	; 1
- 176:	59 f0       	breq	.+22     	; 0x18e <Timer_Start+0x1a>
- 178:	18 f0       	brcs	.+6      	; 0x180 <Timer_Start+0xc>
- 17a:	82 30       	cpi	r24, 0x02	; 2
- 17c:	99 f0       	breq	.+38     	; 0x1a4 <Timer_Start+0x30>
- 17e:	18 c0       	rjmp	.+48     	; 0x1b0 <Timer_Start+0x3c>
- 180:	62 bf       	out	0x32, r22	; 50
- 182:	90 91 74 00 	lds	r25, 0x0074	; 0x800074 <gu8_t0Prescaler>
- 186:	83 b7       	in	r24, 0x33	; 51
- 188:	89 2b       	or	r24, r25
- 18a:	83 bf       	out	0x33, r24	; 51
- 18c:	11 c0       	rjmp	.+34     	; 0x1b0 <Timer_Start+0x3c>
- 18e:	77 27       	eor	r23, r23
- 190:	7d bd       	out	0x2d, r23	; 45
- 192:	6c bd       	out	0x2c, r22	; 44
- 194:	80 91 72 00 	lds	r24, 0x0072	; 0x800072 <gu16_t1Prescaler>
- 198:	90 91 73 00 	lds	r25, 0x0073	; 0x800073 <gu16_t1Prescaler+0x1>
- 19c:	9e b5       	in	r25, 0x2e	; 46
- 19e:	89 2b       	or	r24, r25
- 1a0:	8e bd       	out	0x2e, r24	; 46
- 1a2:	06 c0       	rjmp	.+12     	; 0x1b0 <Timer_Start+0x3c>
- 1a4:	64 bd       	out	0x24, r22	; 36
- 1a6:	90 91 71 00 	lds	r25, 0x0071	; 0x800071 <gu8_t2Prescaler>
- 1aa:	85 b5       	in	r24, 0x25	; 37
- 1ac:	89 2b       	or	r24, r25
- 1ae:	85 bd       	out	0x25, r24	; 37
- 1b0:	80 e0       	ldi	r24, 0x00	; 0
- 1b2:	08 95       	ret
+ 162:	81 30       	cpi	r24, 0x01	; 1
+ 164:	59 f0       	breq	.+22     	; 0x17c <Timer_Start+0x1a>
+ 166:	18 f0       	brcs	.+6      	; 0x16e <Timer_Start+0xc>
+ 168:	82 30       	cpi	r24, 0x02	; 2
+ 16a:	99 f0       	breq	.+38     	; 0x192 <Timer_Start+0x30>
+ 16c:	18 c0       	rjmp	.+48     	; 0x19e <Timer_Start+0x3c>
+ 16e:	62 bf       	out	0x32, r22	; 50
+ 170:	90 91 6c 00 	lds	r25, 0x006C	; 0x80006c <gu8_t0Prescaler>
+ 174:	83 b7       	in	r24, 0x33	; 51
+ 176:	89 2b       	or	r24, r25
+ 178:	83 bf       	out	0x33, r24	; 51
+ 17a:	11 c0       	rjmp	.+34     	; 0x19e <Timer_Start+0x3c>
+ 17c:	77 27       	eor	r23, r23
+ 17e:	7d bd       	out	0x2d, r23	; 45
+ 180:	6c bd       	out	0x2c, r22	; 44
+ 182:	80 91 6a 00 	lds	r24, 0x006A	; 0x80006a <gu16_t1Prescaler>
+ 186:	90 91 6b 00 	lds	r25, 0x006B	; 0x80006b <gu16_t1Prescaler+0x1>
+ 18a:	9e b5       	in	r25, 0x2e	; 46
+ 18c:	89 2b       	or	r24, r25
+ 18e:	8e bd       	out	0x2e, r24	; 46
+ 190:	06 c0       	rjmp	.+12     	; 0x19e <Timer_Start+0x3c>
+ 192:	64 bd       	out	0x24, r22	; 36
+ 194:	90 91 69 00 	lds	r25, 0x0069	; 0x800069 <gu8_t2Prescaler>
+ 198:	85 b5       	in	r24, 0x25	; 37
+ 19a:	89 2b       	or	r24, r25
+ 19c:	85 bd       	out	0x25, r24	; 37
+ 19e:	80 e0       	ldi	r24, 0x00	; 0
+ 1a0:	08 95       	ret
 
-000001b4 <Timer_Stop>:
- 1b4:	81 30       	cpi	r24, 0x01	; 1
- 1b6:	39 f0       	breq	.+14     	; 0x1c6 <Timer_Stop+0x12>
- 1b8:	18 f0       	brcs	.+6      	; 0x1c0 <Timer_Stop+0xc>
- 1ba:	82 30       	cpi	r24, 0x02	; 2
- 1bc:	39 f0       	breq	.+14     	; 0x1cc <Timer_Stop+0x18>
- 1be:	08 c0       	rjmp	.+16     	; 0x1d0 <Timer_Stop+0x1c>
- 1c0:	83 b7       	in	r24, 0x33	; 51
- 1c2:	13 be       	out	0x33, r1	; 51
- 1c4:	05 c0       	rjmp	.+10     	; 0x1d0 <Timer_Stop+0x1c>
- 1c6:	8e b5       	in	r24, 0x2e	; 46
- 1c8:	1e bc       	out	0x2e, r1	; 46
- 1ca:	02 c0       	rjmp	.+4      	; 0x1d0 <Timer_Stop+0x1c>
- 1cc:	85 b5       	in	r24, 0x25	; 37
- 1ce:	15 bc       	out	0x25, r1	; 37
- 1d0:	80 e0       	ldi	r24, 0x00	; 0
- 1d2:	08 95       	ret
+000001a2 <Timer_Stop>:
+ 1a2:	81 30       	cpi	r24, 0x01	; 1
+ 1a4:	39 f0       	breq	.+14     	; 0x1b4 <Timer_Stop+0x12>
+ 1a6:	18 f0       	brcs	.+6      	; 0x1ae <Timer_Stop+0xc>
+ 1a8:	82 30       	cpi	r24, 0x02	; 2
+ 1aa:	39 f0       	breq	.+14     	; 0x1ba <Timer_Stop+0x18>
+ 1ac:	08 c0       	rjmp	.+16     	; 0x1be <Timer_Stop+0x1c>
+ 1ae:	83 b7       	in	r24, 0x33	; 51
+ 1b0:	13 be       	out	0x33, r1	; 51
+ 1b2:	05 c0       	rjmp	.+10     	; 0x1be <Timer_Stop+0x1c>
+ 1b4:	8e b5       	in	r24, 0x2e	; 46
+ 1b6:	1e bc       	out	0x2e, r1	; 46
+ 1b8:	02 c0       	rjmp	.+4      	; 0x1be <Timer_Stop+0x1c>
+ 1ba:	85 b5       	in	r24, 0x25	; 37
+ 1bc:	15 bc       	out	0x25, r1	; 37
+ 1be:	80 e0       	ldi	r24, 0x00	; 0
+ 1c0:	08 95       	ret
 
-000001d4 <Timer_SetValue>:
- 1d4:	81 30       	cpi	r24, 0x01	; 1
- 1d6:	31 f0       	breq	.+12     	; 0x1e4 <Timer_SetValue+0x10>
- 1d8:	18 f0       	brcs	.+6      	; 0x1e0 <Timer_SetValue+0xc>
- 1da:	82 30       	cpi	r24, 0x02	; 2
- 1dc:	31 f0       	breq	.+12     	; 0x1ea <Timer_SetValue+0x16>
- 1de:	06 c0       	rjmp	.+12     	; 0x1ec <Timer_SetValue+0x18>
- 1e0:	62 bf       	out	0x32, r22	; 50
- 1e2:	04 c0       	rjmp	.+8      	; 0x1ec <Timer_SetValue+0x18>
- 1e4:	7d bd       	out	0x2d, r23	; 45
- 1e6:	6c bd       	out	0x2c, r22	; 44
- 1e8:	01 c0       	rjmp	.+2      	; 0x1ec <Timer_SetValue+0x18>
- 1ea:	64 bd       	out	0x24, r22	; 36
- 1ec:	80 e0       	ldi	r24, 0x00	; 0
- 1ee:	08 95       	ret
+000001c2 <Timer_SetValue>:
+ 1c2:	81 30       	cpi	r24, 0x01	; 1
+ 1c4:	31 f0       	breq	.+12     	; 0x1d2 <Timer_SetValue+0x10>
+ 1c6:	18 f0       	brcs	.+6      	; 0x1ce <Timer_SetValue+0xc>
+ 1c8:	82 30       	cpi	r24, 0x02	; 2
+ 1ca:	31 f0       	breq	.+12     	; 0x1d8 <Timer_SetValue+0x16>
+ 1cc:	06 c0       	rjmp	.+12     	; 0x1da <Timer_SetValue+0x18>
+ 1ce:	62 bf       	out	0x32, r22	; 50
+ 1d0:	04 c0       	rjmp	.+8      	; 0x1da <Timer_SetValue+0x18>
+ 1d2:	7d bd       	out	0x2d, r23	; 45
+ 1d4:	6c bd       	out	0x2c, r22	; 44
+ 1d6:	01 c0       	rjmp	.+2      	; 0x1da <Timer_SetValue+0x18>
+ 1d8:	64 bd       	out	0x24, r22	; 36
+ 1da:	80 e0       	ldi	r24, 0x00	; 0
+ 1dc:	08 95       	ret
 
-000001f0 <Timer_GetValue>:
- 1f0:	61 15       	cp	r22, r1
- 1f2:	71 05       	cpc	r23, r1
- 1f4:	d9 f0       	breq	.+54     	; 0x22c <Timer_GetValue+0x3c>
- 1f6:	81 30       	cpi	r24, 0x01	; 1
- 1f8:	59 f0       	breq	.+22     	; 0x210 <Timer_GetValue+0x20>
- 1fa:	18 f0       	brcs	.+6      	; 0x202 <Timer_GetValue+0x12>
- 1fc:	82 30       	cpi	r24, 0x02	; 2
- 1fe:	79 f0       	breq	.+30     	; 0x21e <Timer_GetValue+0x2e>
- 200:	17 c0       	rjmp	.+46     	; 0x230 <Timer_GetValue+0x40>
- 202:	82 b7       	in	r24, 0x32	; 50
- 204:	90 e0       	ldi	r25, 0x00	; 0
- 206:	fb 01       	movw	r30, r22
- 208:	91 83       	std	Z+1, r25	; 0x01
- 20a:	80 83       	st	Z, r24
- 20c:	80 e0       	ldi	r24, 0x00	; 0
- 20e:	08 95       	ret
- 210:	8c b5       	in	r24, 0x2c	; 44
- 212:	9d b5       	in	r25, 0x2d	; 45
- 214:	fb 01       	movw	r30, r22
- 216:	91 83       	std	Z+1, r25	; 0x01
- 218:	80 83       	st	Z, r24
- 21a:	80 e0       	ldi	r24, 0x00	; 0
+000001de <Timer_GetValue>:
+ 1de:	61 15       	cp	r22, r1
+ 1e0:	71 05       	cpc	r23, r1
+ 1e2:	d9 f0       	breq	.+54     	; 0x21a <Timer_GetValue+0x3c>
+ 1e4:	81 30       	cpi	r24, 0x01	; 1
+ 1e6:	59 f0       	breq	.+22     	; 0x1fe <Timer_GetValue+0x20>
+ 1e8:	18 f0       	brcs	.+6      	; 0x1f0 <Timer_GetValue+0x12>
+ 1ea:	82 30       	cpi	r24, 0x02	; 2
+ 1ec:	79 f0       	breq	.+30     	; 0x20c <Timer_GetValue+0x2e>
+ 1ee:	17 c0       	rjmp	.+46     	; 0x21e <Timer_GetValue+0x40>
+ 1f0:	82 b7       	in	r24, 0x32	; 50
+ 1f2:	90 e0       	ldi	r25, 0x00	; 0
+ 1f4:	fb 01       	movw	r30, r22
+ 1f6:	91 83       	std	Z+1, r25	; 0x01
+ 1f8:	80 83       	st	Z, r24
+ 1fa:	80 e0       	ldi	r24, 0x00	; 0
+ 1fc:	08 95       	ret
+ 1fe:	8c b5       	in	r24, 0x2c	; 44
+ 200:	9d b5       	in	r25, 0x2d	; 45
+ 202:	fb 01       	movw	r30, r22
+ 204:	91 83       	std	Z+1, r25	; 0x01
+ 206:	80 83       	st	Z, r24
+ 208:	80 e0       	ldi	r24, 0x00	; 0
+ 20a:	08 95       	ret
+ 20c:	84 b5       	in	r24, 0x24	; 36
+ 20e:	90 e0       	ldi	r25, 0x00	; 0
+ 210:	fb 01       	movw	r30, r22
+ 212:	91 83       	std	Z+1, r25	; 0x01
+ 214:	80 83       	st	Z, r24
+ 216:	80 e0       	ldi	r24, 0x00	; 0
+ 218:	08 95       	ret
+ 21a:	81 e0       	ldi	r24, 0x01	; 1
  21c:	08 95       	ret
- 21e:	84 b5       	in	r24, 0x24	; 36
- 220:	90 e0       	ldi	r25, 0x00	; 0
- 222:	fb 01       	movw	r30, r22
- 224:	91 83       	std	Z+1, r25	; 0x01
- 226:	80 83       	st	Z, r24
- 228:	80 e0       	ldi	r24, 0x00	; 0
- 22a:	08 95       	ret
- 22c:	81 e0       	ldi	r24, 0x01	; 1
- 22e:	08 95       	ret
- 230:	80 e0       	ldi	r24, 0x00	; 0
- 232:	08 95       	ret
+ 21e:	80 e0       	ldi	r24, 0x00	; 0
+ 220:	08 95       	ret
 
-00000234 <__vector_11>:
+00000222 <__vector_11>:
 
 /************************************************ Timers ISRs Control **********************************************************/
 ISR_TIMER0_OVF(){
- 234:	1f 92       	push	r1
- 236:	0f 92       	push	r0
- 238:	0f b6       	in	r0, 0x3f	; 63
- 23a:	0f 92       	push	r0
- 23c:	11 24       	eor	r1, r1
- 23e:	2f 93       	push	r18
- 240:	3f 93       	push	r19
- 242:	8f 93       	push	r24
- 244:	9f 93       	push	r25
- 246:	af 93       	push	r26
- 248:	bf 93       	push	r27
+ 222:	1f 92       	push	r1
+ 224:	0f 92       	push	r0
+ 226:	0f b6       	in	r0, 0x3f	; 63
+ 228:	0f 92       	push	r0
+ 22a:	11 24       	eor	r1, r1
+ 22c:	2f 93       	push	r18
+ 22e:	3f 93       	push	r19
+ 230:	8f 93       	push	r24
+ 232:	9f 93       	push	r25
+ 234:	af 93       	push	r26
+ 236:	bf 93       	push	r27
    /*---- TMU Over Flow Procedure ----*/
    /* 1 - Increment Global over flow times counter --*/
    gu32_overflowTimes++;
- 24a:	80 91 6d 00 	lds	r24, 0x006D	; 0x80006d <gu32_overflowTimes>
- 24e:	90 91 6e 00 	lds	r25, 0x006E	; 0x80006e <gu32_overflowTimes+0x1>
- 252:	a0 91 6f 00 	lds	r26, 0x006F	; 0x80006f <gu32_overflowTimes+0x2>
- 256:	b0 91 70 00 	lds	r27, 0x0070	; 0x800070 <gu32_overflowTimes+0x3>
- 25a:	01 96       	adiw	r24, 0x01	; 1
- 25c:	a1 1d       	adc	r26, r1
- 25e:	b1 1d       	adc	r27, r1
- 260:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <gu32_overflowTimes>
- 264:	90 93 6e 00 	sts	0x006E, r25	; 0x80006e <gu32_overflowTimes+0x1>
- 268:	a0 93 6f 00 	sts	0x006F, r26	; 0x80006f <gu32_overflowTimes+0x2>
- 26c:	b0 93 70 00 	sts	0x0070, r27	; 0x800070 <gu32_overflowTimes+0x3>
+ 238:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <gu32_overflowTimes>
+ 23c:	90 91 66 00 	lds	r25, 0x0066	; 0x800066 <gu32_overflowTimes+0x1>
+ 240:	a0 91 67 00 	lds	r26, 0x0067	; 0x800067 <gu32_overflowTimes+0x2>
+ 244:	b0 91 68 00 	lds	r27, 0x0068	; 0x800068 <gu32_overflowTimes+0x3>
+ 248:	01 96       	adiw	r24, 0x01	; 1
+ 24a:	a1 1d       	adc	r26, r1
+ 24c:	b1 1d       	adc	r27, r1
+ 24e:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <gu32_overflowTimes>
+ 252:	90 93 66 00 	sts	0x0066, r25	; 0x800066 <gu32_overflowTimes+0x1>
+ 256:	a0 93 67 00 	sts	0x0067, r26	; 0x800067 <gu32_overflowTimes+0x2>
+ 25a:	b0 93 68 00 	sts	0x0068, r27	; 0x800068 <gu32_overflowTimes+0x3>
    /* 2 - Rise execute flag */
    gu8_excuteFlag = 1;
- 270:	81 e0       	ldi	r24, 0x01	; 1
- 272:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <gu8_excuteFlag>
+ 25e:	81 e0       	ldi	r24, 0x01	; 1
+ 260:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <gu8_excuteFlag>
    /* 3 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));   
- 276:	20 91 76 00 	lds	r18, 0x0076	; 0x800076 <gu16_preloader>
- 27a:	30 91 77 00 	lds	r19, 0x0077	; 0x800077 <gu16_preloader+0x1>
+ 264:	20 91 6e 00 	lds	r18, 0x006E	; 0x80006e <gu16_preloader>
+ 268:	30 91 6f 00 	lds	r19, 0x006F	; 0x80006f <gu16_preloader+0x1>
 ERROR_STATUS Timer_SetValue(uint8_t Timer_CH_NO, uint16_t Timer_value)
 {
    switch(Timer_CH_NO)
    {
       case TIMER_0:
          TCNT0 = (uint8_t)Timer_value;         
- 27e:	80 e0       	ldi	r24, 0x00	; 0
- 280:	91 e0       	ldi	r25, 0x01	; 1
- 282:	82 1b       	sub	r24, r18
- 284:	93 0b       	sbc	r25, r19
- 286:	82 bf       	out	0x32, r24	; 50
+ 26c:	80 e0       	ldi	r24, 0x00	; 0
+ 26e:	91 e0       	ldi	r25, 0x01	; 1
+ 270:	82 1b       	sub	r24, r18
+ 272:	93 0b       	sbc	r25, r19
+ 274:	82 bf       	out	0x32, r24	; 50
    /* 2 - Rise execute flag */
    gu8_excuteFlag = 1;
    /* 3 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));   
      
 }
- 288:	bf 91       	pop	r27
- 28a:	af 91       	pop	r26
- 28c:	9f 91       	pop	r25
- 28e:	8f 91       	pop	r24
- 290:	3f 91       	pop	r19
- 292:	2f 91       	pop	r18
- 294:	0f 90       	pop	r0
- 296:	0f be       	out	0x3f, r0	; 63
- 298:	0f 90       	pop	r0
- 29a:	1f 90       	pop	r1
- 29c:	18 95       	reti
+ 276:	bf 91       	pop	r27
+ 278:	af 91       	pop	r26
+ 27a:	9f 91       	pop	r25
+ 27c:	8f 91       	pop	r24
+ 27e:	3f 91       	pop	r19
+ 280:	2f 91       	pop	r18
+ 282:	0f 90       	pop	r0
+ 284:	0f be       	out	0x3f, r0	; 63
+ 286:	0f 90       	pop	r0
+ 288:	1f 90       	pop	r1
+ 28a:	18 95       	reti
 
-0000029e <__vector_9>:
+0000028c <__vector_9>:
 
 ISR_TIMER1_OVF(){
- 29e:	1f 92       	push	r1
- 2a0:	0f 92       	push	r0
- 2a2:	0f b6       	in	r0, 0x3f	; 63
- 2a4:	0f 92       	push	r0
- 2a6:	11 24       	eor	r1, r1
- 2a8:	8f 93       	push	r24
- 2aa:	9f 93       	push	r25
- 2ac:	af 93       	push	r26
- 2ae:	bf 93       	push	r27
+ 28c:	1f 92       	push	r1
+ 28e:	0f 92       	push	r0
+ 290:	0f b6       	in	r0, 0x3f	; 63
+ 292:	0f 92       	push	r0
+ 294:	11 24       	eor	r1, r1
+ 296:	8f 93       	push	r24
+ 298:	9f 93       	push	r25
+ 29a:	af 93       	push	r26
+ 29c:	bf 93       	push	r27
    /*---- TMU Over Flow Procedure ----*/
    /* 1 - Increment Global over flow times counter --*/
    gu32_overflowTimes++; 
- 2b0:	80 91 6d 00 	lds	r24, 0x006D	; 0x80006d <gu32_overflowTimes>
- 2b4:	90 91 6e 00 	lds	r25, 0x006E	; 0x80006e <gu32_overflowTimes+0x1>
- 2b8:	a0 91 6f 00 	lds	r26, 0x006F	; 0x80006f <gu32_overflowTimes+0x2>
- 2bc:	b0 91 70 00 	lds	r27, 0x0070	; 0x800070 <gu32_overflowTimes+0x3>
- 2c0:	01 96       	adiw	r24, 0x01	; 1
- 2c2:	a1 1d       	adc	r26, r1
- 2c4:	b1 1d       	adc	r27, r1
- 2c6:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <gu32_overflowTimes>
- 2ca:	90 93 6e 00 	sts	0x006E, r25	; 0x80006e <gu32_overflowTimes+0x1>
- 2ce:	a0 93 6f 00 	sts	0x006F, r26	; 0x80006f <gu32_overflowTimes+0x2>
- 2d2:	b0 93 70 00 	sts	0x0070, r27	; 0x800070 <gu32_overflowTimes+0x3>
+ 29e:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <gu32_overflowTimes>
+ 2a2:	90 91 66 00 	lds	r25, 0x0066	; 0x800066 <gu32_overflowTimes+0x1>
+ 2a6:	a0 91 67 00 	lds	r26, 0x0067	; 0x800067 <gu32_overflowTimes+0x2>
+ 2aa:	b0 91 68 00 	lds	r27, 0x0068	; 0x800068 <gu32_overflowTimes+0x3>
+ 2ae:	01 96       	adiw	r24, 0x01	; 1
+ 2b0:	a1 1d       	adc	r26, r1
+ 2b2:	b1 1d       	adc	r27, r1
+ 2b4:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <gu32_overflowTimes>
+ 2b8:	90 93 66 00 	sts	0x0066, r25	; 0x800066 <gu32_overflowTimes+0x1>
+ 2bc:	a0 93 67 00 	sts	0x0067, r26	; 0x800067 <gu32_overflowTimes+0x2>
+ 2c0:	b0 93 68 00 	sts	0x0068, r27	; 0x800068 <gu32_overflowTimes+0x3>
    /* 2 - Rise execute flag */
    gu8_excuteFlag = 1; 
- 2d6:	81 e0       	ldi	r24, 0x01	; 1
- 2d8:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <gu8_excuteFlag>
+ 2c4:	81 e0       	ldi	r24, 0x01	; 1
+ 2c6:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <gu8_excuteFlag>
    /* 3 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_1 , (T1_OV_VAL - gu16_preloader));     
- 2dc:	80 91 76 00 	lds	r24, 0x0076	; 0x800076 <gu16_preloader>
- 2e0:	90 91 77 00 	lds	r25, 0x0077	; 0x800077 <gu16_preloader+0x1>
- 2e4:	91 95       	neg	r25
- 2e6:	81 95       	neg	r24
- 2e8:	91 09       	sbc	r25, r1
+ 2ca:	80 91 6e 00 	lds	r24, 0x006E	; 0x80006e <gu16_preloader>
+ 2ce:	90 91 6f 00 	lds	r25, 0x006F	; 0x80006f <gu16_preloader+0x1>
+ 2d2:	91 95       	neg	r25
+ 2d4:	81 95       	neg	r24
+ 2d6:	91 09       	sbc	r25, r1
    {
       case TIMER_0:
          TCNT0 = (uint8_t)Timer_value;         
       break;
       case TIMER_1:
          TCNT1 = Timer_value;
- 2ea:	9d bd       	out	0x2d, r25	; 45
- 2ec:	8c bd       	out	0x2c, r24	; 44
+ 2d8:	9d bd       	out	0x2d, r25	; 45
+ 2da:	8c bd       	out	0x2c, r24	; 44
    gu32_overflowTimes++; 
    /* 2 - Rise execute flag */
    gu8_excuteFlag = 1; 
    /* 3 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_1 , (T1_OV_VAL - gu16_preloader));     
 }
- 2ee:	bf 91       	pop	r27
- 2f0:	af 91       	pop	r26
- 2f2:	9f 91       	pop	r25
- 2f4:	8f 91       	pop	r24
- 2f6:	0f 90       	pop	r0
- 2f8:	0f be       	out	0x3f, r0	; 63
- 2fa:	0f 90       	pop	r0
- 2fc:	1f 90       	pop	r1
- 2fe:	18 95       	reti
+ 2dc:	bf 91       	pop	r27
+ 2de:	af 91       	pop	r26
+ 2e0:	9f 91       	pop	r25
+ 2e2:	8f 91       	pop	r24
+ 2e4:	0f 90       	pop	r0
+ 2e6:	0f be       	out	0x3f, r0	; 63
+ 2e8:	0f 90       	pop	r0
+ 2ea:	1f 90       	pop	r1
+ 2ec:	18 95       	reti
 
-00000300 <__vector_5>:
+000002ee <__vector_5>:
 
 ISR_TIMER2_OVF(){
- 300:	1f 92       	push	r1
- 302:	0f 92       	push	r0
- 304:	0f b6       	in	r0, 0x3f	; 63
- 306:	0f 92       	push	r0
- 308:	11 24       	eor	r1, r1
- 30a:	2f 93       	push	r18
- 30c:	3f 93       	push	r19
- 30e:	8f 93       	push	r24
- 310:	9f 93       	push	r25
- 312:	af 93       	push	r26
- 314:	bf 93       	push	r27
+ 2ee:	1f 92       	push	r1
+ 2f0:	0f 92       	push	r0
+ 2f2:	0f b6       	in	r0, 0x3f	; 63
+ 2f4:	0f 92       	push	r0
+ 2f6:	11 24       	eor	r1, r1
+ 2f8:	2f 93       	push	r18
+ 2fa:	3f 93       	push	r19
+ 2fc:	8f 93       	push	r24
+ 2fe:	9f 93       	push	r25
+ 300:	af 93       	push	r26
+ 302:	bf 93       	push	r27
    /*---- TMU Over Flow Procedure ----*/
    /* 1 - Increment Global over flow times counter --*/
    gu32_overflowTimes++;
- 316:	80 91 6d 00 	lds	r24, 0x006D	; 0x80006d <gu32_overflowTimes>
- 31a:	90 91 6e 00 	lds	r25, 0x006E	; 0x80006e <gu32_overflowTimes+0x1>
- 31e:	a0 91 6f 00 	lds	r26, 0x006F	; 0x80006f <gu32_overflowTimes+0x2>
- 322:	b0 91 70 00 	lds	r27, 0x0070	; 0x800070 <gu32_overflowTimes+0x3>
- 326:	01 96       	adiw	r24, 0x01	; 1
- 328:	a1 1d       	adc	r26, r1
- 32a:	b1 1d       	adc	r27, r1
- 32c:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <gu32_overflowTimes>
- 330:	90 93 6e 00 	sts	0x006E, r25	; 0x80006e <gu32_overflowTimes+0x1>
- 334:	a0 93 6f 00 	sts	0x006F, r26	; 0x80006f <gu32_overflowTimes+0x2>
- 338:	b0 93 70 00 	sts	0x0070, r27	; 0x800070 <gu32_overflowTimes+0x3>
+ 304:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <gu32_overflowTimes>
+ 308:	90 91 66 00 	lds	r25, 0x0066	; 0x800066 <gu32_overflowTimes+0x1>
+ 30c:	a0 91 67 00 	lds	r26, 0x0067	; 0x800067 <gu32_overflowTimes+0x2>
+ 310:	b0 91 68 00 	lds	r27, 0x0068	; 0x800068 <gu32_overflowTimes+0x3>
+ 314:	01 96       	adiw	r24, 0x01	; 1
+ 316:	a1 1d       	adc	r26, r1
+ 318:	b1 1d       	adc	r27, r1
+ 31a:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <gu32_overflowTimes>
+ 31e:	90 93 66 00 	sts	0x0066, r25	; 0x800066 <gu32_overflowTimes+0x1>
+ 322:	a0 93 67 00 	sts	0x0067, r26	; 0x800067 <gu32_overflowTimes+0x2>
+ 326:	b0 93 68 00 	sts	0x0068, r27	; 0x800068 <gu32_overflowTimes+0x3>
    /* 2 - Rise execute flag */
    gu8_excuteFlag = 1;
- 33c:	81 e0       	ldi	r24, 0x01	; 1
- 33e:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <gu8_excuteFlag>
+ 32a:	81 e0       	ldi	r24, 0x01	; 1
+ 32c:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <gu8_excuteFlag>
    /* 3 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));   
- 342:	20 91 76 00 	lds	r18, 0x0076	; 0x800076 <gu16_preloader>
- 346:	30 91 77 00 	lds	r19, 0x0077	; 0x800077 <gu16_preloader+0x1>
+ 330:	20 91 6e 00 	lds	r18, 0x006E	; 0x80006e <gu16_preloader>
+ 334:	30 91 6f 00 	lds	r19, 0x006F	; 0x80006f <gu16_preloader+0x1>
       break;
       case TIMER_1:
          TCNT1 = Timer_value;
       break;
       case TIMER_2:
          TCNT2 = (uint8_t)Timer_value;
- 34a:	80 e0       	ldi	r24, 0x00	; 0
- 34c:	91 e0       	ldi	r25, 0x01	; 1
- 34e:	82 1b       	sub	r24, r18
- 350:	93 0b       	sbc	r25, r19
- 352:	84 bd       	out	0x24, r24	; 36
+ 338:	80 e0       	ldi	r24, 0x00	; 0
+ 33a:	91 e0       	ldi	r25, 0x01	; 1
+ 33c:	82 1b       	sub	r24, r18
+ 33e:	93 0b       	sbc	r25, r19
+ 340:	84 bd       	out	0x24, r24	; 36
    /* 2 - Rise execute flag */
    gu8_excuteFlag = 1;
    /* 3 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));   
      
 }
- 354:	bf 91       	pop	r27
- 356:	af 91       	pop	r26
- 358:	9f 91       	pop	r25
- 35a:	8f 91       	pop	r24
- 35c:	3f 91       	pop	r19
- 35e:	2f 91       	pop	r18
- 360:	0f 90       	pop	r0
- 362:	0f be       	out	0x3f, r0	; 63
- 364:	0f 90       	pop	r0
- 366:	1f 90       	pop	r1
- 368:	18 95       	reti
+ 342:	bf 91       	pop	r27
+ 344:	af 91       	pop	r26
+ 346:	9f 91       	pop	r25
+ 348:	8f 91       	pop	r24
+ 34a:	3f 91       	pop	r19
+ 34c:	2f 91       	pop	r18
+ 34e:	0f 90       	pop	r0
+ 350:	0f be       	out	0x3f, r0	; 63
+ 352:	0f 90       	pop	r0
+ 354:	1f 90       	pop	r1
+ 356:	18 95       	reti
 
-0000036a <__vector_10>:
+00000358 <__vector_10>:
 
 
 
 ISR_TIMER0_COMP(){
- 36a:	1f 92       	push	r1
- 36c:	0f 92       	push	r0
- 36e:	0f b6       	in	r0, 0x3f	; 63
- 370:	0f 92       	push	r0
- 372:	11 24       	eor	r1, r1
+ 358:	1f 92       	push	r1
+ 35a:	0f 92       	push	r0
+ 35c:	0f b6       	in	r0, 0x3f	; 63
+ 35e:	0f 92       	push	r0
+ 360:	11 24       	eor	r1, r1
    /*set pins*/
    //gpioPinWrite(GPIOD,(BIT4|BIT5),HIGH);
 }
- 374:	0f 90       	pop	r0
- 376:	0f be       	out	0x3f, r0	; 63
- 378:	0f 90       	pop	r0
- 37a:	1f 90       	pop	r1
- 37c:	18 95       	reti
+ 362:	0f 90       	pop	r0
+ 364:	0f be       	out	0x3f, r0	; 63
+ 366:	0f 90       	pop	r0
+ 368:	1f 90       	pop	r1
+ 36a:	18 95       	reti
 
-0000037e <Usart_Init>:
-   {
-      /* Report Fail */
-      au8_errorState = UDR_RESET_FAIL; 
-   }
-   return au8_errorState;
-}
- 37e:	fc 01       	movw	r30, r24
- 380:	89 2b       	or	r24, r25
- 382:	c9 f0       	breq	.+50     	; 0x3b6 <Usart_Init+0x38>
- 384:	90 b5       	in	r25, 0x20	; 32
- 386:	80 81       	ld	r24, Z
- 388:	89 2b       	or	r24, r25
- 38a:	86 60       	ori	r24, 0x06	; 6
- 38c:	92 81       	ldd	r25, Z+2	; 0x02
- 38e:	89 2b       	or	r24, r25
- 390:	93 81       	ldd	r25, Z+3	; 0x03
- 392:	89 2b       	or	r24, r25
- 394:	80 bd       	out	0x20, r24	; 32
- 396:	2a b1       	in	r18, 0x0a	; 10
- 398:	84 81       	ldd	r24, Z+4	; 0x04
- 39a:	95 81       	ldd	r25, Z+5	; 0x05
- 39c:	89 2b       	or	r24, r25
- 39e:	88 7f       	andi	r24, 0xF8	; 248
- 3a0:	82 2b       	or	r24, r18
- 3a2:	8a b9       	out	0x0a, r24	; 10
- 3a4:	9b b1       	in	r25, 0x0b	; 11
- 3a6:	86 81       	ldd	r24, Z+6	; 0x06
- 3a8:	83 7e       	andi	r24, 0xE3	; 227
- 3aa:	89 2b       	or	r24, r25
- 3ac:	8b b9       	out	0x0b, r24	; 11
- 3ae:	87 e6       	ldi	r24, 0x67	; 103
- 3b0:	89 b9       	out	0x09, r24	; 9
- 3b2:	80 e0       	ldi	r24, 0x00	; 0
- 3b4:	08 95       	ret
- 3b6:	81 e0       	ldi	r24, 0x01	; 1
- 3b8:	08 95       	ret
-
-000003ba <UsartReadRx>:
- 3ba:	00 97       	sbiw	r24, 0x00	; 0
- 3bc:	29 f0       	breq	.+10     	; 0x3c8 <UsartReadRx+0xe>
- 3be:	2c b1       	in	r18, 0x0c	; 12
- 3c0:	fc 01       	movw	r30, r24
- 3c2:	20 83       	st	Z, r18
- 3c4:	84 e0       	ldi	r24, 0x04	; 4
- 3c6:	08 95       	ret
- 3c8:	81 e0       	ldi	r24, 0x01	; 1
- 3ca:	08 95       	ret
-
-000003cc <UsartWriteTx>:
- 3cc:	00 97       	sbiw	r24, 0x00	; 0
- 3ce:	29 f0       	breq	.+10     	; 0x3da <UsartWriteTx+0xe>
- 3d0:	fc 01       	movw	r30, r24
- 3d2:	80 81       	ld	r24, Z
- 3d4:	8c b9       	out	0x0c, r24	; 12
- 3d6:	82 e0       	ldi	r24, 0x02	; 2
- 3d8:	08 95       	ret
- 3da:	81 e0       	ldi	r24, 0x01	; 1
- 3dc:	08 95       	ret
-
-000003de <getTransmissionState>:
- 3de:	80 91 75 00 	lds	r24, 0x0075	; 0x800075 <gu8_RX_CompleteFlag>
- 3e2:	81 30       	cpi	r24, 0x01	; 1
- 3e4:	21 f4       	brne	.+8      	; 0x3ee <getTransmissionState+0x10>
- 3e6:	10 92 75 00 	sts	0x0075, r1	; 0x800075 <gu8_RX_CompleteFlag>
- 3ea:	88 e0       	ldi	r24, 0x08	; 8
- 3ec:	08 95       	ret
- 3ee:	89 e0       	ldi	r24, 0x09	; 9
- 3f0:	08 95       	ret
-
-000003f2 <__vector_13>:
+0000036c <__vector_13>:
 /*--------------------------------------------------- Interrupt handlers  -----------------------------------------*/
 /*
 * USART on successful character receive completion interrupt handler 
 */
 ISR_USART_RX()
 {
- 3f2:	1f 92       	push	r1
- 3f4:	0f 92       	push	r0
- 3f6:	0f b6       	in	r0, 0x3f	; 63
- 3f8:	0f 92       	push	r0
- 3fa:	11 24       	eor	r1, r1
- 3fc:	8f 93       	push	r24
+ 36c:	1f 92       	push	r1
+ 36e:	0f 92       	push	r0
+ 370:	0f b6       	in	r0, 0x3f	; 63
+ 372:	0f 92       	push	r0
+ 374:	11 24       	eor	r1, r1
+ 376:	8f 93       	push	r24
    /* on successful character reception : you can read the new character */  
    gu8_RX_CompleteFlag = 1;
- 3fe:	81 e0       	ldi	r24, 0x01	; 1
- 400:	80 93 75 00 	sts	0x0075, r24	; 0x800075 <gu8_RX_CompleteFlag>
+ 378:	81 e0       	ldi	r24, 0x01	; 1
+ 37a:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <gu8_RX_CompleteFlag>
 }
- 404:	8f 91       	pop	r24
- 406:	0f 90       	pop	r0
- 408:	0f be       	out	0x3f, r0	; 63
- 40a:	0f 90       	pop	r0
- 40c:	1f 90       	pop	r1
- 40e:	18 95       	reti
+ 37e:	8f 91       	pop	r24
+ 380:	0f 90       	pop	r0
+ 382:	0f be       	out	0x3f, r0	; 63
+ 384:	0f 90       	pop	r0
+ 386:	1f 90       	pop	r1
+ 388:	18 95       	reti
 
-00000410 <myUsartFullDuplexInterruptTest>:
-#include "../MCAL/USART/usart.h"
-#include "../MCAL/USART/usart_Cfg.h"
-#include "../interrupt.h"
-/*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
-void myUsartFullDuplexInterruptTest(void)
-{
- 410:	cf 93       	push	r28
- 412:	df 93       	push	r29
- 414:	1f 92       	push	r1
- 416:	cd b7       	in	r28, 0x3d	; 61
- 418:	de b7       	in	r29, 0x3e	; 62
-   sei();   
- 41a:	78 94       	sei
-   uint8_t ch = 0;
- 41c:	19 82       	std	Y+1, r1	; 0x01
-   uint8_t state = 0;     
-   Usart_Init(&usart_init_config);        
- 41e:	80 e6       	ldi	r24, 0x60	; 96
- 420:	90 e0       	ldi	r25, 0x00	; 0
- 422:	0e 94 bf 01 	call	0x37e	; 0x37e <Usart_Init>
-   while(1)
-   {
-      state = getTransmissionState();     
- 426:	0e 94 ef 01 	call	0x3de	; 0x3de <getTransmissionState>
-      switch(state)
- 42a:	88 30       	cpi	r24, 0x08	; 8
- 42c:	e1 f7       	brne	.-8      	; 0x426 <myUsartFullDuplexInterruptTest+0x16>
-      {
-         case USART_BYTE_TRANSMIT_SUCCESS:
-            /* Read byte transmitted to udr*/
-            UsartReadRx(&ch);             
- 42e:	ce 01       	movw	r24, r28
- 430:	01 96       	adiw	r24, 0x01	; 1
- 432:	0e 94 dd 01 	call	0x3ba	; 0x3ba <UsartReadRx>
-            /* Write a the same character to be transmitted again*/
-            UsartWriteTx(&ch);
- 436:	ce 01       	movw	r24, r28
- 438:	01 96       	adiw	r24, 0x01	; 1
- 43a:	0e 94 e6 01 	call	0x3cc	; 0x3cc <UsartWriteTx>
-         break;
- 43e:	f3 cf       	rjmp	.-26     	; 0x426 <myUsartFullDuplexInterruptTest+0x16>
+0000038a <_exit>:
+ 38a:	f8 94       	cli
 
-00000440 <_exit>:
- 440:	f8 94       	cli
-
-00000442 <__stop_program>:
- 442:	ff cf       	rjmp	.-2      	; 0x442 <__stop_program>
+0000038c <__stop_program>:
+ 38c:	ff cf       	rjmp	.-2      	; 0x38c <__stop_program>
