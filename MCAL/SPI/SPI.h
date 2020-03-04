@@ -67,6 +67,8 @@ typedef enum EnumSPIError
    INVALID_INPUT_PARAMS = 1,
    BYTE_WRITE_SUCCESS = 2,
    BYTE_WRITE_FAIL = 3,
+   SPI_TRANSMISSION_SUCCESS = 4,
+   SPI_TRANSMISSION_FAIL = 5
    
 }EnumSPIError_t; 
 
@@ -96,6 +98,14 @@ extern EnumSPIError_t SPI_WriteByte(uint8_t * Data_byte);
 *
 *  @return EnumSPIError
 */
-extern EnumSPIError_t SPI_ReadByte(volatile uint8_t * Data_byte);
+extern EnumSPIError_t SPI_ReadByte(uint8_t * Data_byte);
+
+/*
+*  Description : Returns status of Transmission complete software flag
+*
+*  @param void
+*  @return EnumSPIError_t
+*/
+extern EnumSPIError_t SPI_GetTransmissionStatus(void);
 
 #endif /* SPI_H_ */

@@ -9,7 +9,7 @@
 #include "../../interrupt.h"
 #include "../../registers.h"
 /*- GLOBAL VARIABLES ----------------------------------------------------------------------------------------------*/
-static volatile uint8_t gu8_readByte = 0;
+volatile uint8_t gu8_transmissionComplete = 0;
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------*/
 /*
 *  Description : Initializes SPI module.
@@ -25,7 +25,7 @@ EnumSPIError_t SPI_Init(str_SPI_Cfg_t * str_SpiCfg)
    if(NULL != str_SpiCfg)
    {
       /*---- Configuring (SPCR) ----*/
-      SPCR |= (str_SpiCfg->SPI_En|str_SpiCfg->SPI_INT_En|str_SpiCfg->SPI_MS_Sel|str_SpiCfg->SPI_freq_mode|str_SpiCfg->SPI_CK_mode|str_SpiCfg->SPI_Dord);
+      SPCR |= (str_SpiCfg->SPI_En|str_SpiCfg->SPI_INT_En|str_SpiCfg->SPI_MS_Sel|str_SpiCfg->SPI_CK_mode|str_SpiCfg->SPI_freq_mode|str_SpiCfg->SPI_Dord);
       /*---- Configuring (SPSR) ----*/
       SPSR |= (str_SpiCfg->SPI_2X_En);      
       /*---- report success ----*/
@@ -45,7 +45,7 @@ EnumSPIError_t SPI_Init(str_SPI_Cfg_t * str_SpiCfg)
 *
 *  @return EnumSPIError
 */
-EnumSPIError_t SPI_WriteByte(uint8_t * Data_byte)
+EnumSPIError_t SPI_WriteByte(uint8_t *Data_byte)
 {
    /* Define error state*/
    uint8_t au8_errorState = 0;  
@@ -72,7 +72,7 @@ EnumSPIError_t SPI_WriteByte(uint8_t * Data_byte)
 *
 *  @return EnumSPIError
 */
-EnumSPIError_t SPI_ReadByte(volatile uint8_t * Data_byte)
+EnumSPIError_t SPI_ReadByte(uint8_t *Data_byte)
 {
    /* Define error state*/
    uint8_t au8_errorState = 0;
@@ -92,13 +92,35 @@ EnumSPIError_t SPI_ReadByte(volatile uint8_t * Data_byte)
    return au8_errorState;
 }
 
+/*
+*  Description : Returns status of Transmission complete software flag
+*
+*  @param void
+*  @return EnumSPIError_t
+*/
+EnumSPIError_t SPI_GetTransmissionStatus(void)
+{
+   /* Define error state */
+   uint8_t au8_errorState = 0;
+   /* Check transmission status flag */
+   if(gu8_transmissionComplete == 1)
+   {
+      /* Report transmission success */
+      au8_errorState = SPI_TRANSMISSION_SUCCESS;
+      /* Reset Transmission Flag */
+      gu8_transmissionComplete = 0;
+   }
+   else
+   {
+      /* Report transmission fail */
+      au8_errorState = SPI_TRANSMISSION_FAIL;      
+   }
+   return au8_errorState;
+}
+
 /*--------------------------------------------- ISR CONTROL ------------------------------------------------------*/
 ISR_SPI()
 { 
-     
-   /*--- Read the transmitted byte when transmission is complete ---*/  
-   SPI_ReadByte(&TCNT2); 
-   /*--- Write the new Byte ----*/ 
-   gu8_readByte++;
-   SPI_WriteByte(&gu8_readByte);  
+   /* Raise transmission complete flag */
+   gu8_transmissionComplete = 1;
 }

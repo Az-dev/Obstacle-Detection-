@@ -12,10 +12,10 @@ str_SPI_Cfg_t gstr_MasterCfg =
 {
    SPI_EN,
    SPIE_EN,
-   DORD_HIGH,
+   DORD_LOW,
    MSTR_SEL,
    CLK_POL_PHA_MODE_0,
-   Fosc_128,
+   Fosc_4,
    SPI_2X_DIS,   
 };
 
@@ -24,9 +24,9 @@ str_SPI_Cfg_t gstr_SlaveCfg =
 {
    SPI_EN,
    SPIE_EN,
-   DORD_HIGH,
+   DORD_LOW,
    SLV_SEL,
    CLK_POL_PHA_MODE_0,
-   Fosc_128,
+   Fosc_4,
    SPI_2X_DIS,   
 };
