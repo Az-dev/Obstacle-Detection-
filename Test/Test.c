@@ -19,13 +19,14 @@
 #include "../MCAL/USART/usart_Cfg.h"
 #include "../interrupt.h"
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
-extern volatile uint8_t ch;
 void myUsartFullDuplexInterruptTest(void)
 {
    sei();
-   Usart_Init(&usart_init_config); 
-         
-   while(1) UsartWriteTx(ch);  
+   volatile uint8_t ch = 10;
+   Usart_Init(&usart_init_config);
+   /* Initiate write operation */ 
+   UsartWriteTx(&ch);      
+   while(1);  
 }
 
 

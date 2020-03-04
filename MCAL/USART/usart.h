@@ -5,7 +5,6 @@
 #include "../../std_types.h"
 /*- DEFINES --------------------------------------------------------------------------------------------------------*/
 #define BAUDE_RATE 103 /* this value generates baude rate of 9600 at Fosc = 16MHz */
-//volatile uint8_t ch  = 0;
 /*- TYPEDEFS -------------------------------------------------------------------------------------------------------*/
 /*---- 1 - (UCSRC) CONFIG ENUMS ----*/
 /* Select mode enum : whether Asynchronous or Synchronous */
@@ -96,26 +95,26 @@ typedef enum EnumUSARTError
 /*
 *  Description : Initializes USART.
 *
-*  @param gstr_usart_init_t USART_InitCfg
+*  @param const gstr_usart_init_t USART_InitCfg
 *  @return EnumUSARTError_t
 */
-extern EnumUSARTError_t Usart_Init(gstr_usart_init_t * USART_InitCfg);
+extern EnumUSARTError_t Usart_Init(const gstr_usart_init_t * USART_InitCfg);
 
 /*
 *  Description : Read a character from RXB.
 *
-*  @param uint8_t * data_byte
+*  @param volatile uint8_t * data_byte
 *  @return EnumUSARTError_t
 */
-extern EnumUSARTError_t UsartReadRx(uint8_t * data_byte);
+extern EnumUSARTError_t UsartReadRx(volatile uint8_t * data_byte);
 
 /*
 *  Description : Write a character to TXB
 *
-*  @param uint8_t * data_byte  (input param)
+*  @param volatile uint8_t * data_byte  (input param)
 *  @return EnumUSARTError_t
 */
-extern EnumUSARTError_t UsartWriteTx(uint8_t * data_byte);
+extern EnumUSARTError_t UsartWriteTx(volatile uint8_t * data_byte);
 
 /*
 *  Description : Resets UDR .

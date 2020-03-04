@@ -8,10 +8,10 @@ volatile uint8_t ch  = 0;
 /*
 *  Description : Initializes USART.
 *
-*  @param gstr_usart_init_t USART_InitCfg
+*  @param const gstr_usart_init_t USART_InitCfg
 *  @return EnumUSARTError_t
 */
-EnumUSARTError_t Usart_Init(gstr_usart_init_t * USART_InitCfg)
+EnumUSARTError_t Usart_Init(const gstr_usart_init_t * USART_InitCfg)
 {
    /* Define error state */
    uint8_t au8_errrorState = 0;
@@ -49,10 +49,10 @@ EnumUSARTError_t Usart_Init(gstr_usart_init_t * USART_InitCfg)
 /*
 *  Description : Read a character from RXB.
 *
-*  @param uint8_t * data_byte (output param)
+*  @param volatile uint8_t * data_byte (output param)
 *  @return EnumUSARTError_t
 */
-EnumUSARTError_t UsartReadRx(uint8_t * data_byte)
+EnumUSARTError_t UsartReadRx(volatile uint8_t * data_byte)
 {
    /* Define error state */
    uint8_t au8_errorState = 0;
@@ -74,10 +74,10 @@ EnumUSARTError_t UsartReadRx(uint8_t * data_byte)
 /*
 *  Description : Write a character to TXB
 *
-*  @param uint8_t * data_byte  (input param)
+*  @param volatile uint8_t * data_byte  (input param)
 *  @return EnumUSARTError_t
 */
-EnumUSARTError_t UsartWriteTx(uint8_t * data_byte)
+EnumUSARTError_t UsartWriteTx(volatile uint8_t * data_byte)
 {
    /* Define error state */
    uint8_t au8_errorState = 0;
@@ -132,20 +132,25 @@ EnumUSARTError_t ResetUDR(void)
 ISR_USART_RX()
 {
    /* on successful character reception : you can read the new character */  
-   UsartReadRx(&ch);   
+   UsartReadRx(&ch);
+   /* Test Purpose */ 
+   TCNT2 = UDR;  
 }
 
 /*
 * USART when data register is empty
 */
-//ISR_USART_UDRE()
-//{
-//   ch = 10;
-//   /* if data register is empty : you can write a new character. */   
-//   UsartWriteTx(&ch);
-//   /* Disable interrupt of UDER */
-//   UCSRB &= ~(DATA_REGISTER_EMPTY_EN);       
-//}
+ISR_USART_UDRE()
+{
+   /* if data register is empty : you can write a new character. */   
+   UsartWriteTx(&ch);
+   /* Reset UDER flag */
+   UCSRA |= 0x20;
+   /* Disable UDER */
+   UCSRB &= ~(DATA_REGISTER_EMPTY_EN); 
+   
+            
+}
 
 ISR_USART_TX()
 {
