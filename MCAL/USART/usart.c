@@ -3,7 +3,8 @@
 #include "../../interrupt.h"
 
 /*- GLOBAL VARIALBLES ---------------------------------------------------------------------------------------------*/
-volatile uint8_t ch  = 0;
+volatile uint8_t gu8_RX_CompleteFlag = 0;    /* Receive complete software flag */
+//volatile uint8_t gu8_TX_CompleteFlag = 0;    /* Transmit complete software flag */
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------*/
 /*
 *  Description : Initializes USART.
@@ -49,10 +50,10 @@ EnumUSARTError_t Usart_Init(const gstr_usart_init_t * USART_InitCfg)
 /*
 *  Description : Read a character from RXB.
 *
-*  @param volatile uint8_t * data_byte (output param)
+*  @param uint8_t * data_byte (output param)
 *  @return EnumUSARTError_t
 */
-EnumUSARTError_t UsartReadRx(volatile uint8_t * data_byte)
+EnumUSARTError_t UsartReadRx(uint8_t * data_byte)
 {
    /* Define error state */
    uint8_t au8_errorState = 0;
@@ -61,7 +62,7 @@ EnumUSARTError_t UsartReadRx(volatile uint8_t * data_byte)
    {
       *data_byte = UDR;      
       /* Report success*/
-      au8_errorState = USART_BYTE_READ_SUCCESS;      
+      au8_errorState = USART_BYTE_READ_SUCCESS;           
    }
    else
    {
@@ -74,10 +75,10 @@ EnumUSARTError_t UsartReadRx(volatile uint8_t * data_byte)
 /*
 *  Description : Write a character to TXB
 *
-*  @param volatile uint8_t * data_byte  (input param)
+*  @param uint8_t * data_byte  (input param)
 *  @return EnumUSARTError_t
 */
-EnumUSARTError_t UsartWriteTx(volatile uint8_t * data_byte)
+EnumUSARTError_t UsartWriteTx(uint8_t * data_byte)
 {
    /* Define error state */
    uint8_t au8_errorState = 0;
@@ -85,9 +86,10 @@ EnumUSARTError_t UsartWriteTx(volatile uint8_t * data_byte)
    if(NULL != data_byte)
    {
       /* Write value  to UDR */
-      UDR = * data_byte;
+      UDR = *data_byte;     
       /* Report Success */
       au8_errorState = USART_BYTE_WRITE_SUCCESS;
+      
    }
    else
    {
@@ -96,6 +98,30 @@ EnumUSARTError_t UsartWriteTx(volatile uint8_t * data_byte)
    }
    return au8_errorState;  
 }
+
+/*
+*  Description : Get the state of the transmission complete software flag.
+*
+*  @param void
+*  @return EnumUSARTError_t
+*/
+EnumUSARTError_t getTransmissionState(void)
+{
+   /* define error state*/
+   uint8_t au8_errorState = 0;
+   if(gu8_RX_CompleteFlag == 1)
+   {
+      au8_errorState = USART_BYTE_TRANSMIT_SUCCESS;
+      /* Reset transmission state flag */
+      gu8_RX_CompleteFlag = 0;      
+   }
+   else
+   {
+      au8_errorState = USART_BYTE_TRANSMIT_FAIL;
+   }
+   return au8_errorState;   
+}
+
 
 /*
 *  Description : Resets UDR .
@@ -132,28 +158,19 @@ EnumUSARTError_t ResetUDR(void)
 ISR_USART_RX()
 {
    /* on successful character reception : you can read the new character */  
-   UsartReadRx(&ch);
-   /* Test Purpose */ 
-   TCNT2 = UDR;  
+   gu8_RX_CompleteFlag = 1;
 }
 
 /*
 * USART when data register is empty
 */
-ISR_USART_UDRE()
-{
-   /* if data register is empty : you can write a new character. */   
-   UsartWriteTx(&ch);
-   /* Reset UDER flag */
-   UCSRA |= 0x20;
-   /* Disable UDER */
-   UCSRB &= ~(DATA_REGISTER_EMPTY_EN); 
-   
-            
-}
+//ISR_USART_UDRE()
+//{
+   /* if data register is empty : you can write a new character. */            
+//}
 
-ISR_USART_TX()
-{
+//ISR_USART_TX()
+//{
    /* if data register is empty : you can write a new character. */
-   UsartWriteTx(&ch);   
-}
+   //gu8_TX_CompleteFlag = 1;     
+//}

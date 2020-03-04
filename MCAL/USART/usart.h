@@ -87,7 +87,10 @@ typedef enum EnumUSARTError
    USART_BYTE_READ_SUCCESS = 4,
    USART_BYTE_READ_FAIL = 5,
    UDR_RESET_SUCCESS = 6,
-   UDR_RESET_FAIL = 7  
+   UDR_RESET_FAIL = 7,
+   USART_BYTE_TRANSMIT_SUCCESS = 8,
+   USART_BYTE_TRANSMIT_FAIL = 9
+     
 }EnumUSARTError_t;
 
 
@@ -103,18 +106,18 @@ extern EnumUSARTError_t Usart_Init(const gstr_usart_init_t * USART_InitCfg);
 /*
 *  Description : Read a character from RXB.
 *
-*  @param volatile uint8_t * data_byte
+*  @param uint8_t * data_byte
 *  @return EnumUSARTError_t
 */
-extern EnumUSARTError_t UsartReadRx(volatile uint8_t * data_byte);
+extern EnumUSARTError_t UsartReadRx(uint8_t * data_byte);
 
 /*
 *  Description : Write a character to TXB
 *
-*  @param volatile uint8_t * data_byte  (input param)
+*  @param uint8_t * data_byte  (input param)
 *  @return EnumUSARTError_t
 */
-extern EnumUSARTError_t UsartWriteTx(volatile uint8_t * data_byte);
+extern EnumUSARTError_t UsartWriteTx(uint8_t * data_byte);
 
 /*
 *  Description : Resets UDR .
@@ -124,5 +127,13 @@ extern EnumUSARTError_t UsartWriteTx(volatile uint8_t * data_byte);
 *  @return EnumUSARTError_t
 */
 extern EnumUSARTError_t ResetUDR(void);
+
+/*
+*  Description : Get the state of the transmission complete software flag. 
+*
+*  @param void 
+*  @return EnumUSARTError_t
+*/
+extern EnumUSARTError_t getTransmissionState(void);
 
 #endif /* END OF __USART_H__ */
