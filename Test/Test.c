@@ -46,19 +46,34 @@ void myUsartFullDuplexInterruptTest(void)
 void masterSpi(void)
 {
    sei();
-   uint8_t data = 10;
+   /* Define data byte*/
+   uint8_t data = 5;
+   /* Define state */
+   uint8_t state = 0;
    /* Initialize master */
    SPI_Init(&gstr_MasterCfg);
-   PORTB_DIR = 0b10110000; 
-   SPI_WriteByte(&data);
-    
+   /* Configure SS pin */
+   PORTB_DIR = 0b10110000;
+   /* Initiate data byte write */
+   SPI_WriteByte(&data);    
    while(1)
    {
-      //data++;
-      //SPI_WriteByte(&data);
-      //softwareDelayMs(50);
-      //SPI_ReadByte(&data); 
-   }; 
+      state = SPI_GetTransmissionStatus();
+      
+      switch(state)
+      {
+         case SPI_TRANSMISSION_SUCCESS:
+            /* 1 - Read the trancieved byte in slave */
+            SPI_ReadByte(&data);
+            //TCNT2 = data;
+            data++;
+            softwareDelayMs(100);
+            /* 2- write the new data byte*/
+            SPI_WriteByte(&data);
+            softwareDelayMs(100);           
+         break;
+      }     
+   }
 }
 
 /*
@@ -70,13 +85,14 @@ void masterSpi(void)
 */
 void slaveSpi(void)
 {
-    uint8_t data; 
-    sei();   
+     
+    sei();      
     /* Initialize master */
     SPI_Init(&gstr_SlaveCfg);
-    PORTB_DIR = 0b01000000; 
-    SPI_ReadByte(&data);   
+    /* Configure SS pin */
+    PORTB_DIR = 0b01000000;       
     while(1);
+    
        
 }
 
