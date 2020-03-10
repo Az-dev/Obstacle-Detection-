@@ -31,7 +31,7 @@ void __vector_3(void)
 
 /*ISR_SPI*/
 #define ISR_SPI()\
-void __vector_12(void) __attribute__ ((signal));\
+void __vector_12(void) __attribute__ ((signal , used , externally_visible));\
 void __vector_12(void)
 
 /*ISR_USART_RX_COMPLETE*/
