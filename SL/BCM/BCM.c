@@ -29,9 +29,11 @@ StrBuffer_t gstr_rxBufferCfg;
 static uint16_t gu16_txByteCounter = 0;
 static uint16_t gu16_rxByteCounter = 0;
 
+
+static uint8_t gu8_protocol = 0;
+
 /*- FUNCTIONS DEFINITIONS ------------------------------------------------------------------------------------------*/
 
-/*---- START STATIC FUNCTIONS DEFINITIONS ----*/
 /* Notifications */
 /*
 * Description : Sets notification of transmission. 
@@ -98,6 +100,10 @@ static void BCM_SPI_TX_CallBack(void)
    {
       /* Report byte transmit success */
       BCM_SetTXNotification(BCM_BYTE_TRANSMIT_SUCCESS);
+      /* Increment sent bytes counter */
+      gu16_txByteCounter++;
+      /* Send a new byte */
+      SPI_WriteByte(*(gstr_txBufferCfg.bufferAddress++));      
    }  
 }
 
@@ -122,8 +128,14 @@ static void BCM_SPI_RX_CallBack(void)
    }
    else
    {
+      /* Read the byte */
+      SPI_ReadByte(&(gstr_rxBufferCfg.bufferAddress[gu16_rxByteCounter]));            
+      /* Increment sent bytes counter */
+      gu16_rxByteCounter++;
+      /* Increment buffer address to point to the new location */
+      //gstr_rxBufferCfg.bufferAddress++;
       /* Report byte Reception success */
-      BCM_SetRXNotification(BCM_BYTE_RECIEVE_SUCCESS);
+      BCM_SetRXNotification(BCM_BYTE_RECIEVE_SUCCESS);            
    }
 }
 
@@ -283,6 +295,7 @@ EnmBCMError_t BCM_Init(str_BCM_Cfg_t * strBCM_Init)
             /* 1.A Initialize State of Transmission state machine */
             gu8_TxState = IDLE;
             /* 1.B Initialize the chosen protocol */
+            gu8_protocol = strBCM_Init->protocol;
             switch (strBCM_Init->protocol)
             {
                case SPI:                  
@@ -300,6 +313,7 @@ EnmBCMError_t BCM_Init(str_BCM_Cfg_t * strBCM_Init)
             /* 1.A Initialize State of Reception state machine */
             gu8_RxState = IDLE;
             /* 1.B Initialize the chosen protocol */
+            gu8_protocol = strBCM_Init->protocol;
             switch (strBCM_Init->protocol)
             {
                case SPI:               
@@ -336,7 +350,18 @@ void BCM_Send(void)
    /* 1 - Lock Tx/Rx buffer ahead of any further coming actions */
    gstr_txBufferCfg.buffer_state = BUFFER_LOCKED;   
    /* 2 - Triggers Tx/Rx state machines */   
-   gu8_TxState = SENDING_BYTES;   
+   gu8_TxState = SENDING_BYTES;
+   /* 3 - Start Communication protocol */
+   switch (gu8_protocol)
+   {
+      case SPI:
+         SPI_Enable();
+      break;
+      case I2C:
+         /* Not used currently*/
+      break;
+   };
+      
    /* 2 - send BCM_ID */
    //SPI_WriteByte(BCM_ID);   
 }
@@ -353,7 +378,17 @@ void BCM_Read(void)
    /* 1 - Lock Rx buffer ahead of any further coming actions */   
    gstr_rxBufferCfg.buffer_state = BUFFER_LOCKED;
    /* 2 - Triggers Rx state machines */
-   gu8_RxState = RECIEVING_BYTES;   
+   gu8_RxState = RECIEVING_BYTES;
+   /* 3 - Start Communication protocol */
+   switch (gu8_protocol)
+   {
+      case SPI:
+         SPI_Enable();
+      break;
+      case I2C:
+         /* Not used currently*/
+      break;
+   };   
    /* 2 - recieve BCM_ID */
    //SPI_WriteByte(BCM_ID);
 }
@@ -377,21 +412,12 @@ void BCM_RxDispatcher(void)
          /* Wait for the trigger : which is the action token by BCM_send() */
          while((BUFFER_LOCKED != gstr_rxBufferCfg.buffer_state) && (RECIEVING_BYTES != gu8_RxState));
       break;
-      case RECIEVING_BYTES:
+      case RECIEVING_BYTES:         
          /* 1 - wait for the notification fired by ISR -on successful transmission : which mean that you can read -*/
          while(RECIEVING_BYTES == gu8_RxState)
          {
             switch(gu8_RxNotification)
-            {
-               case BCM_BYTE_RECIEVE_SUCCESS:
-                  /* Read the byte */               
-                  SPI_ReadByte(gstr_rxBufferCfg.bufferAddress);
-                  /* Increment sent bytes counter */
-                  gu16_rxByteCounter++;
-                  /* Increment buffer address to point to the new location */
-                  gstr_rxBufferCfg.bufferAddress++;
-                  gu8_RxNotification = 20;              
-               break;
+            {                                              
                case BCM_RECIEVE_COMPLETE:
                   /* 1 - Reset Received bytes counter */
                   gu16_rxByteCounter = 0;
@@ -400,7 +426,18 @@ void BCM_RxDispatcher(void)
                   /* 3 - Set RX state to IDLE */
                   gu8_RxState = IDLE;
                   /* 4 - Initialize Rx Buffer Address to NUll*/
-                  gstr_rxBufferCfg.bufferAddress = NULL;
+                  //gstr_rxBufferCfg.bufferAddress = NULL;
+                  /*disable spi or I2c*/
+                  /* 5 - Stop Communication protocol */
+                  switch (gu8_protocol)
+                  {
+                     case SPI:
+                        SPI_Disable();
+                     break;
+                     case I2C:
+                        /* Not used currently*/
+                     break;
+                  };
                break;
             }
          }         
@@ -424,24 +461,17 @@ void BCM_TxDispatcher(void)
    {
       case IDLE:
          /* Wait for the trigger : which is the action token by BCM_send() */
-         while((BUFFER_LOCKED != gstr_txBufferCfg.buffer_state) && (SENDING_BYTES != gu8_TxState));         
+         while((BUFFER_LOCKED != gstr_txBufferCfg.buffer_state) && (SENDING_BYTES != gu8_TxState)); 
+         //while (1);                 
       break;
       case SENDING_BYTES:            
             /* 1 - Send the first byte */
-            SPI_WriteByte(*(gstr_txBufferCfg.bufferAddress));
-            gu8_TxNotification = 20;                                     
+            SPI_WriteByte(*(gstr_txBufferCfg.bufferAddress));                                                
             /* 2 - wait for the notification fired by ISR -on successful transmission -*/
             while(SENDING_BYTES == gu8_TxState)
             {
                switch(gu8_TxNotification)
-               {
-                  case BCM_BYTE_TRANSMIT_SUCCESS:
-                     /* Increment sent bytes counter */
-                     gu16_txByteCounter++;                                         
-                     /* Send a new byte */
-                     SPI_WriteByte(*(gstr_txBufferCfg.bufferAddress++));
-                     //gu8_TxNotification = 20;
-                  break;
+               {                  
                   case BCM_TRANSMIT_COMPLETE:
                      /* 1 - Reset transmit bytes counter */
                      gu16_txByteCounter = 0;
@@ -450,7 +480,17 @@ void BCM_TxDispatcher(void)
                      /* 3 - Set TX state to IDLE */
                      gu8_TxState = IDLE;
                      /* 4 - Initialize Tx Buffer Address to NUll*/
-                     gstr_txBufferCfg.bufferAddress = NULL;
+                     //gstr_txBufferCfg.bufferAddress = NULL;
+                     /* 5 - Stop Communication protocol */
+                     switch (gu8_protocol)
+                     {
+                        case SPI:
+                           SPI_Disable();
+                        break;
+                        case I2C:
+                           /* Not used currently*/
+                        break;
+                     };
                   break;
                }
             };                     

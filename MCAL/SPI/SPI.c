@@ -6,10 +6,12 @@
  */ 
 /*- INCLUDES -------------------------------------------------------------------------------------------------------*/
 #include "SPI.h"
-#include "../../interrupt.h"
+//#include "../../interrupt.h"
 #include "../../registers.h"
+#include <avr/interrupt.h>
 /*- GLOBAL VARIABLES ----------------------------------------------------------------------------------------------*/
 volatile uint8_t gu8_transmissionComplete = 0;
+static void (*call_back)(void) = NULL;
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------*/
 /*
 *  Description : Initializes SPI module.
@@ -24,10 +26,18 @@ EnumSPIError_t SPI_Init(str_SPI_Cfg_t * str_SpiCfg)
    uint8_t au8_errorState = 0;
    if(NULL != str_SpiCfg)
    {
+      if(str_SpiCfg->SPI_INT_En)
+      {
+         /* Enable global interrupt*/
+         sei();
+      }      
+     /*---- Configuring (SPSR) ----*/
+      SPSR |= (str_SpiCfg->SPI_2X_En);
       /*---- Configuring (SPCR) ----*/
-      SPCR |= (str_SpiCfg->SPI_En|str_SpiCfg->SPI_INT_En|str_SpiCfg->SPI_MS_Sel|str_SpiCfg->SPI_CK_mode|str_SpiCfg->SPI_freq_mode|str_SpiCfg->SPI_Dord);
-      /*---- Configuring (SPSR) ----*/
-      SPSR |= (str_SpiCfg->SPI_2X_En);      
+      SPCR |= (str_SpiCfg->SPI_INT_En|str_SpiCfg->SPI_En|str_SpiCfg->SPI_Dord|str_SpiCfg->SPI_MS_Sel|str_SpiCfg->SPI_CK_mode|str_SpiCfg->SPI_freq_mode);      
+      //SPCR |= (str_SpiCfg->SPI_INT_En|str_SpiCfg->SPI_En|str_SpiCfg->SPI_Dord|str_SpiCfg->SPI_MS_Sel|str_SpiCfg->SPI_CK_mode|str_SpiCfg->SPI_freq_mode); 
+      /*---- Configuration (SS pin) ----*/
+      PORTB_DIR |= str_SpiCfg->SS_PIN;          
       /*---- report success ----*/
       au8_errorState = INIT_CONFIG_OK;      
    }else{
@@ -39,28 +49,52 @@ EnumSPIError_t SPI_Init(str_SPI_Cfg_t * str_SpiCfg)
 }
 
 /*
+*  Description : Enables SPI module.
+*
+*  @param  void
+*
+*  @return void
+*/
+void SPI_Enable(void)
+{
+   SPCR |= SPI_EN;
+}
+
+/*
+*  Description : Disables SPI module.
+*
+*  @param  void
+*
+*  @return void
+*/
+void SPI_Disable(void)
+{
+   SPCR &= ~(SPI_EN);
+}
+
+/*
 *  Description : Writes a Byte to SPDR (SPI Data Register).
 *
-*  @param  uint8_t * Data_byte  (input param)
+*  @param  uint8_t Data_byte  
 *
 *  @return EnumSPIError
 */
-EnumSPIError_t SPI_WriteByte(uint8_t *Data_byte)
+EnumSPIError_t SPI_WriteByte(uint8_t Data_byte)
 {
    /* Define error state*/
    uint8_t au8_errorState = 0;  
-   if(NULL != Data_byte)
-   {
+   //if(NULL != Data_byte)
+   //{
       /* Write Data */
-      SPDR = *Data_byte;
+      SPDR = Data_byte;
       /* Report success */
       au8_errorState = BYTE_WRITE_SUCCESS;     
-   }
-   else
-   {
-      /* Report fail */
-      au8_errorState = INVALID_INPUT_PARAMS;
-   }
+   //}
+   //else
+   //{
+     // /* Report fail */
+     // au8_errorState = INVALID_INPUT_PARAMS;
+   //}
    /* Return au8_errorState */
    return au8_errorState;   
 }
@@ -81,7 +115,7 @@ EnumSPIError_t SPI_ReadByte(uint8_t *Data_byte)
       /* Read Data from SPDR*/
       *Data_byte = SPDR;        
       /* Report success */
-      au8_errorState = BYTE_WRITE_SUCCESS;
+      au8_errorState = BYTE_READ_SUCCESS;
    }
    else
    {
@@ -118,9 +152,43 @@ EnumSPIError_t SPI_GetTransmissionStatus(void)
    return au8_errorState;
 }
 
+/*
+* Description : Sets ISR Call Back.
+*
+*  @param void (*call_back_ISR)(void)
+*
+*  @return EnumSPIError_t
+*/
+EnumSPIError_t SPI_Set_ISR_CallBack(void (*call_back_ISR)(void))
+{
+   /* Define error state */
+   uint8_t au8_errorState = 0;
+   /* Check pointer against NUll */
+   if(NULL != call_back_ISR)
+   {
+      call_back = call_back_ISR;
+      /* report success*/
+      au8_errorState = SPI_CALL_BACK_SET_SUCCESS;
+   }
+   else
+   {
+      /* report fail */
+      au8_errorState = SPI_CALL_BACK_SET_FAIL; 
+   }
+   return au8_errorState;  
+}
+
+
 /*--------------------------------------------- ISR CONTROL ------------------------------------------------------*/
-ISR_SPI()
-{ 
-   /* Raise transmission complete flag */
-   gu8_transmissionComplete = 1;
+// ISR_SPI()
+// { 
+//    /* Raise transmission complete flag */
+//    //gu8_transmissionComplete = 1;
+//    /* Call call_back() */
+//    //call_back();
+// }
+
+ISR(SPI_STC_vect)
+{
+   call_back();  
 }

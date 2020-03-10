@@ -58,7 +58,8 @@ typedef struct str_SPI_Cfg
    uint8_t SPI_MS_Sel;
    uint8_t SPI_CK_mode;
    uint8_t SPI_freq_mode;
-   uint8_t SPI_2X_En;   
+   uint8_t SPI_2X_En;
+   uint8_t SS_PIN;   
 }str_SPI_Cfg_t;
 /*--- SPI Error Enum ----*/
 typedef enum EnumSPIError
@@ -68,11 +69,34 @@ typedef enum EnumSPIError
    BYTE_WRITE_SUCCESS = 2,
    BYTE_WRITE_FAIL = 3,
    SPI_TRANSMISSION_SUCCESS = 4,
-   SPI_TRANSMISSION_FAIL = 5
+   SPI_TRANSMISSION_FAIL = 5,
+   SPI_CALL_BACK_SET_SUCCESS = 6,
+   SPI_CALL_BACK_SET_FAIL = 7,
+   BYTE_READ_SUCCESS = 8,
+   BYTE_READ_FAIL = 9
    
 }EnumSPIError_t; 
 
 /*- FUNCITON PROTOTYPES --------------------------------------------------------------------------------------------*/
+/*
+*  Description : Enables SPI module.
+*
+*  @param  void
+*
+*  @return void
+*/
+extern void SPI_Enable(void);
+
+/*
+*  Description : Disables SPI module.
+*
+*  @param  void
+*
+*  @return void
+*/
+extern void SPI_Disable(void);
+
+
 /*
 *  Description : Initializes SPI module.
 *
@@ -85,11 +109,11 @@ extern EnumSPIError_t SPI_Init(str_SPI_Cfg_t * str_SpiCfg);
 /*
 *  Description : Writes a Byte to SPDR (SPI Data Register).
 *
-*  @param  uint8_t * Data_byte
+*  @param  uint8_t Data_byte
 *
 *  @return EnumSPIError
 */
-extern EnumSPIError_t SPI_WriteByte(uint8_t * Data_byte);
+extern EnumSPIError_t SPI_WriteByte(uint8_t Data_byte);
 
 /*
 *  Description : Reads a Byte from SPDR (SPI Data Register).
@@ -107,5 +131,14 @@ extern EnumSPIError_t SPI_ReadByte(uint8_t * Data_byte);
 *  @return EnumSPIError_t
 */
 extern EnumSPIError_t SPI_GetTransmissionStatus(void);
+
+/*
+* Description : Sets ISR Call Back.
+*
+*  @param void (*call_back_ISR)(void)
+*
+*  @return EnumSPIError_t
+*/
+extern EnumSPIError_t SPI_Set_ISR_CallBack(void (*call_back_ISR)(void));
 
 #endif /* SPI_H_ */
