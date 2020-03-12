@@ -20,6 +20,24 @@
 /*- FUNCTION PROTOTYPES ---------------------------------------------------------------------------------------------------*/
 
 /*
+*  Description : Tests BCM as a Transmitter.
+*
+*  @param void
+*
+*  @return void 
+*/
+void BCM_Transmit(void);
+
+/*
+*  Description : Tests BCM as a Receiver.
+*
+*  @param void
+*
+*  @return void
+*/
+void BCM_Receive(void);
+
+/*
 *  Description : tests usart as reciever/transmitter in interrupt mode.
 *
 *  @param void

@@ -13,8 +13,7 @@
 str_BCM_Cfg_t gstr_BCM_Transmit_Init = 
 {  
    TRANSMIT,
-   SPI
-       
+   SPI       
 };
 
 /* BCM configuration struct - Receive configuration - */ 

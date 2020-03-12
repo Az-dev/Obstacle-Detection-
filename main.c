@@ -10,7 +10,9 @@
 /*- Main FUNCTION DEFINITION ---------------------------------------------------------------------------------------------------*/
 int main(void)
 {
+   /*------------------- START TMU APPLICATION  ------------------------*/
    //TmuTest();
+   /*------------------- END TMU APPLICATION   ------------------------*/
    //TimerTest(); /* ---> test passed*/   
    /* DioTest();  ----> test passed */
    /* HwPwmTest(); ---> bypassed    */
@@ -18,10 +20,12 @@ int main(void)
    /* IcuTest();   ---> Finallly passed */
    //UsTest();
    //IcuWithUsTest(); /*--> Fully passed :xD */
+   
    /*------------------- START CAR APPLICATION  ------------------------*/
    //Car_SM_Init();
    //Car_SM_Update();
-   /*------------------- END CAR APPLICATION   ------------------------*/ 
+   /*------------------- END CAR APPLICATION   ------------------------*/
+    
    /*---------------------- Start SPI test ----------------------------*/
    //masterSpi();  //---->success
    //slaveSpi();  //-----> success
@@ -30,6 +34,13 @@ int main(void)
    /*---------------------- Start UART test ---------------------------*/   
    //myUsartFullDuplexInterruptTest(); // ----> test passed for both transmission and reciption
    /*---------------------- End UART Test -----------------------------*/ 
-    
+   
+   /*--------------------- Start BCM test -----------------------------*/
+   //BCM_Transmit();  /* Burn its hex on master */
+   BCM_Receive();   /* Burn its hex on slave */
+   /*--------------------- End BCM test -------------------------------*/
+   
+   
+       
 }
 

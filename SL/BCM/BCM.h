@@ -68,7 +68,8 @@ typedef enum EnmBCMError
    BCM_READ_RX_BUFFER_STATUS_SUCCESS = 6,
    BCM_READ_RX_BUFFER_STATUS_FAIL = 7,
    BCM_SETUP_RX_BUFFER_SUCCESS = 8,
-   BCM_SETUP_TX_BUFFER_SUCCESS = 10,  
+   BCM_SETUP_TX_BUFFER_SUCCESS = 10,
+   BCM_READ_STATE_SUCCESS = 11  
 }EnmBCMError_t;
 
 /* TX/Rx Buffer configuration */ 
@@ -81,6 +82,25 @@ typedef struct StrBuffer
 }StrBuffer_t;
 
 /*- FUNCTIONS PROTOTYPES -------------------------------------------------------------------------------------------*/
+/*
+*  Description : Get Rx State machine's state.
+*
+*  @param uint8_t * state  (output param)
+*
+*  @return EnmBCMError_t
+*/
+extern EnmBCMError_t  BCM_GetRxState(uint8_t * state);
+
+/*
+*  Description : Get Tx State machine's state.
+*
+*  @param uint8_t * state  (output param)
+*
+*  @return EnmBCMError_t
+*/
+extern EnmBCMError_t  BCM_GetTxState(uint8_t * state);
+
+
 /*
 *  Description : Responsible for initialization process of BCM. 
 *

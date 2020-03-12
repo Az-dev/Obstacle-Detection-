@@ -18,7 +18,155 @@
 #include "../MCAL/USART/usart.h"
 #include "../MCAL/USART/usart_Cfg.h"
 #include "../interrupt.h"
+#include "../SL/BCM/BCM.h"
+#include "../SL/BCM/BCM_LK_Cfg.h"
+/*- DEFINES ----------------------------------------------------------------------------------------------------------*/
+#define DEBUG_POINT 1
+#define CHUNK_SIZE 5
+
+#define USART_CHUNK_RECEIVE_COMPLETE 1
+#define USART_CHUNK_RECEIVING        2
+
+#define USART_CHUNK_TRANSMIT_COMPLETE 3
+#define USART_CHUNK_TRANSMITTING      4
+
+#define USART_CHUNK_IDLE               5
+/*- GLOBALS ----------------------------------------------------------------------------------------------------------*/
+/* USART TX / RX chunks */
+static uint8_t ga_rxUsartChunk[CHUNK_SIZE] = {0};  /* Chunk received by usart */
+static uint8_t ga_txUsartChunk[CHUNK_SIZE] = {0};  /* Chunk transmitted by usart */
+/* BCM TX / RX Usart byte counters */
+static uint8_t gu8_rxUsartByteCount = 0;
+static uint8_t gu8_txUsartByteCount = 0;
+/* USART TX/RX chunk states */
+static uint8_t gu8_chunkReceiveState = USART_CHUNK_RECEIVING;
+static uint8_t gu8_chunkTransmitState = USART_CHUNK_TRANSMITTING;
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
+
+
+/*---------------------- ( START BCM APPLICATION ) ----------------------------*/
+
+/*---- Static functions -------*/
+static void UART_TxCallBack(void)
+{
+   /* Write to UDR */
+   UsartWriteTx(&ga_txUsartChunk[gu8_txUsartByteCount]);   
+   /* Increment tx counter*/
+   gu8_txUsartByteCount++;
+}
+
+static void UART_RxCallBack(void)
+{
+   /* Read from UDR */
+   UsartReadRx(&ga_rxUsartChunk[gu8_rxUsartByteCount]);     
+   /* increment rx counter*/
+   gu8_rxUsartByteCount++;
+   #if DEBUG_POINT
+   TCNT2 = gu8_rxUsartByteCount;
+    #endif
+}
+
+
+void BCM_Transmit(void)
+{   
+   uint8_t au8_BCM_txState = 0;
+   /*------ 1 - BCM INIT ---------*/ 
+   /* Initialize BCM -transmit- */
+   BCM_Init(&gstr_BCM_Transmit_Init);
+   /* Setup Your Buffer/chunk size and address */
+   BCM_SetupTxBuffer(ga_rxUsartChunk,CHUNK_SIZE);
+   /*------ 2 - USART INIT ---------*/
+   /* Usart setup call back */
+   USART_SetRxCallBack(UART_RxCallBack);
+   /* Initialize UART : to receive the chunk of data */
+   Usart_Init(&usart_init_config_receive); 
+   UCSRB = 0x90;
+   gu8_chunkReceiveState = USART_CHUNK_RECEIVING;      
+   while (1)
+   {      
+      /* Check States */
+      switch (gu8_chunkReceiveState)
+      {
+         case USART_CHUNK_RECEIVING:
+            #if DEBUG_POINT
+            PORTA_DIR = 0xff;
+            #endif            
+            /* Wait until receiving is finished */
+            while( gu8_rxUsartByteCount < (uint8_t)CHUNK_SIZE && 0x0D != ga_rxUsartChunk[gu8_rxUsartByteCount])
+            {
+               #if DEBUG_POINT
+               TCNT0 = ga_rxUsartChunk[gu8_rxUsartByteCount];
+               #endif
+            };
+            #if DEBUG_POINT
+            PORTA_DATA = 0xff;
+            #endif                      
+            /* Move to Chunk receiving complete */
+            gu8_chunkReceiveState = USART_CHUNK_RECEIVE_COMPLETE;
+                
+         case USART_CHUNK_RECEIVE_COMPLETE: 
+            /* Reset Counter */
+            gu8_rxUsartByteCount = 0;           
+            /* Trigger BCM */
+            BCM_Send();
+            /* Call dispatcher */  
+            BCM_TxDispatcher();
+            /* check BCM Tx state */ 
+            BCM_GetTxState(&au8_BCM_txState);
+            while(SENDING_COMPLETE != au8_BCM_txState)
+            {
+               /* Check Status again and see if BCM has finished or not */
+               BCM_GetTxState(&au8_BCM_txState);                              
+            }
+            /* if BCM sending is done : Receive the new Usart new chunk */
+            gu8_chunkReceiveState = USART_CHUNK_IDLE;
+         case USART_CHUNK_IDLE:
+         break;         
+      }     
+   }
+}
+
+void BCM_Receive(void)
+{
+   
+   /* Initialize Rx buffer */
+   uint8_t rx_arr[10] ={0};   
+   /* Initialize BCM -receive- */
+   BCM_Init(&gstr_BCM_Receive_Init);
+   /* Initialize UART : to transmit bytes -written to its UDR- from the buffer */
+   //Usart_Init(&usart_init_config_transmit);
+   /* Create your buffer and send its (Address,Size) to / setup_rx_buffer() */
+   BCM_SetupRxBuffer(rx_arr,10);
+   /* Initiate Receive process*/
+   BCM_Read();
+   /* system state*/
+   uint8_t system_state =0;     
+   uint8_t rx_index = 0;
+   while(1)
+   {
+      BCM_RxDispatcher();
+      /*get system state */
+      BCM_GetRxState(&system_state);
+      /* After BCM finish receiving : start flushing data by uart */
+      
+      if(RECIEVING_COMPLETE == system_state)
+      {
+      
+         while(rx_index < (sizeof(rx_arr)/sizeof(uint8_t)))
+         {
+            UsartWriteTx(&rx_arr[rx_index]);
+            rx_index++;
+         }
+       }
+
+      
+
+   }   
+}
+/*-------------------------------------------- ( END BCM APPLICATION ) --------------------------------------------*/
+
+
+
 void myUsartFullDuplexInterruptTest(void)
 {
    sei();   
@@ -27,7 +175,7 @@ void myUsartFullDuplexInterruptTest(void)
    Usart_Init(&usart_init_config);        
    while(1)
    {
-      state = getTransmissionState();     
+      state = getReceptionState();     
       switch(state)
       {
          case USART_BYTE_TRANSMIT_SUCCESS:
@@ -55,7 +203,7 @@ void masterSpi(void)
    /* Configure SS pin */
    PORTB_DIR = 0b10110000;
    /* Initiate data byte write */
-   SPI_WriteByte(&data);    
+   SPI_WriteByte(data);    
    while(1)
    {
       state = SPI_GetTransmissionStatus();
@@ -69,7 +217,7 @@ void masterSpi(void)
             data++;
             softwareDelayMs(100);
             /* 2- write the new data byte*/
-            SPI_WriteByte(&data);
+            SPI_WriteByte(data);
             softwareDelayMs(100);           
          break;
       }     
@@ -98,20 +246,29 @@ void slaveSpi(void)
 
 void taskA(void)
 {
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0x10;   
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x10;   
 }
 
 void taskB(void)
 {
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0x20;
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x20;
+}
+
+void cpu_sleep()
+{     
+   /* Idel mode */
+   MCUCR &= ~(1<<5) & ~(1<<6) & ~(1<<4);
+   /* Sleep enable */
+   MCUCR |= (1<<7);
+   __asm__ __volatile__("sleep" "\n\t" ::);
 }
 
 void taskC(void)
 {
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0x40;
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x40;
 }
 
 void taskD(void)
@@ -128,15 +285,19 @@ void taskD(void)
 */
 void TmuTest(void)
 {
+   PORTA_DIR = 0xff;   
    TMU_Init(&gstrTMUConfig);   
-   TMU_Start_Timer(3,taskA,PERIODIC);   
-   TMU_Start_Timer(20,taskB,PERIODIC);
-   TMU_Start_Timer(50,taskC,PERIODIC);
-   TMU_Start_Timer(60,taskD,PERIODIC);  
+   TMU_Start_Timer(5,taskA,PERIODIC);   
+   TMU_Start_Timer(10,taskB,PERIODIC);
+   TMU_Start_Timer(20,taskC,PERIODIC);
+   //TMU_Start_Timer(60,taskD,PERIODIC);  
    Timer_Start(TIMER_1,0);   
    while(1)
-   {      
-      TMU_Dispatch();          
+   { 
+      PORTA_DATA |= 0x08;     
+      TMU_Dispatch(); 
+      PORTA_DATA &= ~(0x08);
+      cpu_sleep();          
    }
 }
 
