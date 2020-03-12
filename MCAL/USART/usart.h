@@ -89,7 +89,8 @@ typedef enum EnumUSARTError
    UDR_RESET_SUCCESS = 6,
    UDR_RESET_FAIL = 7,
    USART_BYTE_TRANSMIT_SUCCESS = 8,
-   USART_BYTE_TRANSMIT_FAIL = 9
+   USART_BYTE_TRANSMIT_FAIL = 9,
+   USART_CALL_BACK_SET_SUCCESS = 10,
      
 }EnumUSARTError_t;
 
@@ -107,17 +108,17 @@ extern EnumUSARTError_t Usart_Init(const gstr_usart_init_t * USART_InitCfg);
 *  Description : Read a character from RXB.
 *
 *  @param uint8_t * data_byte
-*  @return EnumUSARTError_t
+*  @return void
 */
-extern EnumUSARTError_t UsartReadRx(uint8_t * data_byte);
+extern void UsartReadRx(uint8_t * data_byte);
 
 /*
 *  Description : Write a character to TXB
 *
 *  @param uint8_t * data_byte  (input param)
-*  @return EnumUSARTError_t
+*  @return void
 */
-extern EnumUSARTError_t UsartWriteTx(uint8_t * data_byte);
+extern void UsartWriteTx(uint8_t * data_byte);
 
 /*
 *  Description : Resets UDR .
@@ -129,11 +130,46 @@ extern EnumUSARTError_t UsartWriteTx(uint8_t * data_byte);
 extern EnumUSARTError_t ResetUDR(void);
 
 /*
-*  Description : Get the state of the transmission complete software flag. 
+*  Description : Get the state of the Reception complete software flag.
 *
-*  @param void 
+*  @param void
 *  @return EnumUSARTError_t
 */
-extern EnumUSARTError_t getTransmissionState(void);
+extern EnumUSARTError_t getReceptionState(void);
+
+/*
+*  Description : Gets Rx notification.
+*
+*  @param uint8_t * state (output param)
+*  @return void
+*/
+void UsartGetRxState(uint8_t * state);
+
+/*
+*  Description : Gets Tx notification.
+*
+*  @param uint8_t * state (output param)
+*  @return void
+*/
+void UsartGetTxState(uint8_t * state);
+
+/*
+*  Description : Set Tx Call back
+*
+*  @param void (*call_back_ptr)(void)
+*
+*  @return EnumUSARTError_t
+*/
+extern EnumUSARTError_t USART_SetTxCallBack(void (*call_back_ptr)(void));
+
+/*
+*  Description : Set Rx call back.
+*
+*  @param void (*call_back_ptr)(void)
+*
+*  @return EnumUSARTError_t
+*
+*/
+extern EnumUSARTError_t USART_SetRxCallBack(void (*call_back_ptr)(void));
 
 #endif /* END OF __USART_H__ */
