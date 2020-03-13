@@ -20,6 +20,65 @@
 #include "../interrupt.h"
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
 
+void taskA(void)
+{
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x10;
+}
+
+void taskB(void)
+{
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x20;
+}
+
+void taskC(void)
+{
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x40;
+}
+
+void taskD(void)
+{
+   PORTB_DIR = 0xff;
+   PORTB_DATA ^= 0x80;
+}
+
+void cpu_sleep()
+{
+   /* Idle mode */
+   MCUCR &= ~(1<<5) & ~(1<<6) & ~(1<<4);
+   /* Sleep enable */
+   MCUCR |= (1<<7);
+   __asm__ __volatile__("sleep" "\n\t" ::);
+}
+
+/*
+*  Description : Tests TMU unit.
+*
+*  @param void
+*
+*  @return void
+*/
+void TmuTest(void)
+{
+   PORTA_DIR = 0xff;
+   TMU_Init(&gstrTMUConfig);
+   TMU_Start_Timer(5,taskA,PERIODIC);
+   TMU_Start_Timer(10,taskB,PERIODIC);
+   TMU_Start_Timer(20,taskC,PERIODIC);
+   //TMU_Start_Timer(60,taskD,PERIODIC);
+   Timer_Start(TIMER_1,0);
+   while(1)
+   {
+      PORTA_DATA |= 0x08;
+      TMU_Dispatch();
+      PORTA_DATA &= ~(0x08);
+      cpu_sleep();
+   }
+}
+
+
 void myUsartFullDuplexInterruptTest(void)
 {
    sei();   
@@ -28,7 +87,7 @@ void myUsartFullDuplexInterruptTest(void)
    Usart_Init(&usart_init_config);        
    while(1)
    {
-      state = getReceptionState();     
+      //state = getReceptionState();    (replace it because it is now deprecated) 
       switch(state)
       {
          case USART_BYTE_TRANSMIT_SUCCESS:
@@ -42,7 +101,6 @@ void myUsartFullDuplexInterruptTest(void)
       
    }
 }
-
 
 void masterSpi(void)
 {
@@ -95,63 +153,6 @@ void slaveSpi(void)
     while(1);
     
        
-}
-
-void taskA(void)
-{
-   PORTA_DIR = 0xff;
-   PORTA_DATA ^= 0x10;   
-}
-
-void taskB(void)
-{
-   PORTA_DIR = 0xff;
-   PORTA_DATA ^= 0x20;
-}
-
-void cpu_sleep()
-{     
-   /* Idel mode */
-   MCUCR &= ~(1<<5) & ~(1<<6) & ~(1<<4);
-   /* Sleep enable */
-   MCUCR |= (1<<7);
-   __asm__ __volatile__("sleep" "\n\t" ::);
-}
-
-void taskC(void)
-{
-   PORTA_DIR = 0xff;
-   PORTA_DATA ^= 0x40;
-}
-
-void taskD(void)
-{
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0x80;
-}
-/*
-*  Description : Tests TMU unit.
-*
-*  @param void
-*
-*  @return void
-*/
-void TmuTest(void)
-{
-   PORTA_DIR = 0xff;   
-   TMU_Init(&gstrTMUConfig);   
-   TMU_Start_Timer(5,taskA,PERIODIC);   
-   TMU_Start_Timer(10,taskB,PERIODIC);
-   TMU_Start_Timer(20,taskC,PERIODIC);
-   //TMU_Start_Timer(60,taskD,PERIODIC);  
-   Timer_Start(TIMER_1,0);   
-   while(1)
-   { 
-      PORTA_DATA |= 0x08;     
-      TMU_Dispatch(); 
-      PORTA_DATA &= ~(0x08);
-      cpu_sleep();          
-   }
 }
 
 /*

@@ -12,7 +12,7 @@
 int main(void)
 {
    /*------------------- START TMU APPLICATION  ------------------------*/
-   //TmuTest();
+   TmuTest();
    /*------------------- END TMU APPLICATION   ------------------------*/   
    
    /*------------------- START CAR APPLICATION  ------------------------*/
