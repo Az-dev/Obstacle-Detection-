@@ -94,10 +94,8 @@
           case USART_CHUNK_RECEIVING:
           /* Wait until receiving is finished */
           while( gu8_rxUsartByteCount < (uint8_t)CHUNK_SIZE && 0x0D != ga_rxUsartChunk[gu8_rxUsartByteCount])
-          {
-             
-             TCNT0 = ga_rxUsartChunk[gu8_rxUsartByteCount];
-             
+          {             
+             gu8_chunkReceiveState = USART_CHUNK_RECEIVING; /* Redundant*/             
           };
           /* Move to Chunk receiving complete */
           gu8_chunkReceiveState = USART_CHUNK_RECEIVE_COMPLETE;
