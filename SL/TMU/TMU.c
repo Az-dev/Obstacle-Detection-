@@ -122,19 +122,23 @@ EnmTMUError_t TMU_Dispatch(void)
    if((0 <= gindex) && (1 == gu8_excuteFlag))
    {
       sint16_t au16_iter = 0;
-      uint32_t au32_overFlowTimes = gu32_overflowTimes;
-      /* 1 - pull down execute flag */
+      //uint32_t au32_overFlowTimes = gu32_overflowTimes;
+      /* 1 - pull down execute flag or tick flag */
       gu8_excuteFlag = 0;
       
       /* Search for the Task of the given function within TMU buffer*/
       for(;au16_iter <= gindex; au16_iter++)
       {
-         /* Check if task counter is a multiple of over flow timer to determine whether to execute task's function or not */
-         if((0 == (au32_overFlowTimes % garrTaskTMUBuffer[au16_iter].counter)) && (0 != au32_overFlowTimes))
-         {            
-            /* 2 - Execute Task Function */
+         /* Increment task internal tick count */
+         garrTaskTMUBuffer[au16_iter].tick_counts++;
+         /* Check if task ticks count has reached to the required tick value -which is (task.counter)- to determine whether to execute task's function or not */
+         if((garrTaskTMUBuffer[au16_iter].tick_counts) == (garrTaskTMUBuffer[au16_iter].counter))
+         { 
+            /* 2 - Reset task tick_counts*/ 
+            garrTaskTMUBuffer[au16_iter].tick_counts = 0;          
+            /* 3 - Execute Task Function */
             garrTaskTMUBuffer[au16_iter].fn();                      
-            /* 3 - See Whether the task is periodic or one shoot -after its execution- */
+            /* 4 - See Whether the task is periodic or one shoot -after its execution- */
             if(ONESHOOT == garrTaskTMUBuffer[au16_iter].work_mode)
             {
                /* Case of buffer contains only one element */
@@ -198,6 +202,7 @@ EnmTMUError_t TMU_Start_Timer(uint16_t duration , void (* task_fn)(void) , uint8
          austr_Task->fn = task_fn;
          austr_Task->counter = duration;
          austr_Task->work_mode = work_mode;
+         austr_Task->tick_counts = 0;
          /* Increment gindex : to point to the next empty location to store the new task */
          gindex++;         
          /* Append the task to TMU buffer */

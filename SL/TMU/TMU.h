@@ -39,9 +39,10 @@ typedef enum EnmTMUError
 typedef struct strTask
 {
    void (* fn)(void) ;
-   uint16_t counter;
+   uint16_t counter;       /* represents the time interval after which task must be executed */
    //uint8_t ready_flag; 
-   uint8_t work_mode;  
+   uint8_t work_mode;
+   uint16_t tick_counts;  /* Internal tick counter for a task */
 }strTask_t;
 
 /*------- configuration Struct -----*/ 
