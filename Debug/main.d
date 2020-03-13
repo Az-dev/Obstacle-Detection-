@@ -21,7 +21,8 @@ main.d main.o: .././main.c .././Test/Test.h \
  .././Test/../ECUAL/Us/../SwDelay/SwDelay.h \
  .././Test/../ECUAL/Us/../SwICU/SwICU.h .././APP/CarSM/CarSM.h \
  .././APP/CarSM/../../common_macros.h .././APP/CarSM/../../std_types.h \
- .././APP/CarSM/../../ECUAL/SwDelay/SwDelay.h
+ .././APP/CarSM/../../ECUAL/SwDelay/SwDelay.h \
+ .././APP/BCM_BasedApp/BCM_Based.h
 
 .././Test/Test.h:
 
@@ -84,3 +85,5 @@ main.d main.o: .././main.c .././Test/Test.h \
 .././APP/CarSM/../../std_types.h:
 
 .././APP/CarSM/../../ECUAL/SwDelay/SwDelay.h:
+
+.././APP/BCM_BasedApp/BCM_Based.h:

@@ -19,6 +19,7 @@
 #include "../MCAL/USART/usart_Cfg.h"
 #include "../interrupt.h"
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
+
 void myUsartFullDuplexInterruptTest(void)
 {
    sei();   
@@ -27,7 +28,7 @@ void myUsartFullDuplexInterruptTest(void)
    Usart_Init(&usart_init_config);        
    while(1)
    {
-      state = getTransmissionState();     
+      state = getReceptionState();     
       switch(state)
       {
          case USART_BYTE_TRANSMIT_SUCCESS:
@@ -55,7 +56,7 @@ void masterSpi(void)
    /* Configure SS pin */
    PORTB_DIR = 0b10110000;
    /* Initiate data byte write */
-   SPI_WriteByte(&data);    
+   SPI_WriteByte(data);    
    while(1)
    {
       state = SPI_GetTransmissionStatus();
@@ -69,7 +70,7 @@ void masterSpi(void)
             data++;
             softwareDelayMs(100);
             /* 2- write the new data byte*/
-            SPI_WriteByte(&data);
+            SPI_WriteByte(data);
             softwareDelayMs(100);           
          break;
       }     
@@ -98,20 +99,29 @@ void slaveSpi(void)
 
 void taskA(void)
 {
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0x10;   
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x10;   
 }
 
 void taskB(void)
 {
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0x20;
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x20;
+}
+
+void cpu_sleep()
+{     
+   /* Idel mode */
+   MCUCR &= ~(1<<5) & ~(1<<6) & ~(1<<4);
+   /* Sleep enable */
+   MCUCR |= (1<<7);
+   __asm__ __volatile__("sleep" "\n\t" ::);
 }
 
 void taskC(void)
 {
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0x40;
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x40;
 }
 
 void taskD(void)
@@ -128,15 +138,19 @@ void taskD(void)
 */
 void TmuTest(void)
 {
+   PORTA_DIR = 0xff;   
    TMU_Init(&gstrTMUConfig);   
-   TMU_Start_Timer(3,taskA,PERIODIC);   
-   TMU_Start_Timer(20,taskB,PERIODIC);
-   TMU_Start_Timer(50,taskC,PERIODIC);
-   TMU_Start_Timer(60,taskD,PERIODIC);  
+   TMU_Start_Timer(5,taskA,PERIODIC);   
+   TMU_Start_Timer(10,taskB,PERIODIC);
+   TMU_Start_Timer(20,taskC,PERIODIC);
+   //TMU_Start_Timer(60,taskD,PERIODIC);  
    Timer_Start(TIMER_1,0);   
    while(1)
-   {      
-      TMU_Dispatch();          
+   { 
+      PORTA_DATA |= 0x08;     
+      TMU_Dispatch(); 
+      PORTA_DATA &= ~(0x08);
+      cpu_sleep();          
    }
 }
 

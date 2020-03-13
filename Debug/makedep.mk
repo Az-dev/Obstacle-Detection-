@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+APP\BCM_BasedApp\BCM_Based.c
+
 APP\CarSM\CarSM.c
 
 APP\Steering\Steering.c
@@ -41,6 +43,10 @@ MCAL\Timer\Timer_Cfg.c
 MCAL\USART\usart.c
 
 MCAL\USART\usart_Cfg.c
+
+SL\BCM\BCM.c
+
+SL\BCM\BCM_LK_Cfg.c
 
 SL\TMU\TMU.c
 

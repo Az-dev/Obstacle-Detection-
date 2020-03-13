@@ -34,6 +34,7 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../APP/CarSM \
+../APP/BCM_BasedApp \
 ../APP/Steering \
 ../ECUAL/Motor \
 ../ECUAL/LCD \
@@ -49,12 +50,14 @@ SUBDIRS :=  \
 ../ECUAL \
 ../APP \
 ../SL \
+../SL/BCM \
 ../SL/TMU \
 ../Test
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../APP/BCM_BasedApp/BCM_Based.c \
 ../APP/CarSM/CarSM.c \
 ../APP/Steering/Steering.c \
 ../ECUAL/LCD/char_lcd.c \
@@ -75,6 +78,8 @@ C_SRCS +=  \
 ../MCAL/Timer/Timer_Cfg.c \
 ../MCAL/USART/usart.c \
 ../MCAL/USART/usart_Cfg.c \
+../SL/BCM/BCM.c \
+../SL/BCM/BCM_LK_Cfg.c \
 ../SL/TMU/TMU.c \
 ../SL/TMU/TMU_PB_Cfg.c \
 ../Test/Test.c
@@ -87,6 +92,7 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+APP/BCM_BasedApp/BCM_Based.o \
 APP/CarSM/CarSM.o \
 APP/Steering/Steering.o \
 ECUAL/LCD/char_lcd.o \
@@ -107,11 +113,14 @@ MCAL/Timer/Timer.o \
 MCAL/Timer/Timer_Cfg.o \
 MCAL/USART/usart.o \
 MCAL/USART/usart_Cfg.o \
+SL/BCM/BCM.o \
+SL/BCM/BCM_LK_Cfg.o \
 SL/TMU/TMU.o \
 SL/TMU/TMU_PB_Cfg.o \
 Test/Test.o
 
 OBJS_AS_ARGS +=  \
+APP/BCM_BasedApp/BCM_Based.o \
 APP/CarSM/CarSM.o \
 APP/Steering/Steering.o \
 ECUAL/LCD/char_lcd.o \
@@ -132,11 +141,14 @@ MCAL/Timer/Timer.o \
 MCAL/Timer/Timer_Cfg.o \
 MCAL/USART/usart.o \
 MCAL/USART/usart_Cfg.o \
+SL/BCM/BCM.o \
+SL/BCM/BCM_LK_Cfg.o \
 SL/TMU/TMU.o \
 SL/TMU/TMU_PB_Cfg.o \
 Test/Test.o
 
 C_DEPS +=  \
+APP/BCM_BasedApp/BCM_Based.d \
 APP/CarSM/CarSM.d \
 APP/Steering/Steering.d \
 ECUAL/LCD/char_lcd.d \
@@ -157,11 +169,14 @@ MCAL/Timer/Timer.d \
 MCAL/Timer/Timer_Cfg.d \
 MCAL/USART/usart.d \
 MCAL/USART/usart_Cfg.d \
+SL/BCM/BCM.d \
+SL/BCM/BCM_LK_Cfg.d \
 SL/TMU/TMU.d \
 SL/TMU/TMU_PB_Cfg.d \
 Test/Test.d
 
 C_DEPS_AS_ARGS +=  \
+APP/BCM_BasedApp/BCM_Based.d \
 APP/CarSM/CarSM.d \
 APP/Steering/Steering.d \
 ECUAL/LCD/char_lcd.d \
@@ -182,6 +197,8 @@ MCAL/Timer/Timer.d \
 MCAL/Timer/Timer_Cfg.d \
 MCAL/USART/usart.d \
 MCAL/USART/usart_Cfg.d \
+SL/BCM/BCM.d \
+SL/BCM/BCM_LK_Cfg.d \
 SL/TMU/TMU.d \
 SL/TMU/TMU_PB_Cfg.d \
 Test/Test.d
@@ -200,6 +217,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+APP/BCM_BasedApp/BCM_Based.o: ../APP/BCM_BasedApp/BCM_Based.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 APP/CarSM/CarSM.o: ../APP/CarSM/CarSM.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -334,6 +358,20 @@ MCAL/USART/usart.o: ../MCAL/USART/usart.c
 	
 
 MCAL/USART/usart_Cfg.o: ../MCAL/USART/usart_Cfg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+SL/BCM/BCM.o: ../SL/BCM/BCM.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+SL/BCM/BCM_LK_Cfg.o: ../SL/BCM/BCM_LK_Cfg.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

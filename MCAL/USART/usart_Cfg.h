@@ -9,4 +9,10 @@
 /*- EXTERNS -------------------------------------------------------------------------------------------------------*/
 extern const gstr_usart_init_t usart_init_config;
 
+/* BCM related configurations*/
+extern const gstr_usart_init_t usart_init_config_transmit;
+extern const gstr_usart_init_t usart_init_config_receive;
+
+
+
 #endif /* END OF __USART_CFG_H__ */

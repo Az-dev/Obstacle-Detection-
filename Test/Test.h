@@ -118,8 +118,4 @@ void masterSpi(void);
 */
 void slaveSpi(void);
 
-
-
-
-
 #endif /* TEST_H_ */

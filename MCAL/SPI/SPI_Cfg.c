@@ -7,26 +7,31 @@
 /*- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #include "SPI.h"
 /*- STRUCTS ------------------------------------------------------------------------------------------------------*/
-/*--- SPI configuration struct (Master) Interrupt-mode ---*/
+
+
+/*------------------------------------------  BCM SPI CONFIG ------------------------------------*/
+/*--- SPI configuration struct (Master) BCM Transmit ---*/
 str_SPI_Cfg_t gstr_MasterCfg = 
 {
-   SPI_EN,
+   SPI_DIS,
    SPIE_EN,
-   DORD_LOW,
+   DORD_HIGH,
    MSTR_SEL,
    CLK_POL_PHA_MODE_0,
-   Fosc_4,
-   SPI_2X_DIS,   
+   Fosc_128,
+   SPI_2X_DIS, 
+   0b10110000  
 };
 
-/*--- SPI configuration struct (Slave) Interrupt-mode ---*/
+/*--- SPI configuration struct (Slave) BCM Receive ---*/
 str_SPI_Cfg_t gstr_SlaveCfg =
 {
-   SPI_EN,
+   SPI_DIS,
    SPIE_EN,
-   DORD_LOW,
+   DORD_HIGH,
    SLV_SEL,
    CLK_POL_PHA_MODE_0,
-   Fosc_4,
-   SPI_2X_DIS,   
+   Fosc_128,
+   SPI_2X_DIS,
+   0b01000000   
 };

@@ -29,16 +29,35 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
                               ECUAL/SwICU/SwICU_Cfg.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                              ECUAL/SwICU/SwICU.o (__do_clear_bss)
+                              APP/BCM_BasedApp/BCM_Based.o (__do_clear_bss)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
                               MCAL/PWM/PWM.o (__muluhisi3)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o) (__umulhisi3)
 
+Allocating common symbols
+Common symbol       size              file
+
+gstr_txBufferCfg    0x6               SL/BCM/BCM.o
+gstr_rxBufferCfg    0x6               SL/BCM/BCM.o
+
 Discarded input sections
 
  .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
  .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
+ .text          0x00000000        0x0 APP/BCM_BasedApp/BCM_Based.o
+ .data          0x00000000        0x0 APP/BCM_BasedApp/BCM_Based.o
+ .bss           0x00000000        0x0 APP/BCM_BasedApp/BCM_Based.o
+ .text.UART_RxCallBack
+                0x00000000       0x1a APP/BCM_BasedApp/BCM_Based.o
+ .text.BCM_Transmit
+                0x00000000       0xba APP/BCM_BasedApp/BCM_Based.o
+ .bss.gu8_chunkReceiveState
+                0x00000000        0x1 APP/BCM_BasedApp/BCM_Based.o
+ .bss.gu8_rxUsartByteCount
+                0x00000000        0x1 APP/BCM_BasedApp/BCM_Based.o
+ .bss.ga_rxUsartChunk
+                0x00000000       0x64 APP/BCM_BasedApp/BCM_Based.o
  .text          0x00000000        0x0 APP/CarSM/CarSM.o
  .data          0x00000000        0x0 APP/CarSM/CarSM.o
  .bss           0x00000000        0x0 APP/CarSM/CarSM.o
@@ -307,28 +326,13 @@ Discarded input sections
  .text          0x00000000        0x0 MCAL/SPI/SPI.o
  .data          0x00000000        0x0 MCAL/SPI/SPI.o
  .bss           0x00000000        0x0 MCAL/SPI/SPI.o
- .text.SPI_Init
-                0x00000000       0x32 MCAL/SPI/SPI.o
- .text.SPI_WriteByte
-                0x00000000       0x12 MCAL/SPI/SPI.o
- .text.SPI_ReadByte
-                0x00000000       0x12 MCAL/SPI/SPI.o
  .text.SPI_GetTransmissionStatus
                 0x00000000       0x14 MCAL/SPI/SPI.o
+ .bss.gu8_transmissionComplete
+                0x00000000        0x1 MCAL/SPI/SPI.o
  .text          0x00000000        0x0 MCAL/SPI/SPI_Cfg.o
  .data          0x00000000        0x0 MCAL/SPI/SPI_Cfg.o
  .bss           0x00000000        0x0 MCAL/SPI/SPI_Cfg.o
- .data.gstr_SlaveCfg
-                0x00000000        0x7 MCAL/SPI/SPI_Cfg.o
- .data.gstr_MasterCfg
-                0x00000000        0x7 MCAL/SPI/SPI_Cfg.o
- .debug_info    0x00000000       0xff MCAL/SPI/SPI_Cfg.o
- .debug_abbrev  0x00000000       0x62 MCAL/SPI/SPI_Cfg.o
- .debug_aranges
-                0x00000000       0x18 MCAL/SPI/SPI_Cfg.o
- .debug_line    0x00000000       0x5d MCAL/SPI/SPI_Cfg.o
- .debug_str     0x00000000      0x202 MCAL/SPI/SPI_Cfg.o
- .comment       0x00000000       0x31 MCAL/SPI/SPI_Cfg.o
  .text          0x00000000        0x0 MCAL/Timer/Timer.o
  .data          0x00000000        0x0 MCAL/Timer/Timer.o
  .bss           0x00000000        0x0 MCAL/Timer/Timer.o
@@ -357,28 +361,45 @@ Discarded input sections
  .text          0x00000000        0x0 MCAL/USART/usart.o
  .data          0x00000000        0x0 MCAL/USART/usart.o
  .bss           0x00000000        0x0 MCAL/USART/usart.o
- .text.Usart_Init
-                0x00000000       0x3c MCAL/USART/usart.o
  .text.UsartReadRx
-                0x00000000       0x12 MCAL/USART/usart.o
- .text.UsartWriteTx
-                0x00000000       0x12 MCAL/USART/usart.o
- .text.getTransmissionState
-                0x00000000       0x14 MCAL/USART/usart.o
+                0x00000000       0x1a MCAL/USART/usart.o
+ .text.UsartGetTxState
+                0x00000000        0xa MCAL/USART/usart.o
+ .text.UsartGetRxState
+                0x00000000        0xa MCAL/USART/usart.o
+ .text.getReceptionState
+                0x00000000        0x2 MCAL/USART/usart.o
  .text.ResetUDR
                 0x00000000       0x10 MCAL/USART/usart.o
+ .text.USART_SetRxCallBack
+                0x00000000       0x14 MCAL/USART/usart.o
+ .bss.gu8_rxNotification
+                0x00000000        0x1 MCAL/USART/usart.o
  .text          0x00000000        0x0 MCAL/USART/usart_Cfg.o
  .data          0x00000000        0x0 MCAL/USART/usart_Cfg.o
  .bss           0x00000000        0x0 MCAL/USART/usart_Cfg.o
- .rodata.usart_init_config
+ .rodata.usart_init_config_receive
                 0x00000000        0x7 MCAL/USART/usart_Cfg.o
- .debug_info    0x00000000      0x217 MCAL/USART/usart_Cfg.o
- .debug_abbrev  0x00000000       0xa1 MCAL/USART/usart_Cfg.o
- .debug_aranges
-                0x00000000       0x18 MCAL/USART/usart_Cfg.o
- .debug_line    0x00000000       0x42 MCAL/USART/usart_Cfg.o
- .debug_str     0x00000000      0x399 MCAL/USART/usart_Cfg.o
- .comment       0x00000000       0x31 MCAL/USART/usart_Cfg.o
+ .text          0x00000000        0x0 SL/BCM/BCM.o
+ .data          0x00000000        0x0 SL/BCM/BCM.o
+ .bss           0x00000000        0x0 SL/BCM/BCM.o
+ .text.BCM_GetTxState
+                0x00000000       0x14 SL/BCM/BCM.o
+ .text.BCM_GetTxBufferStatus
+                0x00000000       0x14 SL/BCM/BCM.o
+ .text.BCM_GetRxBufferStatus
+                0x00000000       0x14 SL/BCM/BCM.o
+ .text.BCM_SetupTxBuffer
+                0x00000000       0x1e SL/BCM/BCM.o
+ .text.BCM_Send
+                0x00000000       0x18 SL/BCM/BCM.o
+ .text.BCM_TxDispatcher
+                0x00000000       0xb2 SL/BCM/BCM.o
+ .text          0x00000000        0x0 SL/BCM/BCM_LK_Cfg.o
+ .data          0x00000000        0x0 SL/BCM/BCM_LK_Cfg.o
+ .bss           0x00000000        0x0 SL/BCM/BCM_LK_Cfg.o
+ .data.gstr_BCM_Transmit_Init
+                0x00000000        0x2 SL/BCM/BCM_LK_Cfg.o
  .text          0x00000000        0x0 SL/TMU/TMU.o
  .data          0x00000000        0x0 SL/TMU/TMU.o
  .bss           0x00000000        0x0 SL/TMU/TMU.o
@@ -411,14 +432,16 @@ Discarded input sections
  .text.taskA    0x00000000        0xe Test/Test.o
  .text.taskB    0x00000000        0xe Test/Test.o
  .text.taskC    0x00000000        0xe Test/Test.o
- .text.taskD    0x00000000        0xc Test/Test.o
  .text.myUsartFullDuplexInterruptTest
                 0x00000000       0x30 Test/Test.o
  .text.masterSpi
-                0x00000000       0x5c Test/Test.o
+                0x00000000       0x58 Test/Test.o
  .text.slaveSpi
                 0x00000000       0x10 Test/Test.o
- .text.TmuTest  0x00000000       0x50 Test/Test.o
+ .text.cpu_sleep
+                0x00000000       0x10 Test/Test.o
+ .text.taskD    0x00000000        0xc Test/Test.o
+ .text.TmuTest  0x00000000       0x4e Test/Test.o
  .text.TimerTest
                 0x00000000        0x2 Test/Test.o
  .text.DioTest  0x00000000       0x4e Test/Test.o
@@ -432,16 +455,16 @@ Discarded input sections
  .text.UsTest   0x00000000        0xa Test/Test.o
  .text.IcuWithUsTest
                 0x00000000       0xe8 Test/Test.o
- .debug_info    0x00000000     0x1069 Test/Test.o
- .debug_abbrev  0x00000000      0x1e1 Test/Test.o
+ .debug_info    0x00000000     0x1068 Test/Test.o
+ .debug_abbrev  0x00000000      0x206 Test/Test.o
  .debug_loc     0x00000000      0x237 Test/Test.o
  .debug_aranges
-                0x00000000       0x90 Test/Test.o
- .debug_ranges  0x00000000       0x80 Test/Test.o
- .debug_line    0x00000000      0x640 Test/Test.o
- .debug_str     0x00000000      0x8dd Test/Test.o
+                0x00000000       0x98 Test/Test.o
+ .debug_ranges  0x00000000       0x88 Test/Test.o
+ .debug_line    0x00000000      0x681 Test/Test.o
+ .debug_str     0x00000000      0x959 Test/Test.o
  .comment       0x00000000       0x31 Test/Test.o
- .debug_frame   0x00000000      0x164 Test/Test.o
+ .debug_frame   0x00000000      0x174 Test/Test.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
@@ -609,6 +632,7 @@ user_signatures  0x00850000         0x00000400         rw !x
 Linker script and memory map
 
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
+LOAD APP/BCM_BasedApp/BCM_Based.o
 LOAD APP/CarSM/CarSM.o
 LOAD APP/Steering/Steering.o
 LOAD ECUAL/LCD/char_lcd.o
@@ -629,6 +653,8 @@ LOAD MCAL/Timer/Timer.o
 LOAD MCAL/Timer/Timer_Cfg.o
 LOAD MCAL/USART/usart.o
 LOAD MCAL/USART/usart_Cfg.o
+LOAD SL/BCM/BCM.o
+LOAD SL/BCM/BCM_LK_Cfg.o
 LOAD SL/TMU/TMU.o
 LOAD SL/TMU/TMU_PB_Cfg.o
 LOAD Test/Test.o
@@ -741,7 +767,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x38e
+.text           0x00000000      0x75c
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -808,7 +834,6 @@ END GROUP
                 0x0000008e                __vector_7
                 0x0000008e                __vector_4
                 0x0000008e                __vector_2
-                0x0000008e                __vector_15
                 0x0000008e                __vector_8
                 0x0000008e                __vector_14
                 0x0000008e                __vector_16
@@ -816,46 +841,100 @@ END GROUP
                 0x0000008e                __vector_20
                 0x00000092                . = ALIGN (0x2)
  *(.text.*)
+ .text.UART_TxCallBack
+                0x00000092       0x22 APP/BCM_BasedApp/BCM_Based.o
+ .text.BCM_Receive
+                0x000000b4       0xa0 APP/BCM_BasedApp/BCM_Based.o
+                0x000000b4                BCM_Receive
  .text.__vector_3
-                0x00000092       0xac ECUAL/SwICU/SwICU.o
-                0x00000092                __vector_3
- .text.main     0x0000013e        0x6 main.o
-                0x0000013e                main
+                0x00000154       0xac ECUAL/SwICU/SwICU.o
+                0x00000154                __vector_3
+ .text.main     0x00000200        0xa main.o
+                0x00000200                main
+ .text.SPI_Init
+                0x0000020a       0x42 MCAL/SPI/SPI.o
+                0x0000020a                SPI_Init
+ .text.SPI_Enable
+                0x0000024c        0x4 MCAL/SPI/SPI.o
+                0x0000024c                SPI_Enable
+ .text.SPI_Disable
+                0x00000250        0x4 MCAL/SPI/SPI.o
+                0x00000250                SPI_Disable
+ .text.SPI_WriteByte
+                0x00000254        0x6 MCAL/SPI/SPI.o
+                0x00000254                SPI_WriteByte
+ .text.SPI_ReadByte
+                0x0000025a       0x12 MCAL/SPI/SPI.o
+                0x0000025a                SPI_ReadByte
+ .text.SPI_Set_ISR_CallBack
+                0x0000026c       0x14 MCAL/SPI/SPI.o
+                0x0000026c                SPI_Set_ISR_CallBack
  .text.__vector_12
-                0x00000144       0x1e MCAL/SPI/SPI.o
-                0x00000144                __vector_12
+                0x00000280       0x4e MCAL/SPI/SPI.o
+                0x00000280                __vector_12
  .text.Timer_Start
-                0x00000162       0x40 MCAL/Timer/Timer.o
-                0x00000162                Timer_Start
+                0x000002ce       0x40 MCAL/Timer/Timer.o
+                0x000002ce                Timer_Start
  .text.Timer_Stop
-                0x000001a2       0x20 MCAL/Timer/Timer.o
-                0x000001a2                Timer_Stop
+                0x0000030e       0x20 MCAL/Timer/Timer.o
+                0x0000030e                Timer_Stop
  .text.Timer_SetValue
-                0x000001c2       0x1c MCAL/Timer/Timer.o
-                0x000001c2                Timer_SetValue
+                0x0000032e       0x1c MCAL/Timer/Timer.o
+                0x0000032e                Timer_SetValue
  .text.Timer_GetValue
-                0x000001de       0x44 MCAL/Timer/Timer.o
-                0x000001de                Timer_GetValue
+                0x0000034a       0x44 MCAL/Timer/Timer.o
+                0x0000034a                Timer_GetValue
  .text.__vector_11
-                0x00000222       0x6a MCAL/Timer/Timer.o
-                0x00000222                __vector_11
+                0x0000038e       0x6a MCAL/Timer/Timer.o
+                0x0000038e                __vector_11
  .text.__vector_9
-                0x0000028c       0x62 MCAL/Timer/Timer.o
-                0x0000028c                __vector_9
+                0x000003f8       0x62 MCAL/Timer/Timer.o
+                0x000003f8                __vector_9
  .text.__vector_5
-                0x000002ee       0x6a MCAL/Timer/Timer.o
-                0x000002ee                __vector_5
+                0x0000045a       0x6a MCAL/Timer/Timer.o
+                0x0000045a                __vector_5
  .text.__vector_10
-                0x00000358       0x14 MCAL/Timer/Timer.o
-                0x00000358                __vector_10
+                0x000004c4       0x14 MCAL/Timer/Timer.o
+                0x000004c4                __vector_10
+ .text.Usart_Init
+                0x000004d8       0x3c MCAL/USART/usart.o
+                0x000004d8                Usart_Init
+ .text.UsartWriteTx
+                0x00000514       0x1a MCAL/USART/usart.o
+                0x00000514                UsartWriteTx
+ .text.USART_SetTxCallBack
+                0x0000052e       0x14 MCAL/USART/usart.o
+                0x0000052e                USART_SetTxCallBack
  .text.__vector_13
-                0x0000036c       0x1e MCAL/USART/usart.o
-                0x0000036c                __vector_13
-                0x0000038a                . = ALIGN (0x2)
+                0x00000542       0x4e MCAL/USART/usart.o
+                0x00000542                __vector_13
+ .text.__vector_15
+                0x00000590       0x4e MCAL/USART/usart.o
+                0x00000590                __vector_15
+ .text.BCM_SPI_RX_CallBack
+                0x000005de       0x5c SL/BCM/BCM.o
+ .text.BCM_SPI_TX_CallBack
+                0x0000063a       0x42 SL/BCM/BCM.o
+ .text.BCM_GetRxState
+                0x0000067c       0x14 SL/BCM/BCM.o
+                0x0000067c                BCM_GetRxState
+ .text.BCM_SetupRxBuffer
+                0x00000690       0x1e SL/BCM/BCM.o
+                0x00000690                BCM_SetupRxBuffer
+ .text.BCM_Init
+                0x000006ae       0x60 SL/BCM/BCM.o
+                0x000006ae                BCM_Init
+ .text.BCM_Read
+                0x0000070e       0x18 SL/BCM/BCM.o
+                0x0000070e                BCM_Read
+ .text.BCM_RxDispatcher
+                0x00000726       0x32 SL/BCM/BCM.o
+                0x00000726                BCM_RxDispatcher
+                0x00000758                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000038a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x0000038a                _exit
-                0x0000038a                exit
+ .fini9         0x00000758        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000758                _exit
+                0x00000758                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -874,61 +953,103 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000038a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000758        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000038e                _etext = .
+                0x0000075c                _etext = .
 
-.data           0x00800060        0x0 load address 0x0000038e
+.data           0x00800060       0x20 load address 0x0000075c
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
+ .data.gstr_SlaveCfg
+                0x00800060        0x8 MCAL/SPI/SPI_Cfg.o
+                0x00800060                gstr_SlaveCfg
+ .data.gstr_MasterCfg
+                0x00800068        0x8 MCAL/SPI/SPI_Cfg.o
+                0x00800068                gstr_MasterCfg
+ .data.gstr_BCM_Receive_Init
+                0x00800070        0x2 SL/BCM/BCM_LK_Cfg.o
+                0x00800070                gstr_BCM_Receive_Init
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
+ .rodata.usart_init_config_transmit
+                0x00800072        0x7 MCAL/USART/usart_Cfg.o
+                0x00800072                usart_init_config_transmit
+ .rodata.usart_init_config
+                0x00800079        0x7 MCAL/USART/usart_Cfg.o
+                0x00800079                usart_init_config
  *(.gnu.linkonce.r*)
-                0x00800060                . = ALIGN (0x2)
-                0x00800060                _edata = .
-                0x00800060                PROVIDE (__data_end, .)
+                0x00800080                . = ALIGN (0x2)
+                0x00800080                _edata = .
+                0x00800080                PROVIDE (__data_end, .)
 
-.bss            0x00800060       0x10
-                0x00800060                PROVIDE (__bss_start, .)
+.bss            0x00800080       0x90
+                0x00800080                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
+ .bss.gu8_chunkTransmitState
+                0x00800080        0x1 APP/BCM_BasedApp/BCM_Based.o
+ .bss.gu8_txUsartByteCount
+                0x00800081        0x1 APP/BCM_BasedApp/BCM_Based.o
+ .bss.ga_txUsartChunk
+                0x00800082       0x64 APP/BCM_BasedApp/BCM_Based.o
  .bss.gu16_Icu_Time
-                0x00800060        0x2 ECUAL/SwICU/SwICU.o
+                0x008000e6        0x2 ECUAL/SwICU/SwICU.o
  .bss.gu8_onFallPulseCapture_flag
-                0x00800062        0x1 ECUAL/SwICU/SwICU.o
- .bss.gu8_transmissionComplete
-                0x00800063        0x1 MCAL/SPI/SPI.o
-                0x00800063                gu8_transmissionComplete
+                0x008000e8        0x1 ECUAL/SwICU/SwICU.o
+ .bss.call_back
+                0x008000e9        0x2 MCAL/SPI/SPI.o
  .bss.gu8_excuteFlag
-                0x00800064        0x1 MCAL/Timer/Timer.o
-                0x00800064                gu8_excuteFlag
+                0x008000eb        0x1 MCAL/Timer/Timer.o
+                0x008000eb                gu8_excuteFlag
  .bss.gu32_overflowTimes
-                0x00800065        0x4 MCAL/Timer/Timer.o
-                0x00800065                gu32_overflowTimes
+                0x008000ec        0x4 MCAL/Timer/Timer.o
+                0x008000ec                gu32_overflowTimes
  .bss.gu8_t2Prescaler
-                0x00800069        0x1 MCAL/Timer/Timer.o
+                0x008000f0        0x1 MCAL/Timer/Timer.o
  .bss.gu16_t1Prescaler
-                0x0080006a        0x2 MCAL/Timer/Timer.o
+                0x008000f1        0x2 MCAL/Timer/Timer.o
  .bss.gu8_t0Prescaler
-                0x0080006c        0x1 MCAL/Timer/Timer.o
- .bss.gu8_RX_CompleteFlag
-                0x0080006d        0x1 MCAL/USART/usart.o
-                0x0080006d                gu8_RX_CompleteFlag
+                0x008000f3        0x1 MCAL/Timer/Timer.o
+ .bss.gu8_txNotification
+                0x008000f4        0x1 MCAL/USART/usart.o
+ .bss.rx_call_back
+                0x008000f5        0x2 MCAL/USART/usart.o
+ .bss.tx_call_back
+                0x008000f7        0x2 MCAL/USART/usart.o
+ .bss.gu8_protocol
+                0x008000f9        0x1 SL/BCM/BCM.o
+ .bss.gu16_rxByteCounter
+                0x008000fa        0x2 SL/BCM/BCM.o
+ .bss.gu16_txByteCounter
+                0x008000fc        0x2 SL/BCM/BCM.o
+ .bss.gu8_TxNotification
+                0x008000fe        0x1 SL/BCM/BCM.o
+ .bss.gu8_RxNotification
+                0x008000ff        0x1 SL/BCM/BCM.o
+ .bss.gu8_TxState
+                0x00800100        0x1 SL/BCM/BCM.o
+                0x00800100                gu8_TxState
+ .bss.gu8_RxState
+                0x00800101        0x1 SL/BCM/BCM.o
+                0x00800101                gu8_RxState
  .bss.gu16_preloader
-                0x0080006e        0x2 SL/TMU/TMU.o
-                0x0080006e                gu16_preloader
+                0x00800102        0x2 SL/TMU/TMU.o
+                0x00800102                gu16_preloader
  *(COMMON)
-                0x00800070                PROVIDE (__bss_end, .)
-                0x0000038e                __data_load_start = LOADADDR (.data)
-                0x0000038e                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800104        0xc SL/BCM/BCM.o
+                0x00800104                gstr_txBufferCfg
+                0x0080010a                gstr_rxBufferCfg
+                0x00800110                PROVIDE (__bss_end, .)
+                0x0000075c                __data_load_start = LOADADDR (.data)
+                0x0000077c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800070        0x0
+.noinit         0x00800110        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800070                _end = .
+                0x00800110                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -970,12 +1091,17 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 ECUAL/SwICU/SwICU.o
+ .comment       0x00000000       0x30 APP/BCM_BasedApp/BCM_Based.o
                                  0x31 (size before relaxing)
+ .comment       0x00000030       0x31 ECUAL/SwICU/SwICU.o
  .comment       0x00000030       0x31 main.o
  .comment       0x00000030       0x31 MCAL/SPI/SPI.o
+ .comment       0x00000030       0x31 MCAL/SPI/SPI_Cfg.o
  .comment       0x00000030       0x31 MCAL/Timer/Timer.o
  .comment       0x00000030       0x31 MCAL/USART/usart.o
+ .comment       0x00000030       0x31 MCAL/USART/usart_Cfg.o
+ .comment       0x00000030       0x31 SL/BCM/BCM.o
+ .comment       0x00000030       0x31 SL/BCM/BCM_LK_Cfg.o
  .comment       0x00000030       0x31 SL/TMU/TMU.o
 
 .note.gnu.avr.deviceinfo
@@ -998,86 +1124,125 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x178
+.debug_aranges  0x00000000      0x2b8
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x30 ECUAL/SwICU/SwICU.o
+                0x00000000       0x38 APP/BCM_BasedApp/BCM_Based.o
  .debug_aranges
-                0x00000030       0x20 main.o
+                0x00000038       0x30 ECUAL/SwICU/SwICU.o
  .debug_aranges
-                0x00000050       0x40 MCAL/SPI/SPI.o
+                0x00000068       0x20 main.o
  .debug_aranges
-                0x00000090       0x68 MCAL/Timer/Timer.o
+                0x00000088       0x58 MCAL/SPI/SPI.o
  .debug_aranges
-                0x000000f8       0x48 MCAL/USART/usart.o
+                0x000000e0       0x18 MCAL/SPI/SPI_Cfg.o
  .debug_aranges
-                0x00000140       0x38 SL/TMU/TMU.o
+                0x000000f8       0x68 MCAL/Timer/Timer.o
+ .debug_aranges
+                0x00000160       0x70 MCAL/USART/usart.o
+ .debug_aranges
+                0x000001d0       0x18 MCAL/USART/usart_Cfg.o
+ .debug_aranges
+                0x000001e8       0x80 SL/BCM/BCM.o
+ .debug_aranges
+                0x00000268       0x18 SL/BCM/BCM_LK_Cfg.o
+ .debug_aranges
+                0x00000280       0x38 SL/TMU/TMU.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x164f
+.debug_info     0x00000000     0x2a42
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6      0x2c5 ECUAL/SwICU/SwICU.o
- .debug_info    0x000007ab       0x7c main.o
- .debug_info    0x00000827      0x25b MCAL/SPI/SPI.o
- .debug_info    0x00000a82      0x3e7 MCAL/Timer/Timer.o
- .debug_info    0x00000e69      0x3d6 MCAL/USART/usart.o
- .debug_info    0x0000123f      0x410 SL/TMU/TMU.o
+ .debug_info    0x000004e6      0x5af APP/BCM_BasedApp/BCM_Based.o
+ .debug_info    0x00000a95      0x2c5 ECUAL/SwICU/SwICU.o
+ .debug_info    0x00000d5a       0x97 main.o
+ .debug_info    0x00000df1      0x303 MCAL/SPI/SPI.o
+ .debug_info    0x000010f4      0x10d MCAL/SPI/SPI_Cfg.o
+ .debug_info    0x00001201      0x3e7 MCAL/Timer/Timer.o
+ .debug_info    0x000015e8      0x4de MCAL/USART/usart.o
+ .debug_info    0x00001ac6      0x23b MCAL/USART/usart_Cfg.o
+ .debug_info    0x00001d01      0x878 SL/BCM/BCM.o
+ .debug_info    0x00002579       0xb9 SL/BCM/BCM_LK_Cfg.o
+ .debug_info    0x00002632      0x410 SL/TMU/TMU.o
 
-.debug_abbrev   0x00000000      0xb2a
+.debug_abbrev   0x00000000     0x10a6
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_abbrev  0x000004a3      0x123 ECUAL/SwICU/SwICU.o
- .debug_abbrev  0x000005c6       0x46 main.o
- .debug_abbrev  0x0000060c       0xeb MCAL/SPI/SPI.o
- .debug_abbrev  0x000006f7      0x16f MCAL/Timer/Timer.o
- .debug_abbrev  0x00000866      0x109 MCAL/USART/usart.o
- .debug_abbrev  0x0000096f      0x1bb SL/TMU/TMU.o
+ .debug_abbrev  0x000004a3      0x15d APP/BCM_BasedApp/BCM_Based.o
+ .debug_abbrev  0x00000600      0x123 ECUAL/SwICU/SwICU.o
+ .debug_abbrev  0x00000723       0x65 main.o
+ .debug_abbrev  0x00000788      0x119 MCAL/SPI/SPI.o
+ .debug_abbrev  0x000008a1       0x62 MCAL/SPI/SPI_Cfg.o
+ .debug_abbrev  0x00000903      0x16f MCAL/Timer/Timer.o
+ .debug_abbrev  0x00000a72      0x160 MCAL/USART/usart.o
+ .debug_abbrev  0x00000bd2       0xa1 MCAL/USART/usart_Cfg.o
+ .debug_abbrev  0x00000c73      0x216 SL/BCM/BCM.o
+ .debug_abbrev  0x00000e89       0x62 SL/BCM/BCM_LK_Cfg.o
+ .debug_abbrev  0x00000eeb      0x1bb SL/TMU/TMU.o
 
-.debug_line     0x00000000      0xacf
+.debug_line     0x00000000     0x1319
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x115 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000115      0x1d2 ECUAL/SwICU/SwICU.o
- .debug_line    0x000002e7       0x3f main.o
- .debug_line    0x00000326      0x136 MCAL/SPI/SPI.o
- .debug_line    0x0000045c      0x2b4 MCAL/Timer/Timer.o
- .debug_line    0x00000710      0x179 MCAL/USART/usart.o
- .debug_line    0x00000889      0x246 SL/TMU/TMU.o
+ .debug_line    0x00000115      0x276 APP/BCM_BasedApp/BCM_Based.o
+ .debug_line    0x0000038b      0x1d2 ECUAL/SwICU/SwICU.o
+ .debug_line    0x0000055d       0x6a main.o
+ .debug_line    0x000005c7      0x193 MCAL/SPI/SPI.o
+ .debug_line    0x0000075a       0x5d MCAL/SPI/SPI_Cfg.o
+ .debug_line    0x000007b7      0x2b4 MCAL/Timer/Timer.o
+ .debug_line    0x00000a6b      0x1fe MCAL/USART/usart.o
+ .debug_line    0x00000c69       0x42 MCAL/USART/usart_Cfg.o
+ .debug_line    0x00000cab      0x3cc SL/BCM/BCM.o
+ .debug_line    0x00001077       0x5c SL/BCM/BCM_LK_Cfg.o
+ .debug_line    0x000010d3      0x246 SL/TMU/TMU.o
 
-.debug_frame    0x00000000      0x380
+.debug_frame    0x00000000      0x638
  *(.debug_frame)
- .debug_frame   0x00000000       0x8c ECUAL/SwICU/SwICU.o
- .debug_frame   0x0000008c       0x24 main.o
- .debug_frame   0x000000b0       0x74 MCAL/SPI/SPI.o
- .debug_frame   0x00000124      0x130 MCAL/Timer/Timer.o
- .debug_frame   0x00000254       0x84 MCAL/USART/usart.o
- .debug_frame   0x000002d8       0xa8 SL/TMU/TMU.o
+ .debug_frame   0x00000000       0x74 APP/BCM_BasedApp/BCM_Based.o
+ .debug_frame   0x00000074       0x8c ECUAL/SwICU/SwICU.o
+ .debug_frame   0x00000100       0x24 main.o
+ .debug_frame   0x00000124       0xdc MCAL/SPI/SPI.o
+ .debug_frame   0x00000200      0x130 MCAL/Timer/Timer.o
+ .debug_frame   0x00000330      0x154 MCAL/USART/usart.o
+ .debug_frame   0x00000484      0x10c SL/BCM/BCM.o
+ .debug_frame   0x00000590       0xa8 SL/TMU/TMU.o
 
-.debug_str      0x00000000      0xbed
+.debug_str      0x00000000     0x1258
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x2b0 ECUAL/SwICU/SwICU.o
+ .debug_str     0x00000196      0x58c APP/BCM_BasedApp/BCM_Based.o
+                                0x5e6 (size before relaxing)
+ .debug_str     0x00000722      0x16d ECUAL/SwICU/SwICU.o
                                 0x2fc (size before relaxing)
- .debug_str     0x00000446       0x11 main.o
-                                0x174 (size before relaxing)
- .debug_str     0x00000457      0x16c MCAL/SPI/SPI.o
-                                0x306 (size before relaxing)
- .debug_str     0x000005c3       0xfe MCAL/Timer/Timer.o
+ .debug_str     0x0000088f       0x11 main.o
+                                0x180 (size before relaxing)
+ .debug_str     0x000008a0      0x1c9 MCAL/SPI/SPI.o
+                                0x3a3 (size before relaxing)
+ .debug_str     0x00000a69       0x33 MCAL/SPI/SPI_Cfg.o
+                                0x209 (size before relaxing)
+ .debug_str     0x00000a9c       0xfe MCAL/Timer/Timer.o
                                 0x33e (size before relaxing)
- .debug_str     0x000006c1      0x398 MCAL/USART/usart.o
-                                0x532 (size before relaxing)
- .debug_str     0x00000a59      0x194 SL/TMU/TMU.o
+ .debug_str     0x00000b9a      0x1fd MCAL/USART/usart.o
+                                0x5df (size before relaxing)
+ .debug_str     0x00000d97       0x2c MCAL/USART/usart_Cfg.o
+                                0x3ce (size before relaxing)
+ .debug_str     0x00000dc3      0x2f3 SL/BCM/BCM.o
+                                0x82b (size before relaxing)
+ .debug_str     0x000010b6       0x17 SL/BCM/BCM_LK_Cfg.o
+                                0x1e0 (size before relaxing)
+ .debug_str     0x000010cd      0x18b SL/TMU/TMU.o
                                 0x3cf (size before relaxing)
 
-.debug_loc      0x00000000      0xc0d
+.debug_loc      0x00000000     0x134d
  *(.debug_loc)
- .debug_loc     0x00000000      0x13b ECUAL/SwICU/SwICU.o
- .debug_loc     0x0000013b      0x1d4 MCAL/SPI/SPI.o
- .debug_loc     0x0000030f      0x44a MCAL/Timer/Timer.o
- .debug_loc     0x00000759      0x1f3 MCAL/USART/usart.o
- .debug_loc     0x0000094c      0x2c1 SL/TMU/TMU.o
+ .debug_loc     0x00000000       0x90 APP/BCM_BasedApp/BCM_Based.o
+ .debug_loc     0x00000090      0x13b ECUAL/SwICU/SwICU.o
+ .debug_loc     0x000001cb      0x2a1 MCAL/SPI/SPI.o
+ .debug_loc     0x0000046c      0x44a MCAL/Timer/Timer.o
+ .debug_loc     0x000008b6      0x3a0 MCAL/USART/usart.o
+ .debug_loc     0x00000c56      0x436 SL/BCM/BCM.o
+ .debug_loc     0x0000108c      0x2c1 SL/TMU/TMU.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1097,14 +1262,16 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x118
+.debug_ranges   0x00000000      0x1f0
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x20 ECUAL/SwICU/SwICU.o
- .debug_ranges  0x00000020       0x10 main.o
- .debug_ranges  0x00000030       0x30 MCAL/SPI/SPI.o
- .debug_ranges  0x00000060       0x58 MCAL/Timer/Timer.o
- .debug_ranges  0x000000b8       0x38 MCAL/USART/usart.o
- .debug_ranges  0x000000f0       0x28 SL/TMU/TMU.o
+ .debug_ranges  0x00000000       0x28 APP/BCM_BasedApp/BCM_Based.o
+ .debug_ranges  0x00000028       0x20 ECUAL/SwICU/SwICU.o
+ .debug_ranges  0x00000048       0x10 main.o
+ .debug_ranges  0x00000058       0x48 MCAL/SPI/SPI.o
+ .debug_ranges  0x000000a0       0x58 MCAL/Timer/Timer.o
+ .debug_ranges  0x000000f8       0x60 MCAL/USART/usart.o
+ .debug_ranges  0x00000158       0x70 SL/BCM/BCM.o
+ .debug_ranges  0x000001c8       0x28 SL/TMU/TMU.o
 
 .debug_macro
  *(.debug_macro)
