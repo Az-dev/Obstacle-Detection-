@@ -55,10 +55,7 @@
     /* Read from UDR */
     UsartReadRx(&ga_rxUsartChunk[gu8_rxUsartByteCount]);
     /* increment rx counter*/
-    gu8_rxUsartByteCount++;
-    #if DEBUG_POINT
-    TCNT2 = gu8_rxUsartByteCount;
-    #endif
+    gu8_rxUsartByteCount++;    
  }
 
  /*
@@ -98,9 +95,9 @@
           /* Wait until receiving is finished */
           while( gu8_rxUsartByteCount < (uint8_t)CHUNK_SIZE && 0x0D != ga_rxUsartChunk[gu8_rxUsartByteCount])
           {
-             #if DEBUG_POINT
+             
              TCNT0 = ga_rxUsartChunk[gu8_rxUsartByteCount];
-             #endif
+             
           };
           /* Move to Chunk receiving complete */
           gu8_chunkReceiveState = USART_CHUNK_RECEIVE_COMPLETE;

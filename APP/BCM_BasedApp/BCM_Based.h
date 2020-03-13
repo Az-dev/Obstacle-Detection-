@@ -9,8 +9,7 @@
 #ifndef BCM_BASED_H_
 #define BCM_BASED_H_
 /*- DEFINES ----------------------------------------------------------------------------------------------------------*/
-#define DEBUG_POINT 1
-#define CHUNK_SIZE 5
+#define CHUNK_SIZE 100
 
 #define USART_CHUNK_RECEIVE_COMPLETE 1
 #define USART_CHUNK_RECEIVING        2
