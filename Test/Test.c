@@ -39,8 +39,8 @@ static uint8_t ga_txUsartChunk[CHUNK_SIZE] = {0};  /* Chunk transmitted by usart
 static uint8_t gu8_rxUsartByteCount = 0;
 static uint8_t gu8_txUsartByteCount = 0;
 /* USART TX/RX chunk states */
-static uint8_t gu8_chunkReceiveState = USART_CHUNK_RECEIVING;
-static uint8_t gu8_chunkTransmitState = USART_CHUNK_TRANSMITTING;
+static uint8_t gu8_chunkReceiveState;
+static uint8_t gu8_chunkTransmitState;
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
 
 
@@ -49,10 +49,14 @@ static uint8_t gu8_chunkTransmitState = USART_CHUNK_TRANSMITTING;
 /*---- Static functions -------*/
 static void UART_TxCallBack(void)
 {
-   /* Write to UDR */
-   UsartWriteTx(&ga_txUsartChunk[gu8_txUsartByteCount]);   
-   /* Increment tx counter*/
-   gu8_txUsartByteCount++;
+   /* Check if it the last byte to transmit or not */
+   if((uint8_t)CHUNK_SIZE == gu8_txUsartByteCount)
+   {
+      /* Report finish transmitting chunk*/
+      gu8_chunkTransmitState = USART_CHUNK_TRANSMIT_COMPLETE;
+   }
+   /* Write next byte to UDR */
+   UsartWriteTx(&ga_txUsartChunk[gu8_txUsartByteCount++]);
 }
 
 static void UART_RxCallBack(void)
@@ -80,30 +84,25 @@ void BCM_Transmit(void)
    USART_SetRxCallBack(UART_RxCallBack);
    /* Initialize UART : to receive the chunk of data */
    Usart_Init(&usart_init_config_receive); 
-   UCSRB = 0x90;
-   gu8_chunkReceiveState = USART_CHUNK_RECEIVING;      
+   UCSRB = 0x90;  /* ---> Forcing UCSRB configuration for Debugging purpose */
+   /* Initiate Usart chunk receiving state */
+   gu8_chunkReceiveState = USART_CHUNK_RECEIVING; 
+        
    while (1)
    {      
       /* Check States */
       switch (gu8_chunkReceiveState)
       {
-         case USART_CHUNK_RECEIVING:
-            #if DEBUG_POINT
-            PORTA_DIR = 0xff;
-            #endif            
+         case USART_CHUNK_RECEIVING:                        
             /* Wait until receiving is finished */
             while( gu8_rxUsartByteCount < (uint8_t)CHUNK_SIZE && 0x0D != ga_rxUsartChunk[gu8_rxUsartByteCount])
             {
                #if DEBUG_POINT
                TCNT0 = ga_rxUsartChunk[gu8_rxUsartByteCount];
                #endif
-            };
-            #if DEBUG_POINT
-            PORTA_DATA = 0xff;
-            #endif                      
+            };                                 
             /* Move to Chunk receiving complete */
-            gu8_chunkReceiveState = USART_CHUNK_RECEIVE_COMPLETE;
-                
+            gu8_chunkReceiveState = USART_CHUNK_RECEIVE_COMPLETE;                
          case USART_CHUNK_RECEIVE_COMPLETE: 
             /* Reset Counter */
             gu8_rxUsartByteCount = 0;           
@@ -128,39 +127,60 @@ void BCM_Transmit(void)
 
 void BCM_Receive(void)
 {
-   
-   /* Initialize Rx buffer */
-   uint8_t rx_arr[10] ={0};   
-   /* Initialize BCM -receive- */
+   uint8_t au8_BCM_rxState = 0;
+   /*------ 1 - BCM INIT ---------*/
+   /* Initialize BCM -Receive- */
    BCM_Init(&gstr_BCM_Receive_Init);
-   /* Initialize UART : to transmit bytes -written to its UDR- from the buffer */
-   //Usart_Init(&usart_init_config_transmit);
-   /* Create your buffer and send its (Address,Size) to / setup_rx_buffer() */
-   BCM_SetupRxBuffer(rx_arr,10);
-   /* Initiate Receive process*/
-   BCM_Read();
-   /* system state*/
-   uint8_t system_state =0;     
-   uint8_t rx_index = 0;
+   /* Setup Your Buffer/chunk size and address */   
+   BCM_SetupRxBuffer(ga_txUsartChunk,CHUNK_SIZE);
+   /* ------  (USART INIT) -------- */
+   /* Usart setup call back */
+   USART_SetTxCallBack(UART_TxCallBack);
+   /* Initialize UART : to transmit the chunk of data */
+   Usart_Init(&usart_init_config_transmit);
+   UCSRB = 0x48;        /* ---> Forcing UCSRB configuration for Debugging purpose */     
+   /* Initiate Usart chunk Transmitting state */
+   gu8_chunkTransmitState =  USART_CHUNK_IDLE;    
+   /* Initiate BCM Receive process */
+   BCM_Read();   
    while(1)
    {
-      BCM_RxDispatcher();
-      /*get system state */
-      BCM_GetRxState(&system_state);
-      /* After BCM finish receiving : start flushing data by uart */
-      
-      if(RECIEVING_COMPLETE == system_state)
+      /*get BCM Rx state */
+      BCM_GetRxState(&au8_BCM_rxState);
+      switch(au8_BCM_rxState)
       {
-      
-         while(rx_index < (sizeof(rx_arr)/sizeof(uint8_t)))
-         {
-            UsartWriteTx(&rx_arr[rx_index]);
-            rx_index++;
-         }
-       }
-
-      
-
+         case IDLE:
+            /* Initiate BCM read Again and Move to RECEUVUNG_BYTE State to start again*/
+         break;
+         case RECIEVING_BYTES:
+            /* Wait until receiving - from BCM transmitter - is complete */ 
+            while(RECIEVING_BYTES == au8_BCM_rxState)
+            {
+               BCM_RxDispatcher();
+               BCM_GetRxState(&au8_BCM_rxState);               
+            }
+            /* Initiate Usart chunk Transmit */
+            gu8_chunkTransmitState = USART_CHUNK_TRANSMITTING;                                                 
+         break;
+         case RECIEVING_COMPLETE:                                   
+            switch(gu8_chunkTransmitState)
+            {
+               case USART_CHUNK_TRANSMITTING:
+                  /* Trigger transmit process through writing the first byte */ 
+                  UsartWriteTx(&ga_txUsartChunk[gu8_txUsartByteCount++]);                
+                  /* Wait Until chunk transmitting is complete */
+                  while (USART_CHUNK_TRANSMITTING == gu8_chunkTransmitState);                                                    
+               break;
+               case USART_CHUNK_TRANSMIT_COMPLETE:
+                  /* reset counter */
+                  gu8_txUsartByteCount = 0;
+                  /* Move BCM rx state system to idle */
+                  au8_BCM_rxState = IDLE;
+               break;
+          
+            };
+         break;
+      }
    }   
 }
 /*-------------------------------------------- ( END BCM APPLICATION ) --------------------------------------------*/

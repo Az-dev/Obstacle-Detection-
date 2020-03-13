@@ -157,10 +157,7 @@ static void BCM_SPI_TX_CallBack(void)
       /* Increment sent bytes counter */
       gu16_txByteCounter++;
       /* Send a new byte */
-      SPI_WriteByte(gstr_txBufferCfg.bufferAddress[gu16_txByteCounter]); 
-      
-      TCNT2 = gstr_txBufferCfg.bufferAddress[gu16_txByteCounter];
-           
+      SPI_WriteByte(gstr_txBufferCfg.bufferAddress[gu16_txByteCounter]);      
    }  
 }
 
@@ -178,7 +175,7 @@ static void BCM_SPI_RX_CallBack(void)
    /* report success read */
    /*  when this fires -on behalf of the slave side : that means byte has been successfully transmitted by master
        so you can read the transmitted byte- */
-   if((gstr_rxBufferCfg.bufferSize) == gu16_rxByteCounter)
+   if(((gstr_rxBufferCfg.bufferSize)-1) == gu16_rxByteCounter)
    {     
       /* Report Success Reception */
       BCM_SetRXNotification(BCM_RECIEVE_COMPLETE); 
@@ -188,7 +185,7 @@ static void BCM_SPI_RX_CallBack(void)
    else
    {
       /* Read the byte */
-      SPI_ReadByte(&(gstr_rxBufferCfg.bufferAddress[gu16_rxByteCounter]));                 
+      SPI_ReadByte(&(gstr_rxBufferCfg.bufferAddress[gu16_rxByteCounter]));                  
       /* Increment sent bytes counter */
       gu16_rxByteCounter++;
       /* Increment buffer address to point to the new location */
