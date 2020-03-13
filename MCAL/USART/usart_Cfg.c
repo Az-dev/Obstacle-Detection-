@@ -23,7 +23,7 @@ const gstr_usart_init_t usart_init_config_transmit =
    PARITY_DISABLED,
    STOP_1_BIT,
    UCSRC_SEL,   
-   INTERRUPT_DIS,
+   TRANSMIT_COMPLETE_EN,
    TRANSMIT_EN,
    U2X_DIS,
 };
