@@ -82,6 +82,7 @@ typedef struct StrBuffer
 }StrBuffer_t;
 
 /*- FUNCTIONS PROTOTYPES -------------------------------------------------------------------------------------------*/
+
 /*
 *  Description : Get Rx State machine's state.
 *
@@ -99,7 +100,6 @@ extern EnmBCMError_t  BCM_GetRxState(uint8_t * state);
 *  @return EnmBCMError_t
 */
 extern EnmBCMError_t  BCM_GetTxState(uint8_t * state);
-
 
 /*
 *  Description : Responsible for initialization process of BCM. 
