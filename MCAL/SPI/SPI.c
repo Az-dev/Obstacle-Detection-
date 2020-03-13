@@ -6,9 +6,8 @@
  */ 
 /*- INCLUDES -------------------------------------------------------------------------------------------------------*/
 #include "SPI.h"
-//#include "../../interrupt.h"
+#include "../../interrupt.h"
 #include "../../registers.h"
-#include <avr/interrupt.h>
 /*- GLOBAL VARIABLES ----------------------------------------------------------------------------------------------*/
 volatile uint8_t gu8_transmissionComplete = 0;
 static void (*call_back)(void) = NULL;
@@ -180,15 +179,11 @@ EnumSPIError_t SPI_Set_ISR_CallBack(void (*call_back_ISR)(void))
 
 
 /*--------------------------------------------- ISR CONTROL ------------------------------------------------------*/
-// ISR_SPI()
-// { 
-//    /* Raise transmission complete flag */
-//    //gu8_transmissionComplete = 1;
-//    /* Call call_back() */
-//    //call_back();
-// }
-
-ISR(SPI_STC_vect)
-{
-   call_back();  
+ISR_SPI()
+{ 
+   /* Raise transmission complete flag */
+   //gu8_transmissionComplete = 1;
+   /* Call call_back() */
+   call_back();
 }
+
