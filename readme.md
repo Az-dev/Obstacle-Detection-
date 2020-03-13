@@ -17,10 +17,12 @@ ____
 3. SwICU  : A module for implementing software-based input capture unit.
 4. Us     : An API for Ultrasonic sensor.
 #### Application Layer (APP) 
-1. Steering : A module for implementing the wheels-steering functionality.
-2. CarSm    : A module that implements system state machine of the moving and obstacle detection mechanism.
+1. Steering 	: A module for implementing the wheels-steering functionality.
+2. CarSm    	: A module that implements system state machine of the moving and obstacle detection mechanism.
+3. BCM_BasedApp : A module that represents a test application between two end-points -Transmitter & Receiver- based on BCM.
 #### Service Layer (SL)
 1. TMU      : A module that represents a timer management unit.
+2. BCM		: A module that represents a basic communication Module or protocol between micro controllers.
 ----
 * ####   Components and packages used for implementing this work :
 
