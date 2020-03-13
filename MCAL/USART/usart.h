@@ -130,12 +130,13 @@ extern void UsartWriteTx(uint8_t * data_byte);
 extern EnumUSARTError_t ResetUDR(void);
 
 /*
+*  --- !!! this function is deprecated !!!---
 *  Description : Get the state of the Reception complete software flag.
 *
 *  @param void
 *  @return EnumUSARTError_t
 */
-extern EnumUSARTError_t getReceptionState(void);
+//extern EnumUSARTError_t getReceptionState(void);
 
 /*
 *  Description : Gets Rx notification.

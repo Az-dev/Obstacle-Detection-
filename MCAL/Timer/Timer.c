@@ -236,7 +236,7 @@ ISR_TIMER2_OVF(){
    /*---- TMU Over Flow Procedure ----*/
    /* 1 - Increment Global over flow times counter --*/
    gu32_overflowTimes++;
-   /* 2 - Rise execute flag */
+   /* 2 - Rise execute flag or tick flag */
    gu8_excuteFlag = 1;
    /* 3 - Reload TCNT ---*/   
    Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));   

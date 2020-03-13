@@ -61,18 +61,18 @@ EnumUSARTError_t Usart_Init(const gstr_usart_init_t * USART_InitCfg)
 void UsartReadRx(uint8_t * data_byte)
 {
    /* Define error state */
-   uint8_t au8_errorState = 0;
+   //uint8_t au8_errorState = 0;
    /* Check Null pointer */
    if(NULL != data_byte)
    {
       *data_byte = UDR;      
       /* Notify success*/
-      gu8_rxNotification = USART_BYTE_READ_SUCCESS;           
+      //gu8_rxNotification = USART_BYTE_READ_SUCCESS;           
    }
    else
    {
       /* Notify Fail */
-      gu8_rxNotification = INVALID_USART_INPUT_PARAMS;
+      //gu8_rxNotification = INVALID_USART_INPUT_PARAMS;
    }   
 }
 
@@ -85,19 +85,19 @@ void UsartReadRx(uint8_t * data_byte)
 void UsartWriteTx(uint8_t * data_byte)
 {
    /* Define error state */
-   uint8_t au8_errorState = 0;
+   //uint8_t au8_errorState = 0;
    /* Check NULL pointer */
    if(NULL != data_byte)
    {
       /* Write value  to UDR */
       UDR = *data_byte;     
       /* notify Success */
-      gu8_txNotification = USART_BYTE_WRITE_SUCCESS;      
+      //gu8_txNotification = USART_BYTE_WRITE_SUCCESS;      
    }
    else
    {
       /* notify Fail */
-      gu8_txNotification = INVALID_USART_INPUT_PARAMS;     
+      //gu8_txNotification = INVALID_USART_INPUT_PARAMS;     
    }    
 }
 
@@ -130,8 +130,8 @@ void UsartGetRxState(uint8_t * state)
 *  @param void
 *  @return void
 */
-EnumUSARTError_t getReceptionState(void)
-{
+//EnumUSARTError_t getReceptionState(void)
+//{
    /* define error state*/
 //    uint8_t au8_errorState = 0;
 //    if(gu8_RX_CompleteFlag == 1)
@@ -145,7 +145,7 @@ EnumUSARTError_t getReceptionState(void)
 //       au8_errorState = USART_BYTE_TRANSMIT_FAIL;
 //    }
 //    return au8_errorState;   
-}
+//}
 
 
 /*
