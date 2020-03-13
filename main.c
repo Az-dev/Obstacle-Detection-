@@ -31,13 +31,11 @@ int main(void)
    //masterSpi();  //---->success
    //slaveSpi();  //-----> success
    //myUsartFullDuplexInterruptTest(); // ----> test passed for both transmission and reciption
-   /*---------------------- End test ------------------------------*/
-   
-   
+   /*---------------------- End test ------------------------------*/   
    
    /*--------------------- Start BCM test -----------------------------*/
    //BCM_Transmit();  /* Burn its hex on master */
-   BCM_Receive();   /* Burn its hex on slave */
+   //BCM_Receive();   /* Burn its hex on slave */
    /*--------------------- End BCM test -------------------------------*/
    
    
