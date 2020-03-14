@@ -11,14 +11,53 @@
 /*- GLOBAL VARIABLES -----------------------------------------------------------------------------------------------*/
 static strTask_t garrTaskTMUBuffer[TMU_BUFFER_SIZE];  /* internal TMU tasks buffer*/
 static sint16_t gindex = -1;  
-volatile uint16_t gu16_preloader = 0;      /* this variable is (volatile,not static) as it must be shown to TIMER's ISR*/
-
+static volatile uint16_t gu16_preloader = 0;        /* this variable is (volatile,not static) as it must be shown to TIMER's ISR*/
+static volatile uint8_t gu8_tickFlag = 0;         /* Initial condition '0' not to execute*/
 /*- FUNCITONS DEFINITIONS ------------------------------------------------------------------------------------------*/
+/*---- Start Of Call Backs ----*/
+/*
+*  Description : a Call back of ISR on Over flow -of timer_0-
+*  @param void
+*  @return void
+*/
+static void TMU_T0_OV_CallBack(void)
+{
+   /*---- TMU Over Flow Procedure ----*/
+   /* 1 - Rise execute flag or tick flag */
+   gu8_tickFlag = 1;
+   /* 2 - Reload TCNT ---*/
+   Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));
+}
 
-//static void TMU_CallBack(void)
-//{
-   
-//}
+/*
+*  Description : a Call back of ISR on Over flow -of timer_1-
+*  @param void
+*  @return void
+*/
+static void TMU_T1_OV_CallBack(void)
+{
+   /*---- TMU Over Flow Procedure ----*/
+   /* 1 - Rise execute flag or tick flag*/
+   gu8_tickFlag = 1;
+   /* 2 - Reload TCNT ---*/
+   Timer_SetValue(TIMER_1 , (T1_OV_VAL - gu16_preloader));
+}
+
+/*
+*  Description : a Call back of ISR on Over flow -of timer_2-
+*  @param void
+*  @return void
+*/
+static void TMU_T2_OV_CallBack(void)
+{
+   /*---- TMU Over Flow Procedure ----*/
+   /* 1 - Rise execute flag or tick flag*/
+   gu8_tickFlag = 1;
+   /* 2 - Reload TCNT ---*/
+   Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));
+}
+/*---- End Of Call Backs ----*/
+
 /*
 *  Description : Initializes the given timer channel with the given resolution.
 *
@@ -52,7 +91,9 @@ EnmTMUError_t TMU_Init(const strTMU_Cfg_t * strTMU_Init)
                   gu16_preloader = (uint16_t)(((double)INVERSE_TICK_TIME_PRESCALE_1024 / MILLI_SECONDS) * strTMU_Init->resolution);
                   Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));
                break;               
-            }            
+            }
+            /* Set timer0 call Back */
+            Timer_SetCallBack(TIMER_0,TOV_CALL_BACK,TMU_T0_OV_CallBack);            
          break;
          case TIMER_1:
             /*Initialize timer1*/
@@ -71,6 +112,8 @@ EnmTMUError_t TMU_Init(const strTMU_Cfg_t * strTMU_Init)
                   Timer_SetValue(TIMER_1 , (T1_OV_VAL - gu16_preloader));
                break;
             }
+            /* Set timer1 call Back */
+            Timer_SetCallBack(TIMER_1,TOV_CALL_BACK,TMU_T1_OV_CallBack);
          break;
          case TIMER_2:
             /*Initialize timer2*/
@@ -89,6 +132,8 @@ EnmTMUError_t TMU_Init(const strTMU_Cfg_t * strTMU_Init)
                   Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));
                break;
             }
+            /* Set timer2 call Back */
+            Timer_SetCallBack(TIMER_2,TOV_CALL_BACK,TMU_T2_OV_CallBack);
          break;
       }
       au8_errorState = INIT_OK;      
@@ -119,12 +164,11 @@ EnmTMUError_t TMU_Dispatch(void)
     /* Define Error state */
    uint8_t au8_errorState;   
    /* Check if the buffer not empty */
-   if((0 <= gindex) && (1 == gu8_excuteFlag))
+   if((0 <= gindex) && (1 == gu8_tickFlag))
    {
-      sint16_t au16_iter = 0;
-      //uint32_t au32_overFlowTimes = gu32_overflowTimes;
+      sint16_t au16_iter = 0;      
       /* 1 - pull down execute flag or tick flag */
-      gu8_excuteFlag = 0;
+      gu8_tickFlag = 0;
       
       /* Search for the Task of the given function within TMU buffer*/
       for(;au16_iter <= gindex; au16_iter++)
