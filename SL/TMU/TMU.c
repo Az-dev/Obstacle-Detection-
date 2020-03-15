@@ -25,8 +25,8 @@ static void TMU_T0_OV_CallBack(void)
    /*---- TMU Over Flow Procedure ----*/
    /* 1 - Rise execute flag or tick flag */
    gu8_tickFlag = 1;
-   /* 2 - Reload TCNT ---*/
-   Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));
+   /* 2 - Reload TCNT ---*/         
+   Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));       
 }
 
 /*
@@ -92,7 +92,7 @@ EnmTMUError_t TMU_Init(const strTMU_Cfg_t * strTMU_Init)
                   Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));
                break;               
             }
-            /* Set timer0 call Back */
+            /* Set timer0 call Back */            
             Timer_SetCallBack(TIMER_0,TOV_CALL_BACK,TMU_T0_OV_CallBack);            
          break;
          case TIMER_1:
