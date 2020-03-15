@@ -48,6 +48,10 @@ SL\BCM\BCM.c
 
 SL\BCM\BCM_LK_Cfg.c
 
+SL\SOS\SOS.c
+
+SL\SOS\SOS_PB_Cfg.c
+
 SL\TMU\TMU.c
 
 SL\TMU\TMU_PB_Cfg.c
