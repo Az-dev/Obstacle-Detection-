@@ -22,26 +22,26 @@
 
 void taskA(void)
 {
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0x10;
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x10;
 }
 
 void taskB(void)
 {
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0x20;
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x20;
 }
 
 void taskC(void)
 {
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0x40;
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x40;
 }
 
 void taskD(void)
 {
-   PORTB_DIR = 0xff;
-   PORTB_DATA ^= 0x80;
+   PORTA_DIR = 0xff;
+   PORTA_DATA ^= 0x80;
 }
 
 void cpu_sleep()
@@ -64,10 +64,10 @@ void TmuTest(void)
 {
    //PORTA_DIR = 0xff;
    TMU_Init(&gstrTMUConfig);
-   TMU_Start_Timer(10,taskA,PERIODIC);
-   TMU_Start_Timer(20,taskB,PERIODIC);
-   TMU_Start_Timer(30,taskC,PERIODIC);
-   TMU_Start_Timer(40,taskD,PERIODIC);
+   TMU_Start_Timer(5,taskA,PERIODIC);
+   TMU_Start_Timer(10,taskB,PERIODIC);
+   TMU_Start_Timer(20,taskC,PERIODIC);
+   TMU_Start_Timer(60,taskD,ONESHOOT);
    Timer_Start(TIMER_0,0);
    while(1)
    {
