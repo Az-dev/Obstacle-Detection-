@@ -23,21 +23,23 @@
 /*------- Error Enum -------*/
 typedef enum EnmSOSError
 {
-   INIT_OK  = 0,
-   INIT_NOK = 1,
-   BUFFER_FULL = 3,
-   BUFFER_EMPTY = 4,
-   INVALID_TASK_PARAM = 5,   
+   SOS_INIT_OK  = 0,
+   SOS_INIT_NOK = 1,
+   SOS_BUFFER_FULL = 3,
+   SOS_BUFFER_EMPTY = 4,
+   SOS_INVALID_TASK_PARAM = 5,
+   SOS_TIMER_START_SUCCESS = 6,
+   SOS_TIMER_START_FAIL = 7  
 }EnmSOSError_t;
 /*------- Task Struct ------*/
-typedef struct strTask
+typedef struct strTaskSos
 {
-   void (* fn)(void) ;
    uint16_t counter;       /* represents the time interval after which task must be executed */
    uint16_t priority; 
    uint8_t work_mode;
    uint16_t tick_counts;  /* Internal tick counter for a task */
-}strTask_t;
+   void (* fn)(void);
+}strTaskSos_t;
 
 /*------- configuration Struct -----*/ 
 typedef struct strSOS_Cfg
@@ -82,7 +84,16 @@ extern EnmSOSError_t SOS_Dispatch(void);
 *
 *  @return EnmSOSError_t
 */
-extern EnmSOSError_t SOS_Start_Timer(uint16_t duration , void (* task_fn)(void)  , uint8_t work_mode ,uint16_t priority);
+extern EnmSOSError_t SOS_AddTask(uint16_t duration , void (* task_fn)(void)  , uint8_t work_mode ,uint16_t priority);
+
+/*
+*  Description : Starts a given timer channel
+*
+*  @param void
+*
+*  @return void
+*/
+extern EnmSOSError_t SOS_TimerStart(void);
 
 /*
 *  Description : Removes a task form SOS queue.

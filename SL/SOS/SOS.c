@@ -9,10 +9,13 @@
 #include "../../MCAL/Timer/Timer_Cfg.h"
 #include "SOS.h"
 /*- GLOBAL VARIABLES -----------------------------------------------------------------------------------------------*/
-static strTask_t garrTaskSOSBuffer[SOS_BUFFER_SIZE];  /* internal SOS tasks buffer*/
+static strTaskSos_t garrTaskSOSBuffer[SOS_BUFFER_SIZE];  /* internal SOS tasks buffer*/
 static sint16_t gindex = -1;  
-static volatile uint16_t gu16_preloader = 0;        /* this variable is (volatile,not static) as it must be shown to TIMER's ISR*/
-static volatile uint8_t gu8_tickFlag = 0;         /* Initial condition '0' not to execute*/
+static uint16_t gu16_preloader = 0;        /* this variable is (volatile,not static) as it must be shown to TIMER's ISR*/
+static uint8_t gu8_tickFlag = 0;         /* Initial condition '0' not to execute*/
+
+static uint8_t gu8_timerChannel;   /* this variable is used for starting the desired channel in SOS_TimerStart() */
+
 /*- FUNCITONS DEFINITIONS ------------------------------------------------------------------------------------------*/
 /*---- Start Of Call Backs ----*/
 /*
@@ -26,7 +29,7 @@ static void SOS_T0_OV_CallBack(void)
    /* 1 - Rise execute flag or tick flag */
    gu8_tickFlag = 1;
    /* 2 - Reload TCNT ---*/
-   Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));
+   Timer_SetValue(TIMER_0 , gu16_preloader);
 }
 
 /*
@@ -40,7 +43,7 @@ static void SOS_T1_OV_CallBack(void)
    /* 1 - Rise execute flag or tick flag*/
    gu8_tickFlag = 1;
    /* 2 - Reload TCNT ---*/
-   Timer_SetValue(TIMER_1 , (T1_OV_VAL - gu16_preloader));
+   Timer_SetValue(TIMER_1 , gu16_preloader);
 }
 
 /*
@@ -54,7 +57,7 @@ static void SOS_T2_OV_CallBack(void)
    /* 1 - Rise execute flag or tick flag*/
    gu8_tickFlag = 1;
    /* 2 - Reload TCNT ---*/
-   Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));
+   Timer_SetValue(TIMER_2 , gu16_preloader);
 }
 /*---- End Of Call Backs ----*/
 /*
@@ -75,8 +78,9 @@ EnmSOSError_t SOS_Init(const strSOS_Cfg_t * strSOS_Init)
       switch(strSOS_Init->timer_channel)
       {
          case TIMER_0:
+            gu8_timerChannel = TIMER_0; 
             /* Initialize timer0 */
-            Timer_Init(&gstrTimer0TmuConfig);
+            Timer_Init(&gstrTimer0SosConfig);
             /* Calculate the value to be set to the timer according to the prescaler set in configuration */
             switch(gstrTimer0TmuConfig.u16_prescal)
             {
@@ -88,15 +92,17 @@ EnmSOSError_t SOS_Init(const strSOS_Cfg_t * strSOS_Init)
                break;
                case T0_PRESCALER_1024:
                   gu16_preloader = (uint16_t)(((double)INVERSE_TICK_TIME_PRESCALE_1024 / MILLI_SECONDS) * strSOS_Init->resolution);
-                  Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));
+                  gu16_preloader = T0_OV_VAL - gu16_preloader;
+                  //Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));
                break;               
             }
             /* Set timer0 call Back */
             Timer_SetCallBack(TIMER_0,TOV_CALL_BACK,SOS_T0_OV_CallBack);           
          break;
          case TIMER_1:
+            gu8_timerChannel = TIMER_1;
             /*Initialize timer1*/
-            Timer_Init(&gstrTimer1TmuConfig);
+            Timer_Init(&gstrTimer1SosConfig);
             /* Calculate the value to be set to the timer according to the prescaler set in configuration */
             switch(gstrTimer1TmuConfig.u16_prescal)
             {
@@ -108,15 +114,17 @@ EnmSOSError_t SOS_Init(const strSOS_Cfg_t * strSOS_Init)
                break;
                case T1_PRESCALER_1024:
                   gu16_preloader = (uint16_t)(((double)INVERSE_TICK_TIME_PRESCALE_1024 / MILLI_SECONDS) * strSOS_Init->resolution);
-                  Timer_SetValue(TIMER_1 , (T1_OV_VAL - gu16_preloader));
+                  gu16_preloader = T1_OV_VAL - gu16_preloader;
+                  //Timer_SetValue(TIMER_1 , (T1_OV_VAL - gu16_preloader));
                break;
             }
             /* Set timer1 call Back */
             Timer_SetCallBack(TIMER_1,TOV_CALL_BACK,SOS_T1_OV_CallBack);
          break;
          case TIMER_2:
+            gu8_timerChannel = TIMER_2;
             /*Initialize timer2*/
-            Timer_Init(&gstrTimer2TmuConfig);
+            Timer_Init(&gstrTimer2SosConfig);
             /* Calculate the value to be set to the timer according to the prescaler set in configuration */
             switch(gstrTimer2TmuConfig.u16_prescal)
             {
@@ -128,16 +136,17 @@ EnmSOSError_t SOS_Init(const strSOS_Cfg_t * strSOS_Init)
                break;
                case T2_PRESCALER_1024:
                   gu16_preloader = (uint16_t)(((double)INVERSE_TICK_TIME_PRESCALE_1024 / MILLI_SECONDS) * strSOS_Init->resolution);
-                  Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));
+                  gu16_preloader = T2_OV_VAL - gu16_preloader;
+                  //Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));
                break;
             }
             /* Set timer2 call Back */
             Timer_SetCallBack(TIMER_2,TOV_CALL_BACK,SOS_T2_OV_CallBack);
          break;
       }
-      au8_errorState = INIT_OK;      
+      au8_errorState = SOS_INIT_OK;      
    }else{
-      au8_errorState = INIT_NOK;
+      au8_errorState = SOS_INIT_NOK;
    }   
    /* Return error state */
    return au8_errorState;
@@ -204,7 +213,7 @@ EnmSOSError_t SOS_Dispatch(void)
    else
    {
       /* return error code array is empty */;
-      au8_errorState = BUFFER_EMPTY;      
+      au8_errorState = SOS_BUFFER_EMPTY;      
    }
    return au8_errorState;  
 }
@@ -219,12 +228,12 @@ EnmSOSError_t SOS_Dispatch(void)
 *
 *  @return EnmSOSError_t
 */
-EnmSOSError_t SOS_Start_Timer(uint16_t duration , void (* task_fn)(void)  , uint8_t work_mode ,uint16_t priority)
+EnmSOSError_t SOS_AddTask(uint16_t duration , void (* task_fn)(void)  , uint8_t work_mode ,uint16_t priority)
 {
    /*--- Start Debug Point (success) ----*/
    /* Create a new task */
    /*
-   strTask_t *austr_Task = NULL;
+   strTaskSos_t *austr_Task = NULL;
    austr_Task->fn = task_fn;
    austr_Task->counter = duration;
    austr_Task->work_mode = work_mode;
@@ -242,24 +251,53 @@ EnmSOSError_t SOS_Start_Timer(uint16_t duration , void (* task_fn)(void)  , uint
       if(SOS_BUFFER_SIZE > gindex)
       {
          /* Create a new task */
-         strTask_t *austr_Task = NULL;
-         austr_Task->fn = task_fn;
+         strTaskSos_t *austr_Task = NULL;         
          austr_Task->counter = duration;
          austr_Task->work_mode = work_mode;
          austr_Task->tick_counts = 0;
          austr_Task->priority = priority;
+         austr_Task->fn = task_fn;
          /* Increment gindex : to point to the next empty location to store the new task */
          gindex++;         
          /* Append the task to SOS buffer */
          garrTaskSOSBuffer[gindex] = *austr_Task;         
       }else{
          /* return error code buffer is full*/
-         au8_errorState = BUFFER_FULL;
+         au8_errorState = SOS_BUFFER_FULL;
       }
    }else{
-      au8_errorState = INVALID_TASK_PARAM;
+      au8_errorState = SOS_INVALID_TASK_PARAM;
    }  
    return au8_errorState;
+}
+
+/*
+*  Description : Starts a given timer channel
+*  
+*  @param void
+*
+*  @return void
+*/
+EnmSOSError_t SOS_TimerStart(void)
+{
+   /*  
+   Switch on gu8_timerChannel instead of passing it directly 
+   to Timer_Start() is a kind of protection if the initialized
+   channel in the initialization process was wrong.
+   */
+   switch(gu8_timerChannel)
+   {
+      case TIMER_0:
+         Timer_Start(TIMER_0,gu16_preloader);
+      break;
+      case TIMER_1:
+         Timer_Start(TIMER_1,gu16_preloader);
+      break;
+      case TIMER_2:
+         Timer_Start(TIMER_2,gu16_preloader);
+      break;
+   }
+   return SOS_TIMER_START_SUCCESS;
 }
 
 /*
@@ -293,11 +331,11 @@ EnmSOSError_t SOS_Stop_Timer(void (* task_fn)(void))
          }
          }else{
          /* return error code array is empty */
-         au8_errorState = BUFFER_EMPTY;
+         au8_errorState = SOS_BUFFER_EMPTY;
       }      
    }else{
       /* Invalid Task Paramters*/
-      au8_errorState = INVALID_TASK_PARAM;
+      au8_errorState = SOS_INVALID_TASK_PARAM;
    }
    return au8_errorState;   
 }
