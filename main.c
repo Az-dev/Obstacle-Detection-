@@ -12,8 +12,12 @@
 int main(void)
 {
    /*------------------- START TMU APPLICATION  ------------------------*/
-   TmuTest();
-   /*------------------- END TMU APPLICATION   ------------------------*/   
+   //TmuTest();
+   /*------------------- END TMU APPLICATION   ------------------------*/ 
+   
+   /*------------------- START SOS APPLICATION  ------------------------*/
+   SosTest();
+   /*------------------- END SOS APPLICATION   ------------------------*/  
    
    /*------------------- START CAR APPLICATION  ------------------------*/
    //Car_SM_Init();

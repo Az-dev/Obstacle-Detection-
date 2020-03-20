@@ -18,6 +18,8 @@
 #include "../MCAL/USART/usart.h"
 #include "../MCAL/USART/usart_Cfg.h"
 #include "../interrupt.h"
+#include "../SL/SOS/SOS.h"
+#include "../SL/SOS/SOS_PB_Cfg.h"
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
 
 void taskA(void)
@@ -73,6 +75,32 @@ void TmuTest(void)
    {
       //PORTA_DATA |= 0x08;
       TMU_Dispatch();
+      //PORTA_DATA &= ~(0x08);
+      //cpu_sleep();
+   }
+}
+
+/*
+*  Description : Tests TMU unit.
+*
+*  @param void
+*
+*  @return void
+*/
+void SosTest(void)
+{
+   //PORTA_DIR = 0xff;
+   SOS_Init(&gstrSOSConfig);
+   SOS_AddTask(5,taskA,PERIODIC,0);
+   SOS_AddTask(10,taskB,PERIODIC,1);
+   SOS_AddTask(20,taskC,PERIODIC,2);
+   SOS_AddTask(30,taskD,PERIODIC,3);
+   /* Start SOS */
+   SOS_TimerStart();
+   while(1)
+   {
+      //PORTA_DATA |= 0x08;
+      SOS_Dispatch();
       //PORTA_DATA &= ~(0x08);
       //cpu_sleep();
    }

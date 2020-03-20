@@ -20,6 +20,14 @@
 /*- FUNCTION PROTOTYPES ---------------------------------------------------------------------------------------------------*/
 
 /*
+*  Description :represents a test for sos.
+*  
+*  @param void
+*  @param void
+*/
+void SosTest(void);
+
+/*
 *  Description : tests usart as reciever/transmitter in interrupt mode.
 *
 *  @param void
