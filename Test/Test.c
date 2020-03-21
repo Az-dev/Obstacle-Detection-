@@ -67,9 +67,9 @@ void TmuTest(void)
    //PORTA_DIR = 0xff;
    TMU_Init(&gstrTMUConfig);
    TMU_Start_Timer(5,taskA,PERIODIC);
-   TMU_Start_Timer(10,taskB,PERIODIC);
-   TMU_Start_Timer(20,taskC,PERIODIC);
-   TMU_Start_Timer(60,taskD,ONESHOOT);
+   TMU_Start_Timer(30,taskB,PERIODIC);
+   TMU_Start_Timer(30,taskC,PERIODIC);
+   TMU_Start_Timer(30,taskD,PERIODIC);
    Timer_Start(TIMER_0,0);
    while(1)
    {
@@ -91,10 +91,10 @@ void SosTest(void)
 {
    //PORTA_DIR = 0xff;
    SOS_Init(&gstrSOSConfig);
-   SOS_AddTask(5,taskA,PERIODIC,0);
-   SOS_AddTask(10,taskB,PERIODIC,1);
-   SOS_AddTask(20,taskC,PERIODIC,2);
-   SOS_AddTask(30,taskD,PERIODIC,3);
+   SOS_AddTask(5,taskA,ONESHOOT,0);
+   SOS_AddTask(30,taskB,PERIODIC,2);
+   SOS_AddTask(30,taskC,PERIODIC,3);
+   SOS_AddTask(30,taskD,PERIODIC,1);
    /* Start SOS */
    SOS_TimerStart();
    while(1)
