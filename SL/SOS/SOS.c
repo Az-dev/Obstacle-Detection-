@@ -59,7 +59,42 @@ static void SOS_T2_OV_CallBack(void)
    /* 2 - Reload TCNT ---*/
    Timer_SetValue(TIMER_2 , gu16_preloader);
 }
+
+static void SOS_NO_OP(void){}
 /*---- End Of Call Backs ----*/
+/*---- Start Priority Sorting Handler ----*/
+static void swapVal(strTaskSos_t * a,strTaskSos_t * b)
+{
+   strTaskSos_t temp;
+   PORTB_DATA = a->priority;
+   PORTC_DATA = b->priority;
+   temp = *a;
+   *a = *b;
+   *b = temp;
+}
+/* Sort ascending*/
+static void priorityBubbleSort(strTaskSos_t arr[], uint16_t n)
+{
+   uint16_t i = n-1;   //we could deal with n directly without needing i , but to indicate that
+   // `i` is a parameter that is to express the number of values remaining to
+   // be sorted the size of the array -it is just initialized with the size
+   //of the array-
+   while(i > 0)
+   {
+      uint16_t j = 0;
+      for(;j < i;j++)
+      {
+         if((arr[j].priority) > (arr[j+1].priority))
+         {
+            swapVal(&arr[j],&arr[j+1]);
+         }
+      }
+      i--;
+   }
+}
+/*---- End Priority Sorting Handler -----*/
+
+
 /*
 *  Description : Initialized the given timer channel with the given resolution.
 *
@@ -92,8 +127,7 @@ EnmSOSError_t SOS_Init(const strSOS_Cfg_t * strSOS_Init)
                break;
                case T0_PRESCALER_1024:
                   gu16_preloader = (uint16_t)(((double)INVERSE_TICK_TIME_PRESCALE_1024 / MILLI_SECONDS) * strSOS_Init->resolution);
-                  gu16_preloader = T0_OV_VAL - gu16_preloader;
-                  //Timer_SetValue(TIMER_0 , (T0_OV_VAL - gu16_preloader));
+                  gu16_preloader = T0_OV_VAL - gu16_preloader;                  
                break;               
             }
             /* Set timer0 call Back */
@@ -114,8 +148,7 @@ EnmSOSError_t SOS_Init(const strSOS_Cfg_t * strSOS_Init)
                break;
                case T1_PRESCALER_1024:
                   gu16_preloader = (uint16_t)(((double)INVERSE_TICK_TIME_PRESCALE_1024 / MILLI_SECONDS) * strSOS_Init->resolution);
-                  gu16_preloader = T1_OV_VAL - gu16_preloader;
-                  //Timer_SetValue(TIMER_1 , (T1_OV_VAL - gu16_preloader));
+                  gu16_preloader = T1_OV_VAL - gu16_preloader;                  
                break;
             }
             /* Set timer1 call Back */
@@ -136,8 +169,7 @@ EnmSOSError_t SOS_Init(const strSOS_Cfg_t * strSOS_Init)
                break;
                case T2_PRESCALER_1024:
                   gu16_preloader = (uint16_t)(((double)INVERSE_TICK_TIME_PRESCALE_1024 / MILLI_SECONDS) * strSOS_Init->resolution);
-                  gu16_preloader = T2_OV_VAL - gu16_preloader;
-                  //Timer_SetValue(TIMER_2 , (T2_OV_VAL - gu16_preloader));
+                  gu16_preloader = T2_OV_VAL - gu16_preloader;                  
                break;
             }
             /* Set timer2 call Back */
@@ -154,9 +186,11 @@ EnmSOSError_t SOS_Init(const strSOS_Cfg_t * strSOS_Init)
 
 
 /*
+* Description : De-initializes SOS module.
 *
+*  @param void
 *
-*
+*  @return EnmSOSError_t
 */
 EnmSOSError_t SOS_DeInit();
 
@@ -191,7 +225,7 @@ EnmSOSError_t SOS_Dispatch(void)
             /* 3 - Execute Task Function */
             garrTaskSOSBuffer[au16_iter].fn();                      
             /* 4 - See Whether the task is periodic or one shoot -after its execution- */
-            if(ONESHOOT == garrTaskSOSBuffer[au16_iter].work_mode)
+            if((ONESHOOT == garrTaskSOSBuffer[au16_iter].work_mode) && (SOS_NO_OP != garrTaskSOSBuffer[au16_iter].fn))
             {
                /* Case of buffer contains only one element */
                if(0 == gindex)               
@@ -201,10 +235,8 @@ EnmSOSError_t SOS_Dispatch(void)
                }                
                else
                {
-                  /* remove the Task : by replacing it with the last task in the buffer */
-                  garrTaskSOSBuffer[au16_iter] = garrTaskSOSBuffer[gindex];
-                  /* Decrement gindex */
-                  gindex--;                  
+                  /* Assign to it a task with no operation */
+                  garrTaskSOSBuffer[au16_iter].fn = SOS_NO_OP;                
                }               
             }
          }                                  
@@ -230,17 +262,6 @@ EnmSOSError_t SOS_Dispatch(void)
 */
 EnmSOSError_t SOS_AddTask(uint16_t duration , void (* task_fn)(void)  , uint8_t work_mode ,uint16_t priority)
 {
-   /*--- Start Debug Point (success) ----*/
-   /* Create a new task */
-   /*
-   strTaskSos_t *austr_Task = NULL;
-   austr_Task->fn = task_fn;
-   austr_Task->counter = duration;
-   austr_Task->work_mode = work_mode;
-   garrTaskSOSBuffer[0] = *austr_Task;
-   return 0;
-   */
-   /*--- End Debug Point ---*/
    /* Define Error state */
    uint8_t au8_errorState = 0;
    
@@ -280,6 +301,8 @@ EnmSOSError_t SOS_AddTask(uint16_t duration , void (* task_fn)(void)  , uint8_t 
 */
 EnmSOSError_t SOS_TimerStart(void)
 {
+   /* Sort the tasks before starting your timer - After adding tasks - : gindex+1 represents the number of current elements exist in the buffer*/
+   priorityBubbleSort(garrTaskSOSBuffer,(uint16_t)(gindex+1));
    /*  
    Switch on gu8_timerChannel instead of passing it directly 
    to Timer_Start() is a kind of protection if the initialized

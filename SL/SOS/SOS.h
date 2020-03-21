@@ -59,9 +59,11 @@ typedef struct strSOS_Cfg
 extern EnmSOSError_t SOS_Init(const strSOS_Cfg_t * strSOS_Init);
 
 /*
+* Description : De-initializes SOS module.
 *
+*  @param void
 *
-*
+*  @return EnmSOSError_t
 */
 extern EnmSOSError_t SOS_DeInit();
 
