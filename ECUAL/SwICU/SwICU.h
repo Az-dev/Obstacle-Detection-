@@ -33,8 +33,6 @@ typedef struct strIcuCfg{
 	uint8_t ICU_Ch_No;		/* To choose the External Interrupt number */
 	uint8_t ICU_Ch_Timer;     /* To choose the Timer number */
 }strIcuCfg_t;
-/*- GLOBAL VARIABLES ----------------------------------------------------------------------------------------------------------------*/
-extern strIcuCfg_t Icu_config;
 /*- FUNCTION PROTOTYPES ------------------------------------------------------------------------------------------------------------*/
 
 /*
