@@ -10,5 +10,5 @@
 const strSOS_Cfg_t gstrSOSConfig = 
 {
    (uint8_t)TIMER_2,
-   (uint16_t)1
+   (uint16_t)3
 };

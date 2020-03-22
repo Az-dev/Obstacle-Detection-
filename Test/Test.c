@@ -8,6 +8,7 @@
 #include "Test.h"
 #include "../ECUAL/LCD/char_lcd.h"
 #include "../ECUAL/SwDelay/SwDelay.h"
+#include "../ECUAL/SwICU/SwICU_Cfg.h"
 #include "../MCAL/Timer/Timer.h"
 #include "../MCAL/Timer/Timer_Cfg.h"
 #include "../SL/TMU/TMU.h"
@@ -91,7 +92,7 @@ void SosTest(void)
 {
    //PORTA_DIR = 0xff;
    SOS_Init(&gstrSOSConfig);
-   SOS_AddTask(5,taskA,ONESHOOT,0);
+   SOS_AddTask(1,taskA,ONESHOOT,0);
    SOS_AddTask(30,taskB,PERIODIC,2);
    SOS_AddTask(30,taskC,PERIODIC,3);
    SOS_AddTask(30,taskD,PERIODIC,1);

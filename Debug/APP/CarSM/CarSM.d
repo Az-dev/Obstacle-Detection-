@@ -27,7 +27,8 @@ APP/CarSM/CarSM.d APP/CarSM/CarSM.o: ../APP/CarSM/CarSM.c \
  ../APP/CarSM/../../ECUAL/LCD/../../std_types.h \
  ../APP/CarSM/../../ECUAL/LCD/../../registers.h \
  ../APP/CarSM/../../ECUAL/LCD/gpio.h \
- ../APP/CarSM/../../ECUAL/LCD/std_types.h
+ ../APP/CarSM/../../ECUAL/LCD/std_types.h \
+ ../APP/CarSM/../../ECUAL/SwICU/SwICU_Cfg.h
 
 ../APP/CarSM/CarSM.h:
 
@@ -88,3 +89,5 @@ APP/CarSM/CarSM.d APP/CarSM/CarSM.o: ../APP/CarSM/CarSM.c \
 ../APP/CarSM/../../ECUAL/LCD/gpio.h:
 
 ../APP/CarSM/../../ECUAL/LCD/std_types.h:
+
+../APP/CarSM/../../ECUAL/SwICU/SwICU_Cfg.h:

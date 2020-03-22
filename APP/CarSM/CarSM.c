@@ -10,6 +10,8 @@
 #include "../../ECUAL/Us/Us.h"
 #include "../../ECUAL/SwDelay/SwDelay.h"
 #include "../../ECUAL/LCD/char_lcd.h"
+#include "../../ECUAL/SwICU/SwICU_Cfg.h"
+
 
 /*- DEFINES -----------------------------------------------------------------------------------------------------------------------*/
 #define UP_BOUNDARY_DISTANCE   35
