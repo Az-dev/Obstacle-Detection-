@@ -10,5 +10,5 @@
 const strTMU_Cfg_t gstrTMUConfig = 
 {
    (uint8_t)TIMER_0,
-   (uint16_t)1
+   (uint16_t)3
 };

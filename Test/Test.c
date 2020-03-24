@@ -21,30 +21,63 @@
 #include "../interrupt.h"
 #include "../SL/SOS/SOS.h"
 #include "../SL/SOS/SOS_PB_Cfg.h"
-/*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
+#define F_CPU 16000000UL
+#include <util/delay.h>
 
+/*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
+//#define TASK_A 0
+#define TASK_B 1
+#define TASK_C 2
+#define TASK_D 3
+
+uint8_t gu8_state;
+uint8_t trial_counter  = 1;
 void taskA(void)
 {
    PORTA_DIR = 0xff;
-   PORTA_DATA ^= 0x10;
+   PORTA_DATA = 0x10;
 }
 
 void taskB(void)
 {
-   PORTA_DIR = 0xff;
-   PORTA_DATA ^= 0x20;
+   if(TASK_B == gu8_state)
+   {
+      PORTA_DIR = 0xff;
+      PORTA_DATA = 0x20;
+      _delay_us(500);
+      PORTA_DATA = 0x00;
+      gu8_state = TASK_C;
+   }
+   
 }
 
 void taskC(void)
 {
-   PORTA_DIR = 0xff;
-   PORTA_DATA ^= 0x40;
+   if(TASK_C == gu8_state)
+   {
+      PORTA_DIR = 0xff;
+      PORTA_DATA = 0x40;
+      _delay_us(500);
+      PORTA_DATA = 0x00;
+      gu8_state = TASK_D;
+   }
 }
 
 void taskD(void)
 {
-   PORTA_DIR = 0xff;
-   PORTA_DATA ^= 0x80;
+   if(TASK_D == gu8_state && trial_counter != 0)
+   {
+      PORTA_DIR = 0xff;
+      PORTA_DATA = 0x80;
+      _delay_us(500);
+      PORTA_DATA = 0x00;
+      gu8_state = TASK_C;
+      trial_counter--;
+   }else{
+      trial_counter = 1;
+      gu8_state = TASK_C;
+
+   }
 }
 
 void cpu_sleep()
@@ -57,26 +90,28 @@ void cpu_sleep()
 }
 
 /*
-*  Description : Tests TMU unit.
+*  Description : Tests Sos Tasks unit.
 *
 *  @param void
 *
 *  @return void
 */
-void TmuTest(void)
+void SosTest(void)
 {
+   gu8_state = TASK_B;
    //PORTA_DIR = 0xff;
-   TMU_Init(&gstrTMUConfig);
-   TMU_Start_Timer(5,taskA,PERIODIC);
-   TMU_Start_Timer(30,taskB,PERIODIC);
-   TMU_Start_Timer(30,taskC,PERIODIC);
-   TMU_Start_Timer(30,taskD,PERIODIC);
-   Timer_Start(TIMER_0,0);
+   SOS_Init(&gstrSOSConfig);
+   //SOS_AddTask(1,taskA,ONESHOOT,0);
+   SOS_AddTask(1,taskB,PERIODIC,0);
+   SOS_AddTask(13,taskC,PERIODIC,1);
+   SOS_AddTask(1,taskD,PERIODIC,2);
+   /* Start SOS */
+   SOS_TimerStart();
    while(1)
    {
-      //PORTA_DATA |= 0x08;
-      TMU_Dispatch();
-      //PORTA_DATA &= ~(0x08);
+      //PORTA_DATA |= 0x10;
+      SOS_Dispatch();
+      //PORTA_DATA &= ~(0x10);
       //cpu_sleep();
    }
 }
@@ -88,23 +123,23 @@ void TmuTest(void)
 *
 *  @return void
 */
-void SosTest(void)
+void TmuTest(void)
 {
-   //PORTA_DIR = 0xff;
-   SOS_Init(&gstrSOSConfig);
-   SOS_AddTask(1,taskA,ONESHOOT,0);
-   SOS_AddTask(30,taskB,PERIODIC,2);
-   SOS_AddTask(30,taskC,PERIODIC,3);
-   SOS_AddTask(30,taskD,PERIODIC,1);
-   /* Start SOS */
-   SOS_TimerStart();
-   while(1)
-   {
-      //PORTA_DATA |= 0x08;
-      SOS_Dispatch();
-      //PORTA_DATA &= ~(0x08);
-      //cpu_sleep();
-   }
+   //    gu8_state = TASK_B;
+   //    //PORTA_DIR = 0xff;
+   //    TMU_Init(&gstrTMUConfig);
+   //    //TMU_Start_Timer(5,taskA,PERIODIC);
+   //    TMU_Start_Timer(1,taskB,PERIODIC);
+   //    TMU_Start_Timer(13,taskC,PERIODIC);
+   //    TMU_Start_Timer(1,taskD,PERIODIC);
+   //    Timer_Start(TIMER_0,0);
+   //    while(1)
+   //    {
+   //       //PORTA_DATA |= 0x08;
+   //       TMU_Dispatch();
+   //       //PORTA_DATA &= ~(0x08);
+   //       //cpu_sleep();
+   //    }
 }
 
 

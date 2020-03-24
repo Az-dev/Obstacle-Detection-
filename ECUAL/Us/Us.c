@@ -10,9 +10,8 @@
 
 /*- FUNCTION DEFINITIONS ----------------------------------------------------------------------------------------------------------*/
 /*
-*  Description  :  This function initiate the UltraSonic by set the value of the Dio_Dirction of
-*                  the pin trigger as an output then initiate the ICU to use it to calculate the
-*                  On time of the ECHO signal.
+*  Description  :  Configures Us Triggering and Echo pins 
+* 
 *  @param void
 *
 *  @return ERROR_STATUS
@@ -40,7 +39,7 @@ ERROR_STATUS Us_Init(void)
 }
 
 /*
-*  Description : This function send the  pulse, to trigger pin of the UltraSonic to enhance the  ECUO signal
+*  Description : This function send the  pulse, to trigger pin of the UltraSonic.
 *
 *  @param void
 *
@@ -58,16 +57,18 @@ ERROR_STATUS Us_Trigger(void)
 
 
 /*
-*  Description : This function get the time of high signal of ECUO pulse, then use it to calculate the distance,
-*                then return the value in the Distance parameter.
+*  Description : This function calculate the distance based on input capture value
 *
 *
-*  @param uint16_t *Distance  (OUTPUT)
+*  @param void
 *
 *  @return ERROR_STATUS
 */
-ERROR_STATUS Us_GetDistance(uint16_t *Distance)
+ERROR_STATUS Us_CalcDistance(void)
 {
+   /*- 1 - Get Input Capture Value Stored in RTE ---> GetInputCaptureVal()*/
+   /*- 2 - Calculate the distance -based on the brought input capture value -*/
+   /*- 3 - Update Distance Value Stored in RTE ---> Update/SetDistanceVal()*/
    /*---- Set the new measured distance ----*/
    //*Distance = ((gu32_Icu_Time * 68) / 1000);
    return E_OK;   

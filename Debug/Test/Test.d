@@ -34,7 +34,13 @@ Test/Test.d Test/Test.o: ../Test/Test.c ../Test/Test.h \
  ../Test/../MCAL/USART/usart_Cfg.h \
  ../Test/../MCAL/USART/../../MCAL/DIO/DIO.h ../Test/../interrupt.h \
  ../Test/../SL/SOS/SOS.h ../Test/../SL/SOS/../../std_types.h \
- ../Test/../SL/SOS/SOS_PREB_Cfg.h ../Test/../SL/SOS/SOS_PB_Cfg.h
+ ../Test/../SL/SOS/SOS_PREB_Cfg.h ../Test/../SL/SOS/SOS_PB_Cfg.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
 
 ../Test/Test.h:
 
@@ -145,3 +151,15 @@ Test/Test.d Test/Test.o: ../Test/Test.c ../Test/Test.h \
 ../Test/../SL/SOS/SOS_PREB_Cfg.h:
 
 ../Test/../SL/SOS/SOS_PB_Cfg.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:

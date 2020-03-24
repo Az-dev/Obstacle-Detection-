@@ -34,7 +34,7 @@
 ERROR_STATUS Steering_Init(void);
 
 /**
- * Description: This function controls the command and the speed of the car.
+ * Description: This function controls the moving-direction command -[forward,backward,left,right,stop]- and the speed of the car.
  *
  * @param uint8_t Steering_CarCmd 
  * @param uint8_t speed
