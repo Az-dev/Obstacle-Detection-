@@ -27,7 +27,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o (exit)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
-                              APP/Car_SOS/Car_SOS.o (__do_copy_data)
+                              ECUAL/SwICU/SwICU_Cfg.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
                               APP/BCM_BasedApp/BCM_Based.o (__do_clear_bss)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
@@ -38,10 +38,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 Allocating common symbols
 Common symbol       size              file
 
-genm_recordErrorState
-                    0x1               APP/Car_SOS/Car_SOS.o
 gstr_txBufferCfg    0x6               SL/BCM/BCM.o
-genm_sysState       0x1               APP/Car_SOS/Car_SOS.o
 gstr_rxBufferCfg    0x6               SL/BCM/BCM.o
 gu8_state           0x1               Test/Test.o
 
@@ -99,30 +96,6 @@ Discarded input sections
  .debug_str     0x00000000      0x289 APP/CarSM/CarSM.o
  .comment       0x00000000       0x31 APP/CarSM/CarSM.o
  .debug_frame   0x00000000       0x44 APP/CarSM/CarSM.o
- .text          0x00000000        0x0 APP/Car_SOS/Car_SOS.o
- .data          0x00000000        0x0 APP/Car_SOS/Car_SOS.o
- .bss           0x00000000        0x0 APP/Car_SOS/Car_SOS.o
- .text.TriggerMeasurement
-                0x00000000       0x18 APP/Car_SOS/Car_SOS.o
- .text.CalculateMeasurement
-                0x00000000       0x18 APP/Car_SOS/Car_SOS.o
- .text.SteeringAction
-                0x00000000       0x18 APP/Car_SOS/Car_SOS.o
- .text.TimeOut  0x00000000       0x2e APP/Car_SOS/Car_SOS.o
- .text.Reset    0x00000000        0xe APP/Car_SOS/Car_SOS.o
- .text.Car_SOS  0x00000000       0x76 APP/Car_SOS/Car_SOS.o
- .data.no_of_trials
-                0x00000000        0x1 APP/Car_SOS/Car_SOS.o
- .debug_info    0x00000000      0x323 APP/Car_SOS/Car_SOS.o
- .debug_abbrev  0x00000000      0x12b APP/Car_SOS/Car_SOS.o
- .debug_aranges
-                0x00000000       0x48 APP/Car_SOS/Car_SOS.o
- .debug_ranges  0x00000000       0x38 APP/Car_SOS/Car_SOS.o
- .debug_line    0x00000000      0x1ae APP/Car_SOS/Car_SOS.o
- .debug_str     0x00000000      0x2df APP/Car_SOS/Car_SOS.o
- .comment       0x00000000       0x31 APP/Car_SOS/Car_SOS.o
- .debug_frame   0x00000000       0x74 APP/Car_SOS/Car_SOS.o
- COMMON         0x00000000        0x2 APP/Car_SOS/Car_SOS.o
  .text          0x00000000        0x0 APP/Steering/Steering.o
  .data          0x00000000        0x0 APP/Steering/Steering.o
  .bss           0x00000000        0x0 APP/Steering/Steering.o
@@ -300,16 +273,16 @@ Discarded input sections
  .text.Us_Init  0x00000000       0x48 ECUAL/Us/Us.o
  .text.Us_Trigger
                 0x00000000       0x24 ECUAL/Us/Us.o
- .text.Us_GetDistance
+ .text.Us_CalcDistance
                 0x00000000        0x4 ECUAL/Us/Us.o
- .debug_info    0x00000000      0x1fd ECUAL/Us/Us.o
- .debug_abbrev  0x00000000       0xfb ECUAL/Us/Us.o
- .debug_loc     0x00000000       0x6e ECUAL/Us/Us.o
+ .debug_info    0x00000000      0x1d8 ECUAL/Us/Us.o
+ .debug_abbrev  0x00000000       0xfd ECUAL/Us/Us.o
+ .debug_loc     0x00000000       0x48 ECUAL/Us/Us.o
  .debug_aranges
                 0x00000000       0x30 ECUAL/Us/Us.o
  .debug_ranges  0x00000000       0x20 ECUAL/Us/Us.o
  .debug_line    0x00000000      0x104 ECUAL/Us/Us.o
- .debug_str     0x00000000      0x217 ECUAL/Us/Us.o
+ .debug_str     0x00000000      0x206 ECUAL/Us/Us.o
  .comment       0x00000000       0x31 ECUAL/Us/Us.o
  .debug_frame   0x00000000       0x54 ECUAL/Us/Us.o
  .text          0x00000000        0x0 main.o
@@ -744,7 +717,6 @@ Linker script and memory map
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
 LOAD APP/BCM_BasedApp/BCM_Based.o
 LOAD APP/CarSM/CarSM.o
-LOAD APP/Car_SOS/Car_SOS.o
 LOAD APP/Steering/Steering.o
 LOAD ECUAL/LCD/char_lcd.o
 LOAD ECUAL/LCD/gpio.o

@@ -35,7 +35,6 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../APP/CarSM \
 ../APP/BCM_BasedApp \
-../APP/Car_SOS \
 ../APP/Steering \
 ../ECUAL/Motor \
 ../ECUAL/LCD \
@@ -61,7 +60,6 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../APP/BCM_BasedApp/BCM_Based.c \
 ../APP/CarSM/CarSM.c \
-../APP/Car_SOS/Car_SOS.c \
 ../APP/Steering/Steering.c \
 ../ECUAL/LCD/char_lcd.c \
 ../ECUAL/LCD/gpio.c \
@@ -99,7 +97,6 @@ ASM_SRCS +=
 OBJS +=  \
 APP/BCM_BasedApp/BCM_Based.o \
 APP/CarSM/CarSM.o \
-APP/Car_SOS/Car_SOS.o \
 APP/Steering/Steering.o \
 ECUAL/LCD/char_lcd.o \
 ECUAL/LCD/gpio.o \
@@ -130,7 +127,6 @@ Test/Test.o
 OBJS_AS_ARGS +=  \
 APP/BCM_BasedApp/BCM_Based.o \
 APP/CarSM/CarSM.o \
-APP/Car_SOS/Car_SOS.o \
 APP/Steering/Steering.o \
 ECUAL/LCD/char_lcd.o \
 ECUAL/LCD/gpio.o \
@@ -161,7 +157,6 @@ Test/Test.o
 C_DEPS +=  \
 APP/BCM_BasedApp/BCM_Based.d \
 APP/CarSM/CarSM.d \
-APP/Car_SOS/Car_SOS.d \
 APP/Steering/Steering.d \
 ECUAL/LCD/char_lcd.d \
 ECUAL/LCD/gpio.d \
@@ -192,7 +187,6 @@ Test/Test.d
 C_DEPS_AS_ARGS +=  \
 APP/BCM_BasedApp/BCM_Based.d \
 APP/CarSM/CarSM.d \
-APP/Car_SOS/Car_SOS.d \
 APP/Steering/Steering.d \
 ECUAL/LCD/char_lcd.d \
 ECUAL/LCD/gpio.d \
@@ -242,13 +236,6 @@ APP/BCM_BasedApp/BCM_Based.o: ../APP/BCM_BasedApp/BCM_Based.c
 	
 
 APP/CarSM/CarSM.o: ../APP/CarSM/CarSM.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-APP/Car_SOS/Car_SOS.o: ../APP/Car_SOS/Car_SOS.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

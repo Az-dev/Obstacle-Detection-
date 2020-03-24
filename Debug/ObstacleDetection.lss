@@ -233,10 +233,10 @@ ISR_INT2()
  13c:	18 95       	reti
 
 0000013e <main>:
-   /*------------------- START Car SOS APPLICATION  ------------------------*/
-   //Car_SOS();
-   /*------------------- END Car SOS APPLICATION   ------------------------*/
-   
+   /*------------------- START TMU APPLICATION  ------------------------*/
+   //TmuTest();
+   /*------------------- END TMU APPLICATION   ------------------------*/ 
+
    /*------------------- START SOS APPLICATION  ------------------------*/
    SosTest();
  13e:	0e 94 68 04 	call	0x8d0	; 0x8d0 <SosTest>
