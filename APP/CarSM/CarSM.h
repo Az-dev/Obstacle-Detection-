@@ -9,8 +9,8 @@
 #ifndef CARSM_H_
 #define CARSM_H_
 /*- INCLUDES -----------------------------------------------------------------------------------------------------------------------*/
-#include "../../common_macros.h"
-#include "../../std_types.h"
+#include "../../Helpers/common_macros.h"
+#include "../../Helpers/std_types.h"
 #include "../../ECUAL/SwDelay/SwDelay.h"
 
 /*- FUNCTIONS DECLARATION ---------------------------------------------------------------------------------------------------------*/

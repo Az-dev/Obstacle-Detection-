@@ -1,6 +1,6 @@
  /*-INCLUDES ------------------------------------------------------------------------------------------------------*/
 #include "usart.h"
-#include "../../interrupt.h"
+#include "../../UTILS/interrupt.h"
 
 /*- GLOBAL VARIALBLES ---------------------------------------------------------------------------------------------*/
 //volatile uint8_t gu8_RX_CompleteFlag = 0;    /* Receive complete software flag */

@@ -10,8 +10,8 @@
 #define STEERING_H_
 
 /*- INCLUDES ----------------------------------------------------------------------------------------------------------------------*/
-#include "../../std_types.h"
-#include "../../common_macros.h"
+#include "../../Helpers/std_types.h"
+#include "../../Helpers/common_macros.h"
 #include "../../ECUAL/Motor/Motor.h"
 /*- DEFINES -----------------------------------------------------------------------------------------------------------------------*/
 /*Command Macros to call the steering api*/

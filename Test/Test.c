@@ -18,7 +18,7 @@
 #include "../MCAL/DIO/DIO.h"
 #include "../MCAL/USART/usart.h"
 #include "../MCAL/USART/usart_Cfg.h"
-#include "../interrupt.h"
+#include "../UTILS/interrupt.h"
 #include "../SL/SOS/SOS.h"
 #include "../SL/SOS/SOS_PB_Cfg.h"
 #define F_CPU 16000000UL

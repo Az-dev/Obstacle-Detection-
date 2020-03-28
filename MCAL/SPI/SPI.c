@@ -6,8 +6,8 @@
  */ 
 /*- INCLUDES -------------------------------------------------------------------------------------------------------*/
 #include "SPI.h"
-#include "../../interrupt.h"
-#include "../../registers.h"
+#include "../../UTILS/interrupt.h"
+#include "../../UTILS/registers.h"
 /*- GLOBAL VARIABLES ----------------------------------------------------------------------------------------------*/
 volatile uint8_t gu8_transmissionComplete = 0;
 static void (*call_back)(void) = NULL;

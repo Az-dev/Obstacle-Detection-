@@ -1,8 +1,8 @@
 #ifndef __USART_H__
 #define __USART_H__
 /*- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#include "../../registers.h"
-#include "../../std_types.h"
+#include "../../UTILS/registers.h"
+#include "../../Helpers/std_types.h"
 /*- DEFINES --------------------------------------------------------------------------------------------------------*/
 #define BAUDE_RATE 103 /* this value generates baude rate of 9600 at Fosc = 16MHz */
 /*- TYPEDEFS -------------------------------------------------------------------------------------------------------*/

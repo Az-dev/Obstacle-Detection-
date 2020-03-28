@@ -5,9 +5,9 @@
  *  Author: Amr
  */ 
 
-#include "../../std_types.h"
+#include "../../Helpers/std_types.h"
 #include "gpio.h"
-#include "../../registers.h"
+#include "../../UTILS/registers.h"
 /**
  * Description: set port direction (which is DDR register)
  * @param port: portID and takes the following values

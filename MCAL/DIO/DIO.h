@@ -9,9 +9,9 @@
 #define DIO_H_
 
 /*- INCLUDES --------------------------------------------------------------------------------------------------------------*/
-#include "../../common_macros.h"
-#include "../../std_types.h"
-#include "../../registers.h"
+#include "../../Helpers/common_macros.h"
+#include "../../Helpers/std_types.h"
+#include "../../UTILS/registers.h"
 /*- DEFINES --------------------------------------------------------------------------------------------------------------*/
 #define PIN0	      0x01
 #define PIN1	      0x02

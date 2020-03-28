@@ -10,8 +10,8 @@
 #define US_H_
 
 /*- INCLUDES -----------------------------------------------------------------------------------------------------------------------*/
-#include "../../std_types.h"
-#include "../../common_macros.h"
+#include "../../Helpers/std_types.h"
+#include "../../Helpers/common_macros.h"
 #include "../../MCAL/DIO/DIO.h"
 #include "../SwDelay/SwDelay.h"
 #include "../SwICU/SwICU.h"

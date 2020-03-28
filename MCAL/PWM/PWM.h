@@ -7,8 +7,8 @@
 #ifndef PWM_H_
 #define PWM_H_
 /*- INCLUDE --------------------------------------------------------------------------------------------------------------*/
-#include "../../std_types.h"
-#include "../../registers.h"
+#include "../../Helpers/std_types.h"
+#include "../../UTILS/registers.h"
 /*- DEFINES---------------------------------------------------------------------------------------------------------------*/
 #define PWM_CH0               (0)
 #define PWM_CH1A              (1)

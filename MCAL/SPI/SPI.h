@@ -9,7 +9,7 @@
 #ifndef SPI_H_
 #define SPI_H_
 /*- INCLUDES --------------------------------------------------------------------------------------------------------*/
-#include "../../std_types.h"
+#include "../../Helpers/std_types.h"
 /*- DEFINES ---------------------------------------------------------------------------------------------------------*/
 /*--- 1 - SPCR (SPI Control Register) configuration ---*/
 /* SPI Enable/Disable */

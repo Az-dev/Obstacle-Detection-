@@ -49,6 +49,8 @@ SUBDIRS :=  \
 ../MCAL/Timer \
 ../ECUAL \
 ../APP \
+../Helpers \
+../UTILS \
 ../SL \
 ../SL/BCM \
 ../SL/SOS \

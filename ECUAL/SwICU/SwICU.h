@@ -9,9 +9,9 @@
 #ifndef SWICU_H_
 #define SWICU_H_
 /*- INCLUDES -----------------------------------------------------------------------------------------------------------------------*/
-#include "../../std_types.h"
-#include "../../interrupt.h"
-#include "../../common_macros.h"
+#include "../../Helpers/std_types.h"
+#include "../../UTILS/interrupt.h"
+#include "../../Helpers/common_macros.h"
 #include "../../MCAL/DIO/DIO.h"
 /*- DEFINES ------------------------------------------------------------------------------------------------------------------------*/
 #define ICU_CH0			   (0)			/* defines External Interrupt 0 */

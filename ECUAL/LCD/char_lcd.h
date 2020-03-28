@@ -13,8 +13,8 @@
 #ifndef CHAR_LCD_H_
 #define CHAR_LCD_H_
 
-#include "../../std_types.h"
-#include "../../registers.h"
+#include "std_types.h"
+#include "../../UTILS/registers.h"
 #include "gpio.h"
 
 #define LCD_RS_PIN	0x02 	//define MCU pin connected to LCD RS

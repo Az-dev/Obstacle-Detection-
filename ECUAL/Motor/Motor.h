@@ -10,8 +10,8 @@
 #define MOTOR_H_
 
 /*- INCLUDES ---------------------------------------------------------------------------------------------------------------*/
-#include "../../common_macros.h"
-#include "../../std_types.h"
+#include "../../Helpers/common_macros.h"
+#include "../../Helpers/std_types.h"
 /*- DEFINES ---------------------------------------------------------------------------------------------------------------*/
 #define MOTOR_1			1
 #define MOTOR_2 		   2

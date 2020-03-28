@@ -11,8 +11,8 @@
 /*- INCLUDES -------------------------------------------------------------------------------------------------------------*/
 #include "../ECUAL/SwDelay/SwDelay.h"
 #include "../MCAL/DIO/DIO.h"
-#include "../std_types.h"
-#include "../common_macros.h"
+#include "../Helpers/std_types.h"
+#include "../Helpers/common_macros.h"
 #include "../MCAL/PWM/PWM.h"
 #include "../ECUAL/Motor/Motor.h"
 #include "../ECUAL/SwICU/SwICU.h"
