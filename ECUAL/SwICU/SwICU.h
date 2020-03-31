@@ -42,16 +42,24 @@ typedef struct strIcuCfg{
 *
 *  @return ERROR_STATUS
 */
-ERROR_STATUS Icu_Init(strIcuCfg_t * Icu_Cfg);
+extern ERROR_STATUS Icu_Init(strIcuCfg_t * Icu_Cfg);
 
 /*
-*  Description	: calculates the time between 2 edges		
+*  Description	: Configures the starting edge
 *
 *  @param uint8_t Icu_Channel
 *  @param uint8_t Icu_EdgeToEdge
+*
+*  @return ERROR_STATUS
+*/
+extern ERROR_STATUS Icu_ConfigEdge(uint8_t Icu_Channel, uint8_t Icu_EdgeToEdge);
+
+/*
+*  Description	: calculates the time between 2 edges (This is now legacy after the existence of RTE)		
+*
 *  @param uint32_t * Icu_Time      (I/O param)
 *  @return ERROR_STATUS
 */
-ERROR_STATUS Icu_ReadTime(uint8_t Icu_Channel, uint8_t Icu_EdgeToEdge, uint32_t * Icu_Time);
+extern ERROR_STATUS Icu_ReadTime(uint32_t * Icu_Time);
 
 #endif /* SWICU_H_ */
