@@ -54,14 +54,14 @@ ERROR_STATUS Car_SM_Update(void)
 {   
    uint32_t au32_distance = 0;
    uint8_t arr_read[10];
-   Icu_ReadTime(ICU_CH2,ICU_RISE_TO_FALL, &au32_distance);
+   Icu_ConfigEdge(ICU_CH2,ICU_RISE_TO_FALL);
    /*---- Initialize and Test LCD ----*/
    LCD_init();       
    while(1)
    {
       /*---- Read Distance -----*/
       //Us_GetDistance(&au32_distance);
-      Icu_ReadTime(ICU_CH2,ICU_RISE_TO_FALL, &au32_distance);
+      Icu_ReadTime(&au32_distance);
       au32_distance = ((au32_distance * 64)/58);
       /*---- Display Distance --*/
       itoa_(au32_distance, (char*)arr_read, 10);
