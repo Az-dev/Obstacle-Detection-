@@ -6,7 +6,6 @@
  */ 
  /*- INCLUDES --------------------------------------------------------------------------------------------------------*/
  #include "SharedResource.h"
- #include "../../UTILS/registers.h"
 /*- GLOBALS ----------------------------------------------------------------------------------------------------------*/
  static uint32_t gu32_distance = 0;
  static uint16_t gu16_inputCaptureVal = 0;
@@ -21,8 +20,7 @@
  {
     uint8_t au8_errorState = 0;
     /* Sets/Updates Input Capture value*/
-    gu16_inputCaptureVal = val;
-    TCNT1 = gu16_inputCaptureVal;
+    gu16_inputCaptureVal = val;    
     /* report success */
     au8_errorState = IC_SET_SUCCESS;
 
