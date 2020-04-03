@@ -18,6 +18,13 @@
 #include "../ECUAL/SwICU/SwICU.h"
 #include "../ECUAL/Us/Us.h"
 /*- FUNCTION PROTOTYPES ---------------------------------------------------------------------------------------------------*/
+/*
+*  Description :Tests SwICU to update input capture value in RTE.
+*
+*  @param void
+*  @param void
+*/
+void testSwICU_RTE(void);
 
 /*
 *  Description :represents a test for sos.

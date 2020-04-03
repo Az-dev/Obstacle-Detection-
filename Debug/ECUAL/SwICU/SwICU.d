@@ -14,7 +14,9 @@ ECUAL/SwICU/SwICU.d ECUAL/SwICU/SwICU.o: ../ECUAL/SwICU/SwICU.c \
  ../ECUAL/SwICU/../../MCAL/Timer/../../UTILS/registers.h \
  ../ECUAL/SwICU/../../MCAL/Timer/../DIO/DIO.h \
  ../ECUAL/SwICU/../../MCAL/Timer/../../Helpers/common_macros.h \
- ../ECUAL/SwICU/../../MCAL/Timer/Timer_Cfg.h
+ ../ECUAL/SwICU/../../MCAL/Timer/Timer_Cfg.h \
+ ../ECUAL/SwICU/../../RTE/SharedResource/SharedResource.h \
+ ../ECUAL/SwICU/../../RTE/SharedResource/../../Helpers/std_types.h
 
 ../ECUAL/SwICU/../SwICU/SwICU.h:
 
@@ -47,3 +49,7 @@ ECUAL/SwICU/SwICU.d ECUAL/SwICU/SwICU.o: ../ECUAL/SwICU/SwICU.c \
 ../ECUAL/SwICU/../../MCAL/Timer/../../Helpers/common_macros.h:
 
 ../ECUAL/SwICU/../../MCAL/Timer/Timer_Cfg.h:
+
+../ECUAL/SwICU/../../RTE/SharedResource/SharedResource.h:
+
+../ECUAL/SwICU/../../RTE/SharedResource/../../Helpers/std_types.h:

@@ -35,6 +35,7 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../APP/CarSM \
 ../APP/BCM_BasedApp \
+../APP/Car_SOS \
 ../APP/Steering \
 ../ECUAL/Motor \
 ../ECUAL/LCD \
@@ -50,6 +51,8 @@ SUBDIRS :=  \
 ../ECUAL \
 ../APP \
 ../Helpers \
+../RTE \
+../RTE/SharedResource \
 ../UTILS \
 ../SL \
 ../SL/BCM \
@@ -62,6 +65,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../APP/BCM_BasedApp/BCM_Based.c \
 ../APP/CarSM/CarSM.c \
+../APP/Car_SOS/Car_SOS.c \
 ../APP/Steering/Steering.c \
 ../ECUAL/LCD/char_lcd.c \
 ../ECUAL/LCD/gpio.c \
@@ -81,6 +85,7 @@ C_SRCS +=  \
 ../MCAL/Timer/Timer_Cfg.c \
 ../MCAL/USART/usart.c \
 ../MCAL/USART/usart_Cfg.c \
+../RTE/SharedResource/SharedResource.c \
 ../SL/BCM/BCM.c \
 ../SL/BCM/BCM_LK_Cfg.c \
 ../SL/SOS/SOS.c \
@@ -99,6 +104,7 @@ ASM_SRCS +=
 OBJS +=  \
 APP/BCM_BasedApp/BCM_Based.o \
 APP/CarSM/CarSM.o \
+APP/Car_SOS/Car_SOS.o \
 APP/Steering/Steering.o \
 ECUAL/LCD/char_lcd.o \
 ECUAL/LCD/gpio.o \
@@ -118,6 +124,7 @@ MCAL/Timer/Timer.o \
 MCAL/Timer/Timer_Cfg.o \
 MCAL/USART/usart.o \
 MCAL/USART/usart_Cfg.o \
+RTE/SharedResource/SharedResource.o \
 SL/BCM/BCM.o \
 SL/BCM/BCM_LK_Cfg.o \
 SL/SOS/SOS.o \
@@ -129,6 +136,7 @@ Test/Test.o
 OBJS_AS_ARGS +=  \
 APP/BCM_BasedApp/BCM_Based.o \
 APP/CarSM/CarSM.o \
+APP/Car_SOS/Car_SOS.o \
 APP/Steering/Steering.o \
 ECUAL/LCD/char_lcd.o \
 ECUAL/LCD/gpio.o \
@@ -148,6 +156,7 @@ MCAL/Timer/Timer.o \
 MCAL/Timer/Timer_Cfg.o \
 MCAL/USART/usart.o \
 MCAL/USART/usart_Cfg.o \
+RTE/SharedResource/SharedResource.o \
 SL/BCM/BCM.o \
 SL/BCM/BCM_LK_Cfg.o \
 SL/SOS/SOS.o \
@@ -159,6 +168,7 @@ Test/Test.o
 C_DEPS +=  \
 APP/BCM_BasedApp/BCM_Based.d \
 APP/CarSM/CarSM.d \
+APP/Car_SOS/Car_SOS.d \
 APP/Steering/Steering.d \
 ECUAL/LCD/char_lcd.d \
 ECUAL/LCD/gpio.d \
@@ -178,6 +188,7 @@ MCAL/Timer/Timer.d \
 MCAL/Timer/Timer_Cfg.d \
 MCAL/USART/usart.d \
 MCAL/USART/usart_Cfg.d \
+RTE/SharedResource/SharedResource.d \
 SL/BCM/BCM.d \
 SL/BCM/BCM_LK_Cfg.d \
 SL/SOS/SOS.d \
@@ -189,6 +200,7 @@ Test/Test.d
 C_DEPS_AS_ARGS +=  \
 APP/BCM_BasedApp/BCM_Based.d \
 APP/CarSM/CarSM.d \
+APP/Car_SOS/Car_SOS.d \
 APP/Steering/Steering.d \
 ECUAL/LCD/char_lcd.d \
 ECUAL/LCD/gpio.d \
@@ -208,6 +220,7 @@ MCAL/Timer/Timer.d \
 MCAL/Timer/Timer_Cfg.d \
 MCAL/USART/usart.d \
 MCAL/USART/usart_Cfg.d \
+RTE/SharedResource/SharedResource.d \
 SL/BCM/BCM.d \
 SL/BCM/BCM_LK_Cfg.d \
 SL/SOS/SOS.d \
@@ -238,6 +251,13 @@ APP/BCM_BasedApp/BCM_Based.o: ../APP/BCM_BasedApp/BCM_Based.c
 	
 
 APP/CarSM/CarSM.o: ../APP/CarSM/CarSM.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+APP/Car_SOS/Car_SOS.o: ../APP/Car_SOS/Car_SOS.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -371,6 +391,13 @@ MCAL/USART/usart.o: ../MCAL/USART/usart.c
 	
 
 MCAL/USART/usart_Cfg.o: ../MCAL/USART/usart_Cfg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+RTE/SharedResource/SharedResource.o: ../RTE/SharedResource/SharedResource.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

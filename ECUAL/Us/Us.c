@@ -7,7 +7,9 @@
 /*- INCLUDES -----------------------------------------------------------------------------------------------------------------------*/
 #include "Us.h"
 #include "Us_Cfg.h"
-
+#define F_CPU 16000000UL
+#include <util/delay.h>
+#include "../../RTE/SharedResource/SharedResource.h"
 /*- FUNCTION DEFINITIONS ----------------------------------------------------------------------------------------------------------*/
 /*
 *  Description  :  Configures Us Triggering and Echo pins 
@@ -49,7 +51,8 @@ ERROR_STATUS Us_Trigger(void)
 {
    /*- Providing a trigger pulse ----------------*/
    DIO_Write(ULTRA_EN_GPIO,ULTRA_ENABLE_BIT,HIGH);
-   softwareDelayMs(5);
+   //softwareDelayMs(5);
+   _delay_us(10);
    DIO_Write(ULTRA_EN_GPIO,ULTRA_ENABLE_BIT,LOW);
    /*--- Return Success ---*/
    return E_OK;
@@ -66,10 +69,14 @@ ERROR_STATUS Us_Trigger(void)
 */
 ERROR_STATUS Us_CalcDistance(void)
 {
-   /*- 1 - Get Input Capture Value Stored in RTE ---> GetInputCaptureVal()*/
+   uint16_t gu16_IC_val = 0;
+   uint32_t gu32_dis = 0;
+   /*- 1 - Get Input Capture Value Stored in RTE ---> GetInputCaptureVal()*/   
+   Get_IC_Val(&gu16_IC_val);
    /*- 2 - Calculate the distance -based on the brought input capture value -*/
+   gu32_dis = ((gu16_IC_val * 68) / 1000);
    /*- 3 - Update Distance Value Stored in RTE ---> Update/SetDistanceVal()*/
-   /*---- Set the new measured distance ----*/
-   //*Distance = ((gu32_Icu_Time * 68) / 1000);
+   Set_DistanceVal(gu32_dis);
+     
    return E_OK;   
 }

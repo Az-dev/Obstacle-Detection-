@@ -23,8 +23,30 @@
 #include "../SL/SOS/SOS_PB_Cfg.h"
 #define F_CPU 16000000UL
 #include <util/delay.h>
+#include "../RTE/SharedResource/SharedResource.h"
 
 /*- FUNCTION DEFINITIONS ------------------------------------------------------------------------------------------------*/
+
+/*
+*  Description :Tests SwICU to update input capture value in RTE.
+*
+*  @param void
+*  @param void
+*/
+void testSwICU_RTE(void)
+{
+   Icu_Init(&Icu_config);
+   Icu_ConfigEdge(ICU_CH2,ICU_RISE_TO_FALL);
+   uint16_t val;
+   while(1)
+   {
+      Get_IC_Val(&val);
+      PORTB_DIR = val;
+      //Icu_ConfigEdge(ICU_CH2,ICU_RISE_TO_FALL); 
+   }     
+}
+
+
 //#define TASK_A 0
 #define TASK_B 1
 #define TASK_C 2
@@ -385,18 +407,19 @@ void MotorTest(void)
 void IcuTest(void)
 {
     uint32_t u32_test_string;
-    uint8_t test_arr[10];      
-   /*---- Initialize ICU -----------*/
-   Icu_Init(&Icu_config);
+    uint8_t test_arr[10];  
    /*---- Initialize and Test LCD ----*/   
    LCD_init();
    LCD_send_string("Test String");
    softwareDelayMs(2000);
    LCD_clear();
-   softwareDelayMs(1000);      
+   softwareDelayMs(1000);
+   /*---- Initialize ICU -----------*/
+   Icu_Init(&Icu_config);
+   Icu_ConfigEdge(ICU_CH2,ICU_RISE_TO_FALL);      
    while(1)
    {     
-      Icu_ReadTime(ICU_CH2,ICU_RISE_TO_FALL, &u32_test_string);
+      Icu_ReadTime(&u32_test_string);
       u32_test_string = ((u32_test_string*272)/1000);
       itoa_(u32_test_string, (char*)test_arr, 10);
       LCD_send_string((char*)test_arr);
@@ -435,13 +458,14 @@ void IcuWithUsTest(void)
    /*---- Initialize UltraSonic ----*/
    Us_Init();
    /*---- Initialize ICU -----------*/
-   Icu_Init(&Icu_config);     
+   Icu_Init(&Icu_config);   
+   Icu_ConfigEdge(ICU_CH2,ICU_RISE_TO_FALL);     
    /*---- Trigger Sensor ----------*/
    Us_Trigger();  
    while(1)
    {
       //Us_GetDistance(&au16_distance);        
-      Icu_ReadTime(ICU_CH2,ICU_RISE_TO_FALL, &u32_string_test);
+      Icu_ReadTime(&u32_string_test);
       u32_string_test = ((u32_string_test * 64)/58);
       itoa_(u32_string_test, (char*)arr_test, 10);
       LCD_send_string((char*)arr_test);
