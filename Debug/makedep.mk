@@ -6,6 +6,8 @@ APP\BCM_BasedApp\BCM_Based.c
 
 APP\CarSM\CarSM.c
 
+APP\Car_SOS\Car_SOS.c
+
 APP\Steering\Steering.c
 
 ECUAL\LCD\char_lcd.c
@@ -43,6 +45,8 @@ MCAL\Timer\Timer_Cfg.c
 MCAL\USART\usart.c
 
 MCAL\USART\usart_Cfg.c
+
+RTE\SharedResource\SharedResource.c
 
 SL\BCM\BCM.c
 

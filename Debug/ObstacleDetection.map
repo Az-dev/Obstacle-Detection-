@@ -27,18 +27,21 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o (exit)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
-                              ECUAL/SwICU/SwICU_Cfg.o (__do_copy_data)
+                              APP/Car_SOS/Car_SOS.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
                               APP/BCM_BasedApp/BCM_Based.o (__do_clear_bss)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                              ECUAL/Us/Us.o (__umulhisi3)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
                               MCAL/PWM/PWM.o (__muluhisi3)
-c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                              c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o) (__umulhisi3)
 
 Allocating common symbols
 Common symbol       size              file
 
+genm_recordErrorState
+                    0x1               APP/Car_SOS/Car_SOS.o
 gstr_txBufferCfg    0x6               SL/BCM/BCM.o
+genm_sysState       0x1               APP/Car_SOS/Car_SOS.o
 gstr_rxBufferCfg    0x6               SL/BCM/BCM.o
 gu8_state           0x1               Test/Test.o
 
@@ -85,34 +88,25 @@ Discarded input sections
  .text.Car_SM_Init
                 0x00000000       0x18 APP/CarSM/CarSM.o
  .text.Car_SM_Update
-                0x00000000      0x13e APP/CarSM/CarSM.o
- .debug_info    0x00000000      0x38c APP/CarSM/CarSM.o
+                0x00000000      0x132 APP/CarSM/CarSM.o
+ .debug_info    0x00000000      0x384 APP/CarSM/CarSM.o
  .debug_abbrev  0x00000000      0x105 APP/CarSM/CarSM.o
  .debug_loc     0x00000000       0x47 APP/CarSM/CarSM.o
  .debug_aranges
                 0x00000000       0x28 APP/CarSM/CarSM.o
  .debug_ranges  0x00000000       0x18 APP/CarSM/CarSM.o
  .debug_line    0x00000000      0x229 APP/CarSM/CarSM.o
- .debug_str     0x00000000      0x289 APP/CarSM/CarSM.o
+ .debug_str     0x00000000      0x298 APP/CarSM/CarSM.o
  .comment       0x00000000       0x31 APP/CarSM/CarSM.o
  .debug_frame   0x00000000       0x44 APP/CarSM/CarSM.o
+ .text          0x00000000        0x0 APP/Car_SOS/Car_SOS.o
+ .data          0x00000000        0x0 APP/Car_SOS/Car_SOS.o
+ .bss           0x00000000        0x0 APP/Car_SOS/Car_SOS.o
+ .bss.error_state
+                0x00000000        0x1 APP/Car_SOS/Car_SOS.o
  .text          0x00000000        0x0 APP/Steering/Steering.o
  .data          0x00000000        0x0 APP/Steering/Steering.o
  .bss           0x00000000        0x0 APP/Steering/Steering.o
- .text.Steering_Init
-                0x00000000       0x30 APP/Steering/Steering.o
- .text.Steering_SteerCar
-                0x00000000       0x90 APP/Steering/Steering.o
- .debug_info    0x00000000      0x2a8 APP/Steering/Steering.o
- .debug_abbrev  0x00000000       0xb6 APP/Steering/Steering.o
- .debug_loc     0x00000000       0x87 APP/Steering/Steering.o
- .debug_aranges
-                0x00000000       0x28 APP/Steering/Steering.o
- .debug_ranges  0x00000000       0x18 APP/Steering/Steering.o
- .debug_line    0x00000000      0x148 APP/Steering/Steering.o
- .debug_str     0x00000000      0x202 APP/Steering/Steering.o
- .comment       0x00000000       0x31 APP/Steering/Steering.o
- .debug_frame   0x00000000       0x40 APP/Steering/Steering.o
  .text          0x00000000        0x0 ECUAL/LCD/char_lcd.o
  .data          0x00000000        0x0 ECUAL/LCD/char_lcd.o
  .bss           0x00000000        0x0 ECUAL/LCD/char_lcd.o
@@ -211,28 +205,10 @@ Discarded input sections
  .text          0x00000000        0x0 ECUAL/Motor/Motor.o
  .data          0x00000000        0x0 ECUAL/Motor/Motor.o
  .bss           0x00000000        0x0 ECUAL/Motor/Motor.o
- .text.Motor_Init
-                0x00000000       0xa4 ECUAL/Motor/Motor.o
- .text.Motor_Direction
-                0x00000000       0xe4 ECUAL/Motor/Motor.o
- .text.Motor_Start
-                0x00000000       0x60 ECUAL/Motor/Motor.o
- .text.Motor_SpeedUpdate
-                0x00000000       0x3a ECUAL/Motor/Motor.o
  .text.Motor_Stop
                 0x00000000       0x10 ECUAL/Motor/Motor.o
  .text.Motor_GetStatus
                 0x00000000        0x4 ECUAL/Motor/Motor.o
- .debug_info    0x00000000      0x675 ECUAL/Motor/Motor.o
- .debug_abbrev  0x00000000      0x12f ECUAL/Motor/Motor.o
- .debug_loc     0x00000000      0x398 ECUAL/Motor/Motor.o
- .debug_aranges
-                0x00000000       0x48 ECUAL/Motor/Motor.o
- .debug_ranges  0x00000000       0x38 ECUAL/Motor/Motor.o
- .debug_line    0x00000000      0x2bd ECUAL/Motor/Motor.o
- .debug_str     0x00000000      0x2de ECUAL/Motor/Motor.o
- .comment       0x00000000       0x31 ECUAL/Motor/Motor.o
- .debug_frame   0x00000000       0x9c ECUAL/Motor/Motor.o
  .text          0x00000000        0x0 ECUAL/SwDelay/SwDelay.o
  .data          0x00000000        0x0 ECUAL/SwDelay/SwDelay.o
  .bss           0x00000000        0x0 ECUAL/SwDelay/SwDelay.o
@@ -251,99 +227,34 @@ Discarded input sections
  .text          0x00000000        0x0 ECUAL/SwICU/SwICU.o
  .data          0x00000000        0x0 ECUAL/SwICU/SwICU.o
  .bss           0x00000000        0x0 ECUAL/SwICU/SwICU.o
- .text.Icu_Init
-                0x00000000       0x20 ECUAL/SwICU/SwICU.o
  .text.Icu_ReadTime
-                0x00000000       0x64 ECUAL/SwICU/SwICU.o
+                0x00000000       0x26 ECUAL/SwICU/SwICU.o
  .text          0x00000000        0x0 ECUAL/SwICU/SwICU_Cfg.o
  .data          0x00000000        0x0 ECUAL/SwICU/SwICU_Cfg.o
  .bss           0x00000000        0x0 ECUAL/SwICU/SwICU_Cfg.o
- .data.Icu_config
-                0x00000000        0x2 ECUAL/SwICU/SwICU_Cfg.o
- .debug_info    0x00000000       0xa7 ECUAL/SwICU/SwICU_Cfg.o
- .debug_abbrev  0x00000000       0x62 ECUAL/SwICU/SwICU_Cfg.o
- .debug_aranges
-                0x00000000       0x18 ECUAL/SwICU/SwICU_Cfg.o
- .debug_line    0x00000000       0x6f ECUAL/SwICU/SwICU_Cfg.o
- .debug_str     0x00000000      0x1be ECUAL/SwICU/SwICU_Cfg.o
- .comment       0x00000000       0x31 ECUAL/SwICU/SwICU_Cfg.o
  .text          0x00000000        0x0 ECUAL/Us/Us.o
  .data          0x00000000        0x0 ECUAL/Us/Us.o
  .bss           0x00000000        0x0 ECUAL/Us/Us.o
- .text.Us_Init  0x00000000       0x48 ECUAL/Us/Us.o
- .text.Us_Trigger
-                0x00000000       0x24 ECUAL/Us/Us.o
- .text.Us_CalcDistance
-                0x00000000        0x4 ECUAL/Us/Us.o
- .debug_info    0x00000000      0x1d8 ECUAL/Us/Us.o
- .debug_abbrev  0x00000000       0xfd ECUAL/Us/Us.o
- .debug_loc     0x00000000       0x48 ECUAL/Us/Us.o
- .debug_aranges
-                0x00000000       0x30 ECUAL/Us/Us.o
- .debug_ranges  0x00000000       0x20 ECUAL/Us/Us.o
- .debug_line    0x00000000      0x10c ECUAL/Us/Us.o
- .debug_str     0x00000000      0x206 ECUAL/Us/Us.o
- .comment       0x00000000       0x31 ECUAL/Us/Us.o
- .debug_frame   0x00000000       0x54 ECUAL/Us/Us.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
  .text          0x00000000        0x0 MCAL/DIO/DIO.o
  .data          0x00000000        0x0 MCAL/DIO/DIO.o
  .bss           0x00000000        0x0 MCAL/DIO/DIO.o
- .text.DIO_init
-                0x00000000       0x9a MCAL/DIO/DIO.o
- .text.DIO_Write
-                0x00000000       0x6e MCAL/DIO/DIO.o
  .text.DIO_Read
                 0x00000000       0x4e MCAL/DIO/DIO.o
  .text.DIO_Toggle
                 0x00000000       0x32 MCAL/DIO/DIO.o
- .debug_info    0x00000000      0x1e1 MCAL/DIO/DIO.o
- .debug_abbrev  0x00000000       0xd1 MCAL/DIO/DIO.o
- .debug_loc     0x00000000      0x40d MCAL/DIO/DIO.o
- .debug_aranges
-                0x00000000       0x38 MCAL/DIO/DIO.o
- .debug_ranges  0x00000000       0x28 MCAL/DIO/DIO.o
- .debug_line    0x00000000      0x254 MCAL/DIO/DIO.o
- .debug_str     0x00000000      0x1e7 MCAL/DIO/DIO.o
- .comment       0x00000000       0x31 MCAL/DIO/DIO.o
- .debug_frame   0x00000000       0x54 MCAL/DIO/DIO.o
  .text          0x00000000        0x0 MCAL/PWM/PWM.o
  .data          0x00000000        0x0 MCAL/PWM/PWM.o
  .bss           0x00000000        0x0 MCAL/PWM/PWM.o
- .text.Pwm_Init
-                0x00000000       0x34 MCAL/PWM/PWM.o
- .text.Pwm_Start
-                0x00000000       0x72 MCAL/PWM/PWM.o
  .text.Pwm_Update
                 0x00000000       0x68 MCAL/PWM/PWM.o
  .text.Pwm_Stop
                 0x00000000        0xc MCAL/PWM/PWM.o
- .bss.gu8_t1Prescaler
-                0x00000000        0x1 MCAL/PWM/PWM.o
- .debug_info    0x00000000      0x251 MCAL/PWM/PWM.o
- .debug_abbrev  0x00000000       0xd3 MCAL/PWM/PWM.o
- .debug_loc     0x00000000      0x2d2 MCAL/PWM/PWM.o
- .debug_aranges
-                0x00000000       0x38 MCAL/PWM/PWM.o
- .debug_ranges  0x00000000       0x28 MCAL/PWM/PWM.o
- .debug_line    0x00000000      0x157 MCAL/PWM/PWM.o
- .debug_str     0x00000000      0x263 MCAL/PWM/PWM.o
- .comment       0x00000000       0x31 MCAL/PWM/PWM.o
- .debug_frame   0x00000000       0x94 MCAL/PWM/PWM.o
  .text          0x00000000        0x0 MCAL/PWM/PWM_Cfg.o
  .data          0x00000000        0x0 MCAL/PWM/PWM_Cfg.o
  .bss           0x00000000        0x0 MCAL/PWM/PWM_Cfg.o
- .data.gstrPwmConfig
-                0x00000000        0x2 MCAL/PWM/PWM_Cfg.o
- .debug_info    0x00000000       0xa7 MCAL/PWM/PWM_Cfg.o
- .debug_abbrev  0x00000000       0x62 MCAL/PWM/PWM_Cfg.o
- .debug_aranges
-                0x00000000       0x18 MCAL/PWM/PWM_Cfg.o
- .debug_line    0x00000000       0x65 MCAL/PWM/PWM_Cfg.o
- .debug_str     0x00000000      0x1ad MCAL/PWM/PWM_Cfg.o
- .comment       0x00000000       0x31 MCAL/PWM/PWM_Cfg.o
  .text          0x00000000        0x0 MCAL/SPI/SPI.o
  .data          0x00000000        0x0 MCAL/SPI/SPI.o
  .bss           0x00000000        0x0 MCAL/SPI/SPI.o
@@ -385,8 +296,6 @@ Discarded input sections
  .text          0x00000000        0x0 MCAL/Timer/Timer_Cfg.o
  .data          0x00000000        0x0 MCAL/Timer/Timer_Cfg.o
  .bss           0x00000000        0x0 MCAL/Timer/Timer_Cfg.o
- .data.gstrTimerConfig
-                0x00000000        0xa MCAL/Timer/Timer_Cfg.o
  .text          0x00000000        0x0 MCAL/USART/usart.o
  .data          0x00000000        0x0 MCAL/USART/usart.o
  .bss           0x00000000        0x0 MCAL/USART/usart.o
@@ -422,6 +331,9 @@ Discarded input sections
  .debug_line    0x00000000       0x42 MCAL/USART/usart_Cfg.o
  .debug_str     0x00000000      0x3ce MCAL/USART/usart_Cfg.o
  .comment       0x00000000       0x31 MCAL/USART/usart_Cfg.o
+ .text          0x00000000        0x0 RTE/SharedResource/SharedResource.o
+ .data          0x00000000        0x0 RTE/SharedResource/SharedResource.o
+ .bss           0x00000000        0x0 RTE/SharedResource/SharedResource.o
  .text          0x00000000        0x0 SL/BCM/BCM.o
  .data          0x00000000        0x0 SL/BCM/BCM.o
  .bss           0x00000000        0x0 SL/BCM/BCM.o
@@ -547,9 +459,15 @@ Discarded input sections
  .text          0x00000000        0x0 Test/Test.o
  .data          0x00000000        0x0 Test/Test.o
  .bss           0x00000000        0x0 Test/Test.o
+ .text.taskB    0x00000000       0x26 Test/Test.o
+ .text.taskC    0x00000000       0x26 Test/Test.o
+ .text.taskD    0x00000000       0x46 Test/Test.o
+ .text.testSwICU_RTE
+                0x00000000       0x28 Test/Test.o
  .text.taskA    0x00000000        0xa Test/Test.o
  .text.cpu_sleep
                 0x00000000       0x10 Test/Test.o
+ .text.SosTest  0x00000000       0x4e Test/Test.o
  .text.TmuTest  0x00000000        0x2 Test/Test.o
  .text.myUsartFullDuplexInterruptTest
                 0x00000000        0xc Test/Test.o
@@ -566,10 +484,23 @@ Discarded input sections
                 0x00000000      0x102 Test/Test.o
  .rodata.str1.1
                 0x00000000        0xc Test/Test.o
- .text.IcuTest  0x00000000       0xb6 Test/Test.o
+ .text.IcuTest  0x00000000       0xb8 Test/Test.o
  .text.UsTest   0x00000000        0xa Test/Test.o
  .text.IcuWithUsTest
-                0x00000000       0xe8 Test/Test.o
+                0x00000000       0xea Test/Test.o
+ .data.trial_counter
+                0x00000000        0x1 Test/Test.o
+ .debug_info    0x00000000     0x11cc Test/Test.o
+ .debug_abbrev  0x00000000      0x2b5 Test/Test.o
+ .debug_loc     0x00000000      0x2ea Test/Test.o
+ .debug_aranges
+                0x00000000       0xa8 Test/Test.o
+ .debug_ranges  0x00000000       0x98 Test/Test.o
+ .debug_line    0x00000000      0x792 Test/Test.o
+ .debug_str     0x00000000      0x9b7 Test/Test.o
+ .comment       0x00000000       0x31 Test/Test.o
+ .debug_frame   0x00000000      0x194 Test/Test.o
+ COMMON         0x00000000        0x1 Test/Test.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
@@ -608,8 +539,6 @@ Discarded input sections
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.mul
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
- .text.libgcc.div
-                0x00000000       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.prologue
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
@@ -667,27 +596,9 @@ Discarded input sections
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
  .text.libgcc.fixed
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
- .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
- .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
- .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
- .text.libgcc.mul
-                0x00000000       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
- .text.libgcc.div
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
- .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
- .text.libgcc.prologue
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
- .text.libgcc.builtins
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
- .text.libgcc.fmul
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
- .text.libgcc.fixed
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
- .text.libgcc.mul
-                0x00000000       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
  .text.libgcc.div
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
  .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
@@ -699,6 +610,20 @@ Discarded input sections
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
  .text.libgcc.fixed
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+ .text.libgcc.div
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+ .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
 
 Memory Configuration
 
@@ -717,6 +642,7 @@ Linker script and memory map
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
 LOAD APP/BCM_BasedApp/BCM_Based.o
 LOAD APP/CarSM/CarSM.o
+LOAD APP/Car_SOS/Car_SOS.o
 LOAD APP/Steering/Steering.o
 LOAD ECUAL/LCD/char_lcd.o
 LOAD ECUAL/LCD/gpio.o
@@ -736,6 +662,7 @@ LOAD MCAL/Timer/Timer.o
 LOAD MCAL/Timer/Timer_Cfg.o
 LOAD MCAL/USART/usart.o
 LOAD MCAL/USART/usart_Cfg.o
+LOAD RTE/SharedResource/SharedResource.o
 LOAD SL/BCM/BCM.o
 LOAD SL/BCM/BCM_LK_Cfg.o
 LOAD SL/SOS/SOS.o
@@ -852,7 +779,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xb76
+.text           0x00000000     0x130e
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -926,120 +853,195 @@ END GROUP
                 0x0000008e                __vector_20
                 0x00000092                . = ALIGN (0x2)
  *(.text.*)
+ .text.TimeOut  0x00000092       0x2e APP/Car_SOS/Car_SOS.o
+ .text.Reset    0x000000c0        0xe APP/Car_SOS/Car_SOS.o
+ .text.SteeringAction
+                0x000000ce       0x78 APP/Car_SOS/Car_SOS.o
+ .text.CalculateMeasurement
+                0x00000146       0x26 APP/Car_SOS/Car_SOS.o
+ .text.TriggerMeasurement
+                0x0000016c       0x26 APP/Car_SOS/Car_SOS.o
+ .text.InitTask
+                0x00000192       0x56 APP/Car_SOS/Car_SOS.o
+ .text.Car_SOS  0x000001e8       0x82 APP/Car_SOS/Car_SOS.o
+                0x000001e8                Car_SOS
+ .text.Steering_Init
+                0x0000026a       0x30 APP/Steering/Steering.o
+                0x0000026a                Steering_Init
+ .text.Steering_SteerCar
+                0x0000029a       0x90 APP/Steering/Steering.o
+                0x0000029a                Steering_SteerCar
+ .text.Motor_Init
+                0x0000032a       0xa4 ECUAL/Motor/Motor.o
+                0x0000032a                Motor_Init
+ .text.Motor_Direction
+                0x000003ce       0xe4 ECUAL/Motor/Motor.o
+                0x000003ce                Motor_Direction
+ .text.Motor_Start
+                0x000004b2       0x60 ECUAL/Motor/Motor.o
+                0x000004b2                Motor_Start
+ .text.Motor_SpeedUpdate
+                0x00000512       0x3a ECUAL/Motor/Motor.o
+                0x00000512                Motor_SpeedUpdate
+ .text.ChangeToRising
+                0x0000054c       0x1a ECUAL/SwICU/SwICU.o
+ .text.ChangeToFalling
+                0x00000566       0x1a ECUAL/SwICU/SwICU.o
+ .text.CaptureOnFalling
+                0x00000580       0x56 ECUAL/SwICU/SwICU.o
+ .text.Icu_Init
+                0x000005d6       0x22 ECUAL/SwICU/SwICU.o
+                0x000005d6                Icu_Init
+ .text.Icu_ConfigEdge
+                0x000005f8       0x26 ECUAL/SwICU/SwICU.o
+                0x000005f8                Icu_ConfigEdge
  .text.__vector_3
-                0x00000092       0xac ECUAL/SwICU/SwICU.o
-                0x00000092                __vector_3
- .text.main     0x0000013e        0xa main.o
-                0x0000013e                main
+                0x0000061e       0x4e ECUAL/SwICU/SwICU.o
+                0x0000061e                __vector_3
+ .text.Us_Init  0x0000066c       0x48 ECUAL/Us/Us.o
+                0x0000066c                Us_Init
+ .text.Us_Trigger
+                0x000006b4       0x20 ECUAL/Us/Us.o
+                0x000006b4                Us_Trigger
+ .text.Us_CalcDistance
+                0x000006d4       0x5c ECUAL/Us/Us.o
+                0x000006d4                Us_CalcDistance
+ .text.main     0x00000730        0xa main.o
+                0x00000730                main
+ .text.DIO_init
+                0x0000073a       0x9a MCAL/DIO/DIO.o
+                0x0000073a                DIO_init
+ .text.DIO_Write
+                0x000007d4       0x6e MCAL/DIO/DIO.o
+                0x000007d4                DIO_Write
+ .text.Pwm_Init
+                0x00000842       0x34 MCAL/PWM/PWM.o
+                0x00000842                Pwm_Init
+ .text.Pwm_Start
+                0x00000876       0x72 MCAL/PWM/PWM.o
+                0x00000876                Pwm_Start
  .text.__vector_12
-                0x00000148       0x4e MCAL/SPI/SPI.o
-                0x00000148                __vector_12
+                0x000008e8       0x4e MCAL/SPI/SPI.o
+                0x000008e8                __vector_12
  .text.Timer_SetCallBack
-                0x00000196       0x56 MCAL/Timer/Timer.o
-                0x00000196                Timer_SetCallBack
+                0x00000936       0x56 MCAL/Timer/Timer.o
+                0x00000936                Timer_SetCallBack
  .text.Timer_Init
-                0x000001ec       0x66 MCAL/Timer/Timer.o
-                0x000001ec                Timer_Init
+                0x0000098c       0x66 MCAL/Timer/Timer.o
+                0x0000098c                Timer_Init
  .text.Timer_Start
-                0x00000252       0x40 MCAL/Timer/Timer.o
-                0x00000252                Timer_Start
+                0x000009f2       0x40 MCAL/Timer/Timer.o
+                0x000009f2                Timer_Start
  .text.Timer_Stop
-                0x00000292       0x20 MCAL/Timer/Timer.o
-                0x00000292                Timer_Stop
+                0x00000a32       0x20 MCAL/Timer/Timer.o
+                0x00000a32                Timer_Stop
  .text.Timer_SetValue
-                0x000002b2       0x1c MCAL/Timer/Timer.o
-                0x000002b2                Timer_SetValue
+                0x00000a52       0x1c MCAL/Timer/Timer.o
+                0x00000a52                Timer_SetValue
  .text.Timer_GetValue
-                0x000002ce       0x44 MCAL/Timer/Timer.o
-                0x000002ce                Timer_GetValue
+                0x00000a6e       0x44 MCAL/Timer/Timer.o
+                0x00000a6e                Timer_GetValue
  .text.__vector_11
-                0x00000312       0x4e MCAL/Timer/Timer.o
-                0x00000312                __vector_11
+                0x00000ab2       0x4e MCAL/Timer/Timer.o
+                0x00000ab2                __vector_11
  .text.__vector_9
-                0x00000360       0x4e MCAL/Timer/Timer.o
-                0x00000360                __vector_9
+                0x00000b00       0x4e MCAL/Timer/Timer.o
+                0x00000b00                __vector_9
  .text.__vector_5
-                0x000003ae       0x4e MCAL/Timer/Timer.o
-                0x000003ae                __vector_5
+                0x00000b4e       0x4e MCAL/Timer/Timer.o
+                0x00000b4e                __vector_5
  .text.__vector_10
-                0x000003fc       0x14 MCAL/Timer/Timer.o
-                0x000003fc                __vector_10
+                0x00000b9c       0x14 MCAL/Timer/Timer.o
+                0x00000b9c                __vector_10
  .text.__vector_13
-                0x00000410       0x4e MCAL/USART/usart.o
-                0x00000410                __vector_13
+                0x00000bb0       0x4e MCAL/USART/usart.o
+                0x00000bb0                __vector_13
  .text.__vector_15
-                0x0000045e       0x4e MCAL/USART/usart.o
-                0x0000045e                __vector_15
+                0x00000bfe       0x4e MCAL/USART/usart.o
+                0x00000bfe                __vector_15
+ .text.Set_IC_Val
+                0x00000c4c        0xc RTE/SharedResource/SharedResource.o
+                0x00000c4c                Set_IC_Val
+ .text.Set_DistanceVal
+                0x00000c58       0x14 RTE/SharedResource/SharedResource.o
+                0x00000c58                Set_DistanceVal
+ .text.Get_IC_Val
+                0x00000c6c       0x1a RTE/SharedResource/SharedResource.o
+                0x00000c6c                Get_IC_Val
+ .text.Get_DistanceVal
+                0x00000c86       0x26 RTE/SharedResource/SharedResource.o
+                0x00000c86                Get_DistanceVal
  .text.SOS_NO_OP
-                0x000004ac        0x2 SL/SOS/SOS.o
+                0x00000cac        0x2 SL/SOS/SOS.o
  .text.SOS_T2_OV_CallBack
-                0x000004ae       0x16 SL/SOS/SOS.o
+                0x00000cae       0x16 SL/SOS/SOS.o
  .text.SOS_T1_OV_CallBack
-                0x000004c4       0x14 SL/SOS/SOS.o
+                0x00000cc4       0x14 SL/SOS/SOS.o
  .text.SOS_T0_OV_CallBack
-                0x000004d8       0x16 SL/SOS/SOS.o
+                0x00000cd8       0x16 SL/SOS/SOS.o
  .text.SOS_Init
-                0x000004ee      0x12a SL/SOS/SOS.o
-                0x000004ee                SOS_Init
+                0x00000cee      0x12a SL/SOS/SOS.o
+                0x00000cee                SOS_Init
  .text.SOS_Dispatch
-                0x00000618       0xbc SL/SOS/SOS.o
-                0x00000618                SOS_Dispatch
+                0x00000e18       0xbc SL/SOS/SOS.o
+                0x00000e18                SOS_Dispatch
  .text.SOS_AddTask
-                0x000006d4       0x66 SL/SOS/SOS.o
-                0x000006d4                SOS_AddTask
+                0x00000ed4       0x66 SL/SOS/SOS.o
+                0x00000ed4                SOS_AddTask
  .text.SOS_TimerStart
-                0x0000073a      0x104 SL/SOS/SOS.o
-                0x0000073a                SOS_TimerStart
- .text.taskB    0x0000083e       0x26 Test/Test.o
-                0x0000083e                taskB
- .text.taskC    0x00000864       0x26 Test/Test.o
-                0x00000864                taskC
- .text.taskD    0x0000088a       0x46 Test/Test.o
-                0x0000088a                taskD
- .text.SosTest  0x000008d0       0x4e Test/Test.o
-                0x000008d0                SosTest
+                0x00000f3a      0x104 SL/SOS/SOS.o
+                0x00000f3a                SOS_TimerStart
  .text.avr-libc.fplib
-                0x0000091e       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x0000091e                __fixunssfsi
+                0x0000103e       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x0000103e                __fixunssfsi
  .text.avr-libc.fplib
-                0x0000097c       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                0x0000097c                __floatunsisf
-                0x00000980                __floatsisf
+                0x0000109c       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x0000109c                __floatunsisf
+                0x000010a0                __floatsisf
  .text.avr-libc.fplib
-                0x000009f6       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x000009f6                __fp_split3
-                0x00000a06                __fp_splitA
+                0x00001116       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x00001116                __fp_split3
+                0x00001126                __fp_splitA
  .text.avr-libc.fplib
-                0x00000a3a        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x00000a3a                __fp_zero
-                0x00000a3c                __fp_szero
+                0x0000115a        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x0000115a                __fp_zero
+                0x0000115c                __fp_szero
  .text.avr-libc.fplib
-                0x00000a48        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x00000a48                __mulsf3
+                0x00001168        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x00001168                __mulsf3
  .text.avr-libc.fplib
-                0x00000a50       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x00000a6e                __mulsf3x
-                0x00000a74                __mulsf3_pse
+                0x00001170       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x0000118e                __mulsf3x
+                0x00001194                __mulsf3_pse
  .text.avr-libc.fplib
-                0x00000b22        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x00000b22                __fp_inf
+                0x00001242        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x00001242                __fp_inf
  .text.avr-libc.fplib
-                0x00000b2e        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x00000b2e                __fp_nan
+                0x0000124e        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x0000124e                __fp_nan
  .text.avr-libc.fplib
-                0x00000b34        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x00000b34                __fp_pscA
+                0x00001254        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x00001254                __fp_pscA
  .text.avr-libc.fplib
-                0x00000b42        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x00000b42                __fp_pscB
+                0x00001262        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x00001262                __fp_pscB
  .text.avr-libc.fplib
-                0x00000b50       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x00000b50                __fp_round
-                0x00000b72                . = ALIGN (0x2)
+                0x00001270       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x00001270                __fp_round
+ .text.libgcc.div
+                0x00001292       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00001292                __udivmodsi4
+ .text.libgcc.mul
+                0x000012d6       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x000012d6                __umulhisi3
+ .text.libgcc.mul
+                0x000012f4       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+                0x000012f4                __muluhisi3
+                0x0000130a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000b72        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000b72                _exit
-                0x00000b72                exit
+ .fini9         0x0000130a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x0000130a                _exit
+                0x0000130a                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -1058,93 +1060,115 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000b72        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000130a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000b76                _etext = .
+                0x0000130e                _etext = .
 
-.data           0x00800060       0x42 load address 0x00000b76
+.data           0x00800060       0x50 load address 0x0000130e
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
+ .data.no_of_trials
+                0x00800060        0x1 APP/Car_SOS/Car_SOS.o
+                0x00800060                no_of_trials
+ .data.Icu_config
+                0x00800061        0x2 ECUAL/SwICU/SwICU_Cfg.o
+                0x00800061                Icu_config
+ .data.gstrPwmConfig
+                0x00800063        0x2 MCAL/PWM/PWM_Cfg.o
+                0x00800063                gstrPwmConfig
  .data.gstrTimer2SosConfig
-                0x00800060        0xa MCAL/Timer/Timer_Cfg.o
-                0x00800060                gstrTimer2SosConfig
+                0x00800065        0xa MCAL/Timer/Timer_Cfg.o
+                0x00800065                gstrTimer2SosConfig
  .data.gstrTimer1SosConfig
-                0x0080006a        0xa MCAL/Timer/Timer_Cfg.o
-                0x0080006a                gstrTimer1SosConfig
+                0x0080006f        0xa MCAL/Timer/Timer_Cfg.o
+                0x0080006f                gstrTimer1SosConfig
  .data.gstrTimer0SosConfig
-                0x00800074        0xa MCAL/Timer/Timer_Cfg.o
-                0x00800074                gstrTimer0SosConfig
+                0x00800079        0xa MCAL/Timer/Timer_Cfg.o
+                0x00800079                gstrTimer0SosConfig
  .data.gstrTimer2TmuConfig
-                0x0080007e        0xa MCAL/Timer/Timer_Cfg.o
-                0x0080007e                gstrTimer2TmuConfig
+                0x00800083        0xa MCAL/Timer/Timer_Cfg.o
+                0x00800083                gstrTimer2TmuConfig
  .data.gstrTimer1TmuConfig
-                0x00800088        0xa MCAL/Timer/Timer_Cfg.o
-                0x00800088                gstrTimer1TmuConfig
+                0x0080008d        0xa MCAL/Timer/Timer_Cfg.o
+                0x0080008d                gstrTimer1TmuConfig
  .data.gstrTimer0TmuConfig
-                0x00800092        0xa MCAL/Timer/Timer_Cfg.o
-                0x00800092                gstrTimer0TmuConfig
- .data.gindex   0x0080009c        0x2 SL/SOS/SOS.o
- .data.trial_counter
-                0x0080009e        0x1 Test/Test.o
-                0x0080009e                trial_counter
+                0x00800097        0xa MCAL/Timer/Timer_Cfg.o
+                0x00800097                gstrTimer0TmuConfig
+ .data.gstrTimerConfig
+                0x008000a1        0xa MCAL/Timer/Timer_Cfg.o
+                0x008000a1                gstrTimerConfig
+ .data.gindex   0x008000ab        0x2 SL/SOS/SOS.o
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  .rodata.gstrSOSConfig
-                0x0080009f        0x3 SL/SOS/SOS_PB_Cfg.o
-                0x0080009f                gstrSOSConfig
+                0x008000ad        0x3 SL/SOS/SOS_PB_Cfg.o
+                0x008000ad                gstrSOSConfig
  *(.gnu.linkonce.r*)
-                0x008000a2                . = ALIGN (0x2)
-                0x008000a2                _edata = .
-                0x008000a2                PROVIDE (__data_end, .)
+                0x008000b0                . = ALIGN (0x2)
+                0x008000b0                _edata = .
+                0x008000b0                PROVIDE (__data_end, .)
 
-.bss            0x008000a2       0x72
-                0x008000a2                PROVIDE (__bss_start, .)
+.bss            0x008000b0       0x81
+                0x008000b0                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.gu16_Icu_Time
-                0x008000a2        0x2 ECUAL/SwICU/SwICU.o
- .bss.gu8_onFallPulseCapture_flag
-                0x008000a4        0x1 ECUAL/SwICU/SwICU.o
+ .bss.su32_distance.1717
+                0x008000b0        0x4 APP/Car_SOS/Car_SOS.o
+ .bss.timer_channel
+                0x008000b4        0x1 ECUAL/SwICU/SwICU.o
  .bss.call_back
-                0x008000a5        0x2 MCAL/SPI/SPI.o
+                0x008000b5        0x2 ECUAL/SwICU/SwICU.o
+ .bss.gu16_Icu_Time
+                0x008000b7        0x2 ECUAL/SwICU/SwICU.o
+ .bss.gu8_onFallPulseCapture_flag
+                0x008000b9        0x1 ECUAL/SwICU/SwICU.o
+ .bss.gu8_t1Prescaler
+                0x008000ba        0x1 MCAL/PWM/PWM.o
+ .bss.call_back
+                0x008000bb        0x2 MCAL/SPI/SPI.o
  .bss.TOV_T2_Call_Back
-                0x008000a7        0x2 MCAL/Timer/Timer.o
+                0x008000bd        0x2 MCAL/Timer/Timer.o
  .bss.TOV_T1_Call_Back
-                0x008000a9        0x2 MCAL/Timer/Timer.o
+                0x008000bf        0x2 MCAL/Timer/Timer.o
  .bss.TOV_T0_Call_Back
-                0x008000ab        0x2 MCAL/Timer/Timer.o
+                0x008000c1        0x2 MCAL/Timer/Timer.o
  .bss.gu8_t2Prescaler
-                0x008000ad        0x1 MCAL/Timer/Timer.o
+                0x008000c3        0x1 MCAL/Timer/Timer.o
  .bss.gu16_t1Prescaler
-                0x008000ae        0x2 MCAL/Timer/Timer.o
+                0x008000c4        0x2 MCAL/Timer/Timer.o
  .bss.gu8_t0Prescaler
-                0x008000b0        0x1 MCAL/Timer/Timer.o
+                0x008000c6        0x1 MCAL/Timer/Timer.o
  .bss.rx_call_back
-                0x008000b1        0x2 MCAL/USART/usart.o
+                0x008000c7        0x2 MCAL/USART/usart.o
  .bss.tx_call_back
-                0x008000b3        0x2 MCAL/USART/usart.o
+                0x008000c9        0x2 MCAL/USART/usart.o
+ .bss.gu16_inputCaptureVal
+                0x008000cb        0x2 RTE/SharedResource/SharedResource.o
+ .bss.gu32_distance
+                0x008000cd        0x4 RTE/SharedResource/SharedResource.o
  .bss.gu8_timerChannel
-                0x008000b5        0x1 SL/SOS/SOS.o
+                0x008000d1        0x1 SL/SOS/SOS.o
  .bss.gu8_tickFlag
-                0x008000b6        0x1 SL/SOS/SOS.o
+                0x008000d2        0x1 SL/SOS/SOS.o
  .bss.gu16_preloader
-                0x008000b7        0x2 SL/SOS/SOS.o
+                0x008000d3        0x2 SL/SOS/SOS.o
  .bss.garrTaskSOSBuffer
-                0x008000b9       0x5a SL/SOS/SOS.o
+                0x008000d5       0x5a SL/SOS/SOS.o
  *(COMMON)
- COMMON         0x00800113        0x1 Test/Test.o
-                0x00800113                gu8_state
-                0x00800114                PROVIDE (__bss_end, .)
-                0x00000b76                __data_load_start = LOADADDR (.data)
-                0x00000bb8                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0080012f        0x2 APP/Car_SOS/Car_SOS.o
+                0x0080012f                genm_recordErrorState
+                0x00800130                genm_sysState
+                0x00800131                PROVIDE (__bss_end, .)
+                0x0000130e                __data_load_start = LOADADDR (.data)
+                0x0000135e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800114        0x0
+.noinit         0x00800131        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800114                _end = .
+                0x00800131                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -1186,16 +1210,24 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 ECUAL/SwICU/SwICU.o
+ .comment       0x00000000       0x30 APP/Car_SOS/Car_SOS.o
                                  0x31 (size before relaxing)
+ .comment       0x00000030       0x31 APP/Steering/Steering.o
+ .comment       0x00000030       0x31 ECUAL/Motor/Motor.o
+ .comment       0x00000030       0x31 ECUAL/SwICU/SwICU.o
+ .comment       0x00000030       0x31 ECUAL/SwICU/SwICU_Cfg.o
+ .comment       0x00000030       0x31 ECUAL/Us/Us.o
  .comment       0x00000030       0x31 main.o
+ .comment       0x00000030       0x31 MCAL/DIO/DIO.o
+ .comment       0x00000030       0x31 MCAL/PWM/PWM.o
+ .comment       0x00000030       0x31 MCAL/PWM/PWM_Cfg.o
  .comment       0x00000030       0x31 MCAL/SPI/SPI.o
  .comment       0x00000030       0x31 MCAL/Timer/Timer.o
  .comment       0x00000030       0x31 MCAL/Timer/Timer_Cfg.o
  .comment       0x00000030       0x31 MCAL/USART/usart.o
+ .comment       0x00000030       0x31 RTE/SharedResource/SharedResource.o
  .comment       0x00000030       0x31 SL/SOS/SOS.o
  .comment       0x00000030       0x31 SL/SOS/SOS_PB_Cfg.o
- .comment       0x00000030       0x31 Test/Test.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x3c
@@ -1217,109 +1249,177 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x2b0
+.debug_aranges  0x00000000      0x3f8
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x30 ECUAL/SwICU/SwICU.o
+                0x00000000       0x50 APP/Car_SOS/Car_SOS.o
  .debug_aranges
-                0x00000030       0x20 main.o
+                0x00000050       0x28 APP/Steering/Steering.o
  .debug_aranges
-                0x00000050       0x58 MCAL/SPI/SPI.o
+                0x00000078       0x48 ECUAL/Motor/Motor.o
  .debug_aranges
-                0x000000a8       0x70 MCAL/Timer/Timer.o
+                0x000000c0       0x50 ECUAL/SwICU/SwICU.o
  .debug_aranges
-                0x00000118       0x18 MCAL/Timer/Timer_Cfg.o
+                0x00000110       0x18 ECUAL/SwICU/SwICU_Cfg.o
  .debug_aranges
-                0x00000130       0x68 MCAL/USART/usart.o
+                0x00000128       0x30 ECUAL/Us/Us.o
  .debug_aranges
-                0x00000198       0x60 SL/SOS/SOS.o
+                0x00000158       0x20 main.o
  .debug_aranges
-                0x000001f8       0x18 SL/SOS/SOS_PB_Cfg.o
+                0x00000178       0x38 MCAL/DIO/DIO.o
  .debug_aranges
-                0x00000210       0xa0 Test/Test.o
+                0x000001b0       0x38 MCAL/PWM/PWM.o
+ .debug_aranges
+                0x000001e8       0x18 MCAL/PWM/PWM_Cfg.o
+ .debug_aranges
+                0x00000200       0x58 MCAL/SPI/SPI.o
+ .debug_aranges
+                0x00000258       0x70 MCAL/Timer/Timer.o
+ .debug_aranges
+                0x000002c8       0x18 MCAL/Timer/Timer_Cfg.o
+ .debug_aranges
+                0x000002e0       0x68 MCAL/USART/usart.o
+ .debug_aranges
+                0x00000348       0x38 RTE/SharedResource/SharedResource.o
+ .debug_aranges
+                0x00000380       0x60 SL/SOS/SOS.o
+ .debug_aranges
+                0x000003e0       0x18 SL/SOS/SOS_PB_Cfg.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x2d5f
+.debug_info     0x00000000     0x35a4
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6      0x2c5 ECUAL/SwICU/SwICU.o
- .debug_info    0x000007ab       0x97 main.o
- .debug_info    0x00000842      0x303 MCAL/SPI/SPI.o
- .debug_info    0x00000b45      0x3ba MCAL/Timer/Timer.o
- .debug_info    0x00000eff      0x13d MCAL/Timer/Timer_Cfg.o
- .debug_info    0x0000103c      0x4af MCAL/USART/usart.o
- .debug_info    0x000014eb      0x687 SL/SOS/SOS.o
- .debug_info    0x00001b72       0xb7 SL/SOS/SOS_PB_Cfg.o
- .debug_info    0x00001c29     0x1136 Test/Test.o
+ .debug_info    0x000004e6      0x595 APP/Car_SOS/Car_SOS.o
+ .debug_info    0x00000a7b      0x2a8 APP/Steering/Steering.o
+ .debug_info    0x00000d23      0x675 ECUAL/Motor/Motor.o
+ .debug_info    0x00001398      0x371 ECUAL/SwICU/SwICU.o
+ .debug_info    0x00001709       0xa7 ECUAL/SwICU/SwICU_Cfg.o
+ .debug_info    0x000017b0      0x29d ECUAL/Us/Us.o
+ .debug_info    0x00001a4d       0x97 main.o
+ .debug_info    0x00001ae4      0x1e1 MCAL/DIO/DIO.o
+ .debug_info    0x00001cc5      0x251 MCAL/PWM/PWM.o
+ .debug_info    0x00001f16       0xa7 MCAL/PWM/PWM_Cfg.o
+ .debug_info    0x00001fbd      0x303 MCAL/SPI/SPI.o
+ .debug_info    0x000022c0      0x3ba MCAL/Timer/Timer.o
+ .debug_info    0x0000267a      0x13d MCAL/Timer/Timer_Cfg.o
+ .debug_info    0x000027b7      0x4af MCAL/USART/usart.o
+ .debug_info    0x00002c66      0x200 RTE/SharedResource/SharedResource.o
+ .debug_info    0x00002e66      0x687 SL/SOS/SOS.o
+ .debug_info    0x000034ed       0xb7 SL/SOS/SOS_PB_Cfg.o
 
-.debug_abbrev   0x00000000      0xfbd
+.debug_abbrev   0x00000000     0x14fb
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_abbrev  0x000004a3      0x123 ECUAL/SwICU/SwICU.o
- .debug_abbrev  0x000005c6       0x65 main.o
- .debug_abbrev  0x0000062b      0x119 MCAL/SPI/SPI.o
- .debug_abbrev  0x00000744      0x137 MCAL/Timer/Timer.o
- .debug_abbrev  0x0000087b       0x62 MCAL/Timer/Timer_Cfg.o
- .debug_abbrev  0x000008dd      0x146 MCAL/USART/usart.o
- .debug_abbrev  0x00000a23      0x28b SL/SOS/SOS.o
- .debug_abbrev  0x00000cae       0x69 SL/SOS/SOS_PB_Cfg.o
- .debug_abbrev  0x00000d17      0x2a6 Test/Test.o
+ .debug_abbrev  0x000004a3      0x165 APP/Car_SOS/Car_SOS.o
+ .debug_abbrev  0x00000608       0xb6 APP/Steering/Steering.o
+ .debug_abbrev  0x000006be      0x12f ECUAL/Motor/Motor.o
+ .debug_abbrev  0x000007ed      0x13c ECUAL/SwICU/SwICU.o
+ .debug_abbrev  0x00000929       0x62 ECUAL/SwICU/SwICU_Cfg.o
+ .debug_abbrev  0x0000098b      0x165 ECUAL/Us/Us.o
+ .debug_abbrev  0x00000af0       0x65 main.o
+ .debug_abbrev  0x00000b55       0xd1 MCAL/DIO/DIO.o
+ .debug_abbrev  0x00000c26       0xd3 MCAL/PWM/PWM.o
+ .debug_abbrev  0x00000cf9       0x62 MCAL/PWM/PWM_Cfg.o
+ .debug_abbrev  0x00000d5b      0x119 MCAL/SPI/SPI.o
+ .debug_abbrev  0x00000e74      0x137 MCAL/Timer/Timer.o
+ .debug_abbrev  0x00000fab       0x62 MCAL/Timer/Timer_Cfg.o
+ .debug_abbrev  0x0000100d      0x146 MCAL/USART/usart.o
+ .debug_abbrev  0x00001153       0xb4 RTE/SharedResource/SharedResource.o
+ .debug_abbrev  0x00001207      0x28b SL/SOS/SOS.o
+ .debug_abbrev  0x00001492       0x69 SL/SOS/SOS_PB_Cfg.o
 
-.debug_line     0x00000000     0x151f
+.debug_line     0x00000000     0x1d30
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x115 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000115      0x1da ECUAL/SwICU/SwICU.o
- .debug_line    0x000002ef       0x59 main.o
- .debug_line    0x00000348      0x19b MCAL/SPI/SPI.o
- .debug_line    0x000004e3      0x300 MCAL/Timer/Timer.o
- .debug_line    0x000007e3       0x76 MCAL/Timer/Timer_Cfg.o
- .debug_line    0x00000859      0x1e0 MCAL/USART/usart.o
- .debug_line    0x00000a39      0x35f SL/SOS/SOS.o
- .debug_line    0x00000d98       0x64 SL/SOS/SOS_PB_Cfg.o
- .debug_line    0x00000dfc      0x723 Test/Test.o
+ .debug_line    0x00000115      0x368 APP/Car_SOS/Car_SOS.o
+ .debug_line    0x0000047d      0x148 APP/Steering/Steering.o
+ .debug_line    0x000005c5      0x2bd ECUAL/Motor/Motor.o
+ .debug_line    0x00000882      0x259 ECUAL/SwICU/SwICU.o
+ .debug_line    0x00000adb       0x6f ECUAL/SwICU/SwICU_Cfg.o
+ .debug_line    0x00000b4a      0x19f ECUAL/Us/Us.o
+ .debug_line    0x00000ce9       0x63 main.o
+ .debug_line    0x00000d4c      0x254 MCAL/DIO/DIO.o
+ .debug_line    0x00000fa0      0x157 MCAL/PWM/PWM.o
+ .debug_line    0x000010f7       0x65 MCAL/PWM/PWM_Cfg.o
+ .debug_line    0x0000115c      0x19b MCAL/SPI/SPI.o
+ .debug_line    0x000012f7      0x300 MCAL/Timer/Timer.o
+ .debug_line    0x000015f7       0x76 MCAL/Timer/Timer_Cfg.o
+ .debug_line    0x0000166d      0x1e0 MCAL/USART/usart.o
+ .debug_line    0x0000184d      0x120 RTE/SharedResource/SharedResource.o
+ .debug_line    0x0000196d      0x35f SL/SOS/SOS.o
+ .debug_line    0x00001ccc       0x64 SL/SOS/SOS_PB_Cfg.o
 
-.debug_frame    0x00000000      0x6f8
+.debug_frame    0x00000000      0x8dc
  *(.debug_frame)
- .debug_frame   0x00000000       0x8c ECUAL/SwICU/SwICU.o
- .debug_frame   0x0000008c       0x24 main.o
- .debug_frame   0x000000b0       0xdc MCAL/SPI/SPI.o
- .debug_frame   0x0000018c      0x1a8 MCAL/Timer/Timer.o
- .debug_frame   0x00000334      0x144 MCAL/USART/usart.o
- .debug_frame   0x00000478      0x10c SL/SOS/SOS.o
- .debug_frame   0x00000584      0x174 Test/Test.o
+ .debug_frame   0x00000000       0x9c APP/Car_SOS/Car_SOS.o
+ .debug_frame   0x0000009c       0x40 APP/Steering/Steering.o
+ .debug_frame   0x000000dc       0x9c ECUAL/Motor/Motor.o
+ .debug_frame   0x00000178       0xcc ECUAL/SwICU/SwICU.o
+ .debug_frame   0x00000244       0x64 ECUAL/Us/Us.o
+ .debug_frame   0x000002a8       0x24 main.o
+ .debug_frame   0x000002cc       0x54 MCAL/DIO/DIO.o
+ .debug_frame   0x00000320       0x94 MCAL/PWM/PWM.o
+ .debug_frame   0x000003b4       0xdc MCAL/SPI/SPI.o
+ .debug_frame   0x00000490      0x1a8 MCAL/Timer/Timer.o
+ .debug_frame   0x00000638      0x144 MCAL/USART/usart.o
+ .debug_frame   0x0000077c       0x54 RTE/SharedResource/SharedResource.o
+ .debug_frame   0x000007d0      0x10c SL/SOS/SOS.o
 
-.debug_str      0x00000000     0x10f4
+.debug_str      0x00000000     0x149c
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x2b0 ECUAL/SwICU/SwICU.o
-                                0x2fc (size before relaxing)
- .debug_str     0x00000446       0x19 main.o
+ .debug_str     0x00000196      0x46b APP/Car_SOS/Car_SOS.o
+                                0x4a8 (size before relaxing)
+ .debug_str     0x00000601       0x77 APP/Steering/Steering.o
+                                0x202 (size before relaxing)
+ .debug_str     0x00000678      0x115 ECUAL/Motor/Motor.o
+                                0x2de (size before relaxing)
+ .debug_str     0x0000078d      0x15f ECUAL/SwICU/SwICU.o
+                                0x35e (size before relaxing)
+ .debug_str     0x000008ec       0x1b ECUAL/SwICU/SwICU_Cfg.o
+                                0x1be (size before relaxing)
+ .debug_str     0x00000907       0xa4 ECUAL/Us/Us.o
+                                0x27a (size before relaxing)
+ .debug_str     0x000009ab       0x11 main.o
                                 0x17c (size before relaxing)
- .debug_str     0x0000045f      0x1de MCAL/SPI/SPI.o
+ .debug_str     0x000009bc       0x34 MCAL/DIO/DIO.o
+                                0x1e7 (size before relaxing)
+ .debug_str     0x000009f0       0x93 MCAL/PWM/PWM.o
+                                0x263 (size before relaxing)
+ .debug_str     0x00000a83       0x16 MCAL/PWM/PWM_Cfg.o
+                                0x1ad (size before relaxing)
+ .debug_str     0x00000a99      0x1de MCAL/SPI/SPI.o
                                 0x3a3 (size before relaxing)
- .debug_str     0x0000063d      0x12f MCAL/Timer/Timer.o
+ .debug_str     0x00000c77      0x114 MCAL/Timer/Timer.o
                                 0x370 (size before relaxing)
- .debug_str     0x0000076c       0x92 MCAL/Timer/Timer_Cfg.o
+ .debug_str     0x00000d8b       0x92 MCAL/Timer/Timer_Cfg.o
                                 0x269 (size before relaxing)
- .debug_str     0x000007fe      0x42d MCAL/USART/usart.o
+ .debug_str     0x00000e1d      0x42d MCAL/USART/usart.o
                                 0x5cd (size before relaxing)
- .debug_str     0x00000c2b      0x226 SL/SOS/SOS.o
+ .debug_str     0x0000124a       0x58 RTE/SharedResource/SharedResource.o
+                                0x2be (size before relaxing)
+ .debug_str     0x000012a2      0x1e3 SL/SOS/SOS.o
                                 0x4df (size before relaxing)
- .debug_str     0x00000e51       0x25 SL/SOS/SOS_PB_Cfg.o
+ .debug_str     0x00001485       0x17 SL/SOS/SOS_PB_Cfg.o
                                 0x1ca (size before relaxing)
- .debug_str     0x00000e76      0x27e Test/Test.o
-                                0x98f (size before relaxing)
 
-.debug_loc      0x00000000     0x134e
+.debug_loc      0x00000000     0x1ff3
  *(.debug_loc)
- .debug_loc     0x00000000      0x13b ECUAL/SwICU/SwICU.o
- .debug_loc     0x0000013b      0x2a1 MCAL/SPI/SPI.o
- .debug_loc     0x000003dc      0x597 MCAL/Timer/Timer.o
- .debug_loc     0x00000973      0x34a MCAL/USART/usart.o
- .debug_loc     0x00000cbd      0x3ef SL/SOS/SOS.o
- .debug_loc     0x000010ac      0x2a2 Test/Test.o
+ .debug_loc     0x00000000      0x17d APP/Car_SOS/Car_SOS.o
+ .debug_loc     0x0000017d       0x87 APP/Steering/Steering.o
+ .debug_loc     0x00000204      0x398 ECUAL/Motor/Motor.o
+ .debug_loc     0x0000059c      0x19d ECUAL/SwICU/SwICU.o
+ .debug_loc     0x00000739      0x109 ECUAL/Us/Us.o
+ .debug_loc     0x00000842      0x40d MCAL/DIO/DIO.o
+ .debug_loc     0x00000c4f      0x2d2 MCAL/PWM/PWM.o
+ .debug_loc     0x00000f21      0x2a1 MCAL/SPI/SPI.o
+ .debug_loc     0x000011c2      0x597 MCAL/Timer/Timer.o
+ .debug_loc     0x00001759      0x34a MCAL/USART/usart.o
+ .debug_loc     0x00001aa3      0x161 RTE/SharedResource/SharedResource.o
+ .debug_loc     0x00001c04      0x3ef SL/SOS/SOS.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1339,15 +1439,21 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x228
+.debug_ranges   0x00000000      0x2e0
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x20 ECUAL/SwICU/SwICU.o
- .debug_ranges  0x00000020       0x10 main.o
- .debug_ranges  0x00000030       0x48 MCAL/SPI/SPI.o
- .debug_ranges  0x00000078       0x60 MCAL/Timer/Timer.o
- .debug_ranges  0x000000d8       0x58 MCAL/USART/usart.o
- .debug_ranges  0x00000130       0x68 SL/SOS/SOS.o
- .debug_ranges  0x00000198       0x90 Test/Test.o
+ .debug_ranges  0x00000000       0x40 APP/Car_SOS/Car_SOS.o
+ .debug_ranges  0x00000040       0x18 APP/Steering/Steering.o
+ .debug_ranges  0x00000058       0x38 ECUAL/Motor/Motor.o
+ .debug_ranges  0x00000090       0x40 ECUAL/SwICU/SwICU.o
+ .debug_ranges  0x000000d0       0x20 ECUAL/Us/Us.o
+ .debug_ranges  0x000000f0       0x10 main.o
+ .debug_ranges  0x00000100       0x28 MCAL/DIO/DIO.o
+ .debug_ranges  0x00000128       0x28 MCAL/PWM/PWM.o
+ .debug_ranges  0x00000150       0x48 MCAL/SPI/SPI.o
+ .debug_ranges  0x00000198       0x60 MCAL/Timer/Timer.o
+ .debug_ranges  0x000001f8       0x58 MCAL/USART/usart.o
+ .debug_ranges  0x00000250       0x28 RTE/SharedResource/SharedResource.o
+ .debug_ranges  0x00000278       0x68 SL/SOS/SOS.o
 
 .debug_macro
  *(.debug_macro)
